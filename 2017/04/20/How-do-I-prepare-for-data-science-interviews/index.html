@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="interview,data_science," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OverviewPreparing for data science interview is hard, people can be asked a wide range of questions without any focus and guidance. In the interview, sometimes people are asked to do hard-core coding">
+<meta name="keywords" content="interview,data_science">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How do I prepare for data science interviews">
+<meta property="og:url" content="http://zfsang.github.io/2017/04/20/How-do-I-prepare-for-data-science-interviews/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="OverviewPreparing for data science interview is hard, people can be asked a wide range of questions without any focus and guidance. In the interview, sometimes people are asked to do hard-core coding">
+<meta property="og:updated_time" content="2018-11-13T07:48:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How do I prepare for data science interviews">
+<meta name="twitter:description" content="OverviewPreparing for data science interview is hard, people can be asked a wide range of questions without any focus and guidance. In the interview, sometimes people are asked to do hard-core coding">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2017/04/20/How-do-I-prepare-for-data-science-interviews/"/>
+
+
+
+
+
+  <title>How do I prepare for data science interviews | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2017/04/20/How-do-I-prepare-for-data-science-interviews/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">How do I prepare for data science interviews</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-20T14:39:50-07:00">
+                2017-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview_Prep</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/20/How-do-I-prepare-for-data-science-interviews/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/20/How-do-I-prepare-for-data-science-interviews/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>Preparing for data science interview is hard, people can be asked a wide range of questions without any focus and guidance. In the interview, sometimes people are asked to do hard-core coding on data structure and machine learning, sometimes they are asked to solve business problems using data and experiments, sometimes, they are going to work out probabilities and statistics questions, sometimes they have to figure out the right way to query using SQL.  </p>
+<p>Things can be overwhelming sometimes, but calm down, we can tackle the data science interviews.  Personally, I would prepare the interview in the following three steps.</p>
+<ol>
+<li>Understand the industry and available positions</li>
+<li>Learn and review algorithms &amp; data structure, machine learning, statistics, SQL, and business analytics.</li>
+<li>Prepare specifically for the upcoming phone/on-site interviews</li>
+</ol>
+<p>People often focus on the technical side more when preparing for interviews.  There is nothing wrong with that.  Meanwhile, it would be great if you could have a bigger picture of the business and industry by reading online, talking to data science practitioners, looking and applying for a variety of jobs.  Since the data science is such a new field which doesn’t exist 6 years ago, there are not that many standard and routines in the industry.  It would be great to keep fresh understanding of the trend and job market of data science world.  In addition, networking is one of the best way to get into the data science world since people tend to hire more people through referral, informal meeting, reaching out in data science then other fields.  </p>
+<h2 id="My-Experience"><a href="#My-Experience" class="headerlink" title="My Experience"></a>My Experience</h2><p>Getting into the data science world is not easy.  I have been dreaming of being part of the cool data science world since senior year of college, it takes years for me to finally get there.  </p>
+<p>In order to get there, I get academic training in math/statistics/biostatistics.  My adventure to the data science starts two years ago.  I did my research in parallel data simulations and missing data imputation, worked as a statistician for a biotech startup, and learned about machine learning and big data infrastructure in Georgia Tech, Galvanize, Udacity and BitTiger.  Now I will be working on data aggregation and engineering in a B2B marketing analytics company.</p>
+<p>Along the way, I have been applying and interviewing data science positions with lots of struggles.  Sometimes you think you know regression, data structure and algorithms, but actually you don’t.  The hard way to figure that out is doing lots of interviews.  Each time failure is a new starting point.  The old saying never goes run, practice makes prefect.  </p>
+<p>For more detailed resources I used for the interview preparation, please see the Resources section.  </p>
+<p>Anyway, best of luck, data science fellows!</p>
+<h2 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h2><p>In this section, I will briefly introduce the resources and notes I used to prepare for the data science interviews.  Those things which enjoy routine usage in my interview preparation are<br>denoted with a ♡ symbol.  Definitely check it out if you have not done so!</p>
+<h3 id="Coding-Preparation"><a href="#Coding-Preparation" class="headerlink" title="Coding Preparation"></a>Coding Preparation</h3><ul>
+<li>White board<ul>
+<li>You defintely need a white board to practice coding</li>
+</ul>
+</li>
+<li><a href="https://www.leetcode.com" target="_blank" rel="external">Leetcode ♡</a><ul>
+<li>No.1 online coding practice site that you should visit on daily basis for coding interview preparation</li>
+<li>Weekly contest on coding is very good in term of the exercise and rewards</li>
+</ul>
+</li>
+<li><a href="https://www.hackerrank.com/" target="_blank" rel="external">HackerRank</a><ul>
+<li>Many company uses HankerRank for online coding challenges, so make sure you are familiar with the environment.</li>
+</ul>
+</li>
+<li><a href="https://www.codewars.com" target="_blank" rel="external">Codewar</a></li>
+<li><a href="https://sqlzoo.net/" target="_blank" rel="external">SQLZoo</a></li>
+<li><a href="https://regexone.com/" target="_blank" rel="external">Regexone ♡</a><ul>
+<li>Hands-on walk-through on regular expression</li>
+</ul>
+</li>
+<li><a href="https://pgexercises.com/" target="_blank" rel="external">PostgreSQL Exercises</a>  <ul>
+<li>highly recommend using <a href="https://eggerapps.at/postico/" target="_blank" rel="external">Postico ♡</a> to set up the local Postgres database to practice</li>
+</ul>
+</li>
+</ul>
+<h3 id="Data-Science-Statistics-Preparation"><a href="#Data-Science-Statistics-Preparation" class="headerlink" title="Data Science/ Statistics Preparation"></a>Data Science/ Statistics Preparation</h3><ul>
+<li><a href="https://github.com/bulutyazilim/awesome-datascience" target="_blank" rel="external">Awesome Data Science</a></li>
+<li><p><a href="http://www.learndatasci.com/data-science-interview-questions/" target="_blank" rel="external">108 Data Science Interview Questions by Company</a></p>
+<ul>
+<li>If you guys want to work on the solutions together, you can join me in the shared <a href="https://docs.google.com/document/d/18MSXjN0LLmO6Nnah_oO_Py9TmMIGQAMLIlk3Sc_iYpk/edit?usp=sharing" target="_blank" rel="external">Google Doc</a></li>
+</ul>
+</li>
+<li><p><a href="http://www.datasciencequestions.com/" target="_blank" rel="external">120 Data Science Questions</a></p>
+<ul>
+<li>Answers can be found <a href="https://datascienceinterview.quora.com/Answers-1" target="_blank" rel="external">here</a></li>
+</ul>
+</li>
+<li><a href="https://static1.squarespace.com/static/54bf3241e4b0f0d81bf7ff36/t/55e9494fe4b011aed10e48e5/1441352015658/probability_cheatsheet.pdf" target="_blank" rel="external">Probability Cheatsheet</a></li>
+<li><a href="http://blog.minitab.com/blog/adventures-in-statistics-2/how-to-correctly-interpret-p-values" target="_blank" rel="external">How to interpret p-value</a></li>
+</ul>
+<h3 id="Analytics-Preparation"><a href="#Analytics-Preparation" class="headerlink" title="Analytics Preparation"></a>Analytics Preparation</h3><ul>
+<li><a href="https://www.udemy.com/lean-analytics-workshop-alistair-croll-and-ben-yoskovitz/" target="_blank" rel="external">Lean Analytics Workshop - Alistair Croll and Ben Yoskovitz</a></li>
+<li>Google the following concepts:<ul>
+<li>Funnel analysis</li>
+<li>Cohort study</li>
+<li>SEO</li>
+<li>KPI</li>
+<li>User Segmentation</li>
+<li>Click trough rate, conversion rate, bounce rate, retention rate, churn</li>
+<li>Bucket analysis</li>
+<li>Life time value</li>
+<li>Channel</li>
+<li>Seasonality</li>
+</ul>
+</li>
+</ul>
+<h3 id="Books"><a href="#Books" class="headerlink" title="Books"></a>Books</h3><ul>
+<li><a href="https://www.amazon.com/Science-Interviews-Exposed-Yanping-Huang/dp/1511977485/" target="_blank" rel="external">Data Science Interviews Exposed ♡</a><ul>
+<li>A very good book including detailed real data science interview questions and answers.</li>
+<li>Be aware that there are minor mistakes on the calculations.</li>
+</ul>
+</li>
+<li><a href="https://www.amazon.com/collection-Science-Interview-Questions-Solved/dp/1517216710/" target="_blank" rel="external">A collection of Data Science Interview Questions Solved in Python and Spark: Hands-on Big Data and Machine Learning (A Collection of Programming Interview Questions) (Volume 6)</a></li>
+<li><a href="https://www.amazon.com/collection-Advanced-Learning-Interview-Questions/dp/1518678645" target="_blank" rel="external">A collection of Advanced Data Science and Machine Learning Interview Questions Solved in Python and Spark (II): Hands-on Big Data and Machine … Programming Interview Questions) (Volume 7)</a></li>
+<li><a href="http://statweb.stanford.edu/~tibs/ElemStatLearn/printings/ESLII_print10.pdf" target="_blank" rel="external">The Elements of Statistical Learning</a></li>
+<li><a href="http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Sixth%20Printing.pdf" target="_blank" rel="external">An Introduction to Statistical Learning ♡</a></li>
+<li><a href="https://www.amazon.com/Cracking-Coding-Interview-Gayle-McDowell/dp/0984782850/" target="_blank" rel="external">Cracking the Coding Interview</a></li>
+<li><a href="https://www.amazon.com/Grokking-Algorithms-illustrated-programmers-curious/dp/1617292230" target="_blank" rel="external">Grokking Algorithms: An illustrated guide for programmers and other curious people</a></li>
+<li><a href="http://leananalyticsbook.com/" target="_blank" rel="external">Lean Analytics: Use Data to Build a Better Startup Faster </a></li>
+</ul>
+<h3 id="School"><a href="#School" class="headerlink" title="School"></a>School</h3><ul>
+<li><p>Online</p>
+<ul>
+<li>Udacity<ul>
+<li>A/B testing ♡ (Taught by Googlers, highly recommended)</li>
+</ul>
+</li>
+<li>Coursera<ul>
+<li>Machine Learning</li>
+<li>Functional Programming Principles in Scala</li>
+</ul>
+</li>
+<li>Stanford<ul>
+<li><a href="https://lagunita.stanford.edu/courses/HumanitiesandScience/StatLearning/Winter2015/about" target="_blank" rel="external">Statistical Learning</a></li>
+<li><a href="http://cs224d.stanford.edu/" target="_blank" rel="external">Deep Learning for Natural Language Processing</a></li>
+<li><a href="http://cs231n.stanford.edu/" target="_blank" rel="external">Convolutional Neural Networks for Visual Recognition</a></li>
+</ul>
+</li>
+<li>Blogs<ul>
+<li>web analytics</li>
+<li>RNN</li>
+<li>CNN</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Bootcamp</p>
+<ul>
+<li>Galvanize</li>
+<li>Data Incubator</li>
+<li>Insight Data Science</li>
+</ul>
+</li>
+<li><p>Master Degree   </p>
+<p>There are many choices, a lot of schools offer one-year or two-year MS programs on data science, data analytics, computer science, machine learning, statistics, which are all related to data science.  My advice here is consider them if you do not have training or experience in computer science or statistics, and you really want to learn deep into methodologies to gather with applications. The cost of doing a MS degree is not ignorable, plus the data science filed is evolving a lot.  There is no guarantee that you could learn the latest data science and machine learning technologies find a desired data science job afterward.</p>
+</li>
+</ul>
+<h3 id="Data-Science-Challenges"><a href="#Data-Science-Challenges" class="headerlink" title="Data Science Challenges"></a>Data Science Challenges</h3><ul>
+<li><a href="https://www.kaggle.com/" target="_blank" rel="external">Kaggle</a></li>
+<li>Yelp Challenge</li>
+<li>Udacity Didi Challenge</li>
+<li>Other data team challenges and hackathon</li>
+</ul>
+<h3 id="Python-101"><a href="#Python-101" class="headerlink" title="Python 101"></a>Python 101</h3><ul>
+<li><a href="https://www.edx.org/course/introduction-python-data-science-microsoft-dat208x-7" target="_blank" rel="external">https://www.edx.org/course/introduction-python-data-science-microsoft-dat208x-7</a></li>
+<li><a href="https://python101.pythonlibrary.org/" target="_blank" rel="external">https://python101.pythonlibrary.org/</a></li>
+<li><a href="http://interactivepython.org/runestone/static/pythonds/index.html" target="_blank" rel="external">http://interactivepython.org/runestone/static/pythonds/index.html</a></li>
+</ul>
+<h3 id="Coding-Debuging"><a href="#Coding-Debuging" class="headerlink" title="Coding/Debuging"></a>Coding/Debuging</h3><ul>
+<li>Check variable names (spelling) and other typos</li>
+<li>Check base/corner cases (when the input is None, [], -1,…)</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/interview/" rel="tag"># interview</a>
+          
+            <a href="/tags/data-science/" rel="tag"># data_science</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/04/Z-Scala-Notes-Functional-Programming-Principles-in-Scala/" rel="next" title="Scala Notes - Functional Programming Principles in Scala">
+                <i class="fa fa-chevron-left"></i> Scala Notes - Functional Programming Principles in Scala
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/20/Z-Explore-the-Beauty-of-Kalman-Filter/" rel="prev" title="Explore the Beauty of Kalman Filter">
+                Explore the Beauty of Kalman Filter <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#My-Experience"><span class="nav-number">2.</span> <span class="nav-text">My Experience</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resources"><span class="nav-number">3.</span> <span class="nav-text">Resources</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Coding-Preparation"><span class="nav-number">3.1.</span> <span class="nav-text">Coding Preparation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Science-Statistics-Preparation"><span class="nav-number">3.2.</span> <span class="nav-text">Data Science/ Statistics Preparation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analytics-Preparation"><span class="nav-number">3.3.</span> <span class="nav-text">Analytics Preparation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Books"><span class="nav-number">3.4.</span> <span class="nav-text">Books</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#School"><span class="nav-number">3.5.</span> <span class="nav-text">School</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Science-Challenges"><span class="nav-number">3.6.</span> <span class="nav-text">Data Science Challenges</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-101"><span class="nav-number">3.7.</span> <span class="nav-text">Python 101</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Coding-Debuging"><span class="nav-number">3.8.</span> <span class="nav-text">Coding/Debuging</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2017/04/20/How-do-I-prepare-for-data-science-interviews/';
+          this.page.identifier = '2017/04/20/How-do-I-prepare-for-data-science-interviews/';
+          this.page.title = 'How do I prepare for data science interviews';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

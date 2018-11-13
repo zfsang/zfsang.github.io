@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="This is my personal notes for Functional Programming Principles in Scala at Coursera, which is considered one of the most popular introduction course to Scala. BasicsData StructureArraysArrays preserv">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala Notes - Functional Programming Principles in Scala">
+<meta property="og:url" content="http://zfsang.github.io/2017/06/04/Z-Scala-Notes-Functional-Programming-Principles-in-Scala/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="This is my personal notes for Functional Programming Principles in Scala at Coursera, which is considered one of the most popular introduction course to Scala. BasicsData StructureArraysArrays preserv">
+<meta property="og:updated_time" content="2018-11-13T07:52:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala Notes - Functional Programming Principles in Scala">
+<meta name="twitter:description" content="This is my personal notes for Functional Programming Principles in Scala at Coursera, which is considered one of the most popular introduction course to Scala. BasicsData StructureArraysArrays preserv">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2017/06/04/Z-Scala-Notes-Functional-Programming-Principles-in-Scala/"/>
+
+
+
+
+
+  <title>Scala Notes - Functional Programming Principles in Scala | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2017/06/04/Z-Scala-Notes-Functional-Programming-Principles-in-Scala/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Scala Notes - Functional Programming Principles in Scala</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-04T10:22:03-07:00">
+                2017-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/learning-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">learning_notes</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/learning-notes/scala/" itemprop="url" rel="index">
+                    <span itemprop="name">scala</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/04/Z-Scala-Notes-Functional-Programming-Principles-in-Scala/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/04/Z-Scala-Notes-Functional-Programming-Principles-in-Scala/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>This is my personal notes for Functional Programming Principles in Scala at Coursera, which is considered one of the most popular introduction course to Scala.</p>
+<h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><h3 id="Data-Structure"><a href="#Data-Structure" class="headerlink" title="Data Structure"></a>Data Structure</h3><h4 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h4><p>Arrays preserve order, can contain duplicates, and are <strong>mutable</strong>.<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> numbers = <span class="type">Array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</div></pre></td></tr></table></figure></p>
+<h4 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h4><p>Lists preserve order, can contain duplicates, and are <strong>immutable</strong>.<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> numbers = <span class="type">List</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</div></pre></td></tr></table></figure></p>
+<h4 id="Sets"><a href="#Sets" class="headerlink" title="Sets"></a>Sets</h4><p>Sets do not preserve order and have no duplicates<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> numbers = <span class="type">Set</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</div></pre></td></tr></table></figure></p>
+<h4 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h4><p>A tuple groups together simple logical collections of items without using a class.<br>Unlike case classes, they don’t have named accessors, instead they have accessors that are named by their position and is 1-based rather than 0-based.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> hostPort = (<span class="string">"localhost"</span>, <span class="number">80</span>)</div><div class="line">hostPort._1</div><div class="line">hostPort._2</div></pre></td></tr></table></figure>
+<p>Tuple has some special sauce for simply making Tuples of 2 values: -&gt;<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; <span class="number">1</span> -&gt; <span class="number">2</span></div><div class="line">res0: (<span class="type">Int</span>, <span class="type">Int</span>) = (<span class="number">1</span>,<span class="number">2</span>)</div></pre></td></tr></table></figure></p>
+<h4 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h4><p>It can hold basic datatypes.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map(1 -&gt; Map(&quot;foo&quot; -&gt; &quot;bar&quot;))</div></pre></td></tr></table></figure></p>
+<h4 id="Class-Constructor"><a href="#Class-Constructor" class="headerlink" title="Class + Constructor"></a>Class + Constructor</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Calculator</span>(<span class="params">brand: <span class="type">String</span></span>)</span>&#123;</div><div class="line">  <span class="keyword">val</span> color: <span class="type">String</span> = <span class="keyword">if</span> (brand == <span class="string">"TI"</span>)&#123;</div><div class="line">    <span class="string">"blue"</span></div><div class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (brand == <span class="string">"HP"</span>) &#123;</div><div class="line">    <span class="string">"black"</span></div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="string">"white"</span></div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">add</span></span>(m:<span class="type">Int</span>, n:<span class="type">Int</span>): <span class="type">Int</span> = m + note</div><div class="line">&#125;</div><div class="line"><span class="keyword">val</span> calc = <span class="keyword">new</span> <span class="type">Calculator</span></div><div class="line">calc.add(<span class="number">1</span>,<span class="number">2</span>)</div><div class="line">calc.brand</div></pre></td></tr></table></figure>
+<h4 id="Inheritance-Overloading-Methods"><a href="#Inheritance-Overloading-Methods" class="headerlink" title="Inheritance + Overloading Methods"></a>Inheritance + Overloading Methods</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScientificCalculator</span>(<span class="params">brand: <span class="type">String</span></span>) <span class="keyword">extends</span> <span class="title">Calculator</span>(<span class="params">brand</span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">log</span></span>(m: <span class="type">Double</span>, base: <span class="type">Double</span>) = math.log(m) / math.log(base)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">EvenMoreScientificCalculator</span>(<span class="params">brand: <span class="type">String</span></span>) <span class="keyword">extends</span> <span class="title">ScientificCalculator</span>(<span class="params">brand</span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">log</span></span>(m: <span class="type">Int</span>): <span class="type">Double</span> = log(m, math.exp(<span class="number">1</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Abstract Classes<br>Abstract class: a class that defines some methods but does not implement them. Instead, subclasses that extend the abstract class define these methods. You can’t create an instance of an abstract class.<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Shape</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getArea</span></span>():<span class="type">Int</span>    <span class="comment">// subclass should define this</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span>(<span class="params">r: <span class="type">Int</span></span>) <span class="keyword">extends</span> <span class="title">Shape</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getArea</span></span>(): <span class="type">Int</span> = &#123;r * r * <span class="number">3</span>&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="Traits"><a href="#Traits" class="headerlink" title="Traits"></a>Traits</h4><p>Traits are collections of fields and behaviors that you can extend or mixin to your classes.<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Car</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> brand: <span class="type">String</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Shiny</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> shineRefraction: <span class="type">Int</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BMW</span> <span class="keyword">extends</span> <span class="title">Car</span> <span class="keyword">with</span> <span class="title">Shiny</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> brand = <span class="string">"BMW"</span></div><div class="line">  <span class="keyword">val</span> shineRefraction = <span class="number">12</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">val</span> <span class="type">BMW_X5</span> = <span class="keyword">new</span> <span class="type">BMW</span>()</div></pre></td></tr></table></figure></p>
+<h4 id="Option"><a href="#Option" class="headerlink" title="Option"></a>Option</h4><p>Option is a container that may or may not hold something.<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Option</span>[<span class="type">T</span>] </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">isDefined</span></span>: <span class="type">Boolean</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get</span></span>: <span class="type">T</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getOrElse</span></span>(t: <span class="type">T</span>): <span class="type">T</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">bigger</span></span>(o: <span class="type">Any</span>): <span class="type">Any</span> = &#123;</div><div class="line">  o <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> i: <span class="type">Int</span> <span class="keyword">if</span> i &lt; <span class="number">0</span> =&gt; i - <span class="number">1</span></div><div class="line">    <span class="keyword">case</span> i: <span class="type">Int</span> =&gt; i + <span class="number">1</span></div><div class="line">    <span class="keyword">case</span> d: <span class="type">Double</span> <span class="keyword">if</span> d &lt; <span class="number">0.0</span> =&gt; d - <span class="number">0.1</span></div><div class="line">    <span class="keyword">case</span> d: <span class="type">Double</span> =&gt; d + <span class="number">0.1</span></div><div class="line">    <span class="keyword">case</span> text: <span class="type">String</span> =&gt; text + <span class="string">"s"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Option itself is generic and has two subclasses: Some[T] or None<br>Let’s look at an example of how Option is used:<br>Map.get uses Option for its return type. Option tells you that the method might not return what you’re asking for</p>
+<h4 id="Apply-Methods"><a href="#Apply-Methods" class="headerlink" title="Apply Methods"></a>Apply Methods</h4><h4 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h4><p>Objects are used to hold single instances of a class. Often used for factories.</p>
+<h4 id="Pattern-Matching"><a href="#Pattern-Matching" class="headerlink" title="Pattern Matching"></a>Pattern Matching</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> times = <span class="number">1</span></div><div class="line">times <span class="keyword">match</span>&#123;</div><div class="line">  <span class="keyword">case</span> <span class="number">1</span> =&gt; <span class="string">"one"</span></div><div class="line">  <span class="keyword">case</span> <span class="number">2</span> =&gt; <span class="string">"two"</span></div><div class="line">  <span class="keyword">case</span> _ =&gt; <span class="string">"other number"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Case-Classes"><a href="#Case-Classes" class="headerlink" title="Case Classes"></a>Case Classes</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Calculator</span>(<span class="params">brand: <span class="type">String</span>, model: <span class="type">String</span></span>)</span></div><div class="line"><span class="keyword">val</span> hp20b = <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"20B"</span>)</div><div class="line"><span class="keyword">val</span> hp30b = <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"30B"</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcType</span></span>(calc: <span class="type">Calculator</span>) = calc <span class="keyword">match</span> &#123;</div><div class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"20B"</span>) =&gt; <span class="string">"financial"</span></div><div class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"48G"</span>) =&gt; <span class="string">"scientific"</span></div><div class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"30B"</span>) =&gt; <span class="string">"business"</span></div><div class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(ourBrand, ourModel) =&gt; <span class="string">"Calculator: %s %s is of unknown type"</span>.format(ourBrand, ourModel)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Exceptions"><a href="#Exceptions" class="headerlink" title="Exceptions"></a>Exceptions</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">  remoteCalculatorService.add(<span class="number">1</span>, <span class="number">2</span>)</div><div class="line">&#125; <span class="keyword">catch</span> &#123;</div><div class="line">  <span class="keyword">case</span> e: <span class="type">ServerIsDownException</span> =&gt; log.error(e, <span class="string">"the remote calculator service is unavailable. should have kept your trusty HP."</span>)</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">  remoteCalculatorService.close()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Collections"><a href="#Collections" class="headerlink" title="Collections"></a>Collections</h4><h2 id="Week-1-Fundaments"><a href="#Week-1-Fundaments" class="headerlink" title="Week 1 - Fundaments"></a>Week 1 - Fundaments</h2><h4 id="substitution-model-reduce-an-expression-to-a-value-lambda-calculus"><a href="#substitution-model-reduce-an-expression-to-a-value-lambda-calculus" class="headerlink" title="substitution model - reduce an expression to a value (lambda calculus)"></a>substitution model - reduce an expression to a value (lambda calculus)</h4><p> evaluate the the function from left to right, replace the parameter from right to left.</p>
+<p> Lists<br> Lists preserve order, can contain duplicates, and are immutable.</p>
+<ul>
+<li>Call-by-value (more efficient)<ul>
+<li>evaluate function argument only once</li>
+</ul>
+</li>
+<li>Call-by-name (more easy to terminate)<ul>
+<li>function argument is not evaluated if the corresponding parameter is unused in the evaluation of the function body</li>
+</ul>
+</li>
+</ul>
+<p>abstract expression introduces a name for an expression by which it can be then referred to.</p>
+<ul>
+<li>linear recursion</li>
+<li>tail recursion<br>to avoid too-deep recursion chain</li>
+</ul>
+<h2 id="Week-2"><a href="#Week-2" class="headerlink" title="Week 2"></a>Week 2</h2><h4 id="Anonymous-function"><a href="#Anonymous-function" class="headerlink" title="Anonymous function"></a>Anonymous function</h4><p>An anonymous function (x_1:T_1, …, x_n:T_n) =&gt; E can always be expressed using def as follows</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span></span>(x_1:<span class="type">T_1</span>, ..., x_n:<span class="type">T_n</span>) = <span class="type">E</span>;f</div></pre></td></tr></table></figure>
+<h4 id="Function-types"><a href="#Function-types" class="headerlink" title="Function types"></a>Function types</h4><p>The type A =&gt; B is the type of a function that takes an argument of type A and returns a result of B.<br>e.g. Int =&gt; Int is the type of functions that map integers to integers</p>
+<h4 id="Curry"><a href="#Curry" class="headerlink" title="Curry"></a>Curry</h4><p> By repeating the process n times<br>  <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span></span>(args_1)...(args_n<span class="number">-1</span>)(arg_n) = <span class="type">E</span>      </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span> </span>= (args_1 =&gt; (arg_2 =&gt; ...(args_n =&gt; <span class="type">E</span>) ...))</div></pre></td></tr></table></figure></p>
+<h2 id="Week-3"><a href="#Week-3" class="headerlink" title="Week 3"></a>Week 3</h2><h3 id="Abstract-Classes"><a href="#Abstract-Classes" class="headerlink" title="Abstract Classes"></a>Abstract Classes</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">intsets</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> t1 = <span class="keyword">new</span> <span class="type">NonEmpty</span>(<span class="number">3</span>, <span class="keyword">new</span> <span class="type">Empty</span>, <span class="keyword">new</span> <span class="type">Empty</span>)</div><div class="line">  <span class="keyword">val</span> t2 = t1 incl <span class="number">4</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Empty</span> <span class="keyword">extends</span> <span class="title">Intset</span></span>&#123;</div><div class="line">  <span class="comment">//subclass of IntSet</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">contains</span></span>(x: <span class="type">Int</span>): <span class="type">Boolean</span> = <span class="type">False</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">incl</span></span>(x: <span class="type">Int</span>): <span class="type">Intset</span> = <span class="keyword">new</span> <span class="type">NonEmpty</span>(x, <span class="keyword">new</span> <span class="type">Empty</span>, <span class="keyword">new</span> <span class="type">Empty</span>)</div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">toString</span> </span>= '.'</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">union</span></span>(other: <span class="type">IntSet</span>): <span class="type">IntSet</span> = other</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">NonEmpty</span>(<span class="params">elem: <span class="type">Int</span>, left: <span class="type">IntSet</span>, right: <span class="type">IntSet</span></span>) <span class="keyword">extends</span> <span class="title">IntSet</span></span>&#123;</div><div class="line">  <span class="comment">// subclass of IntSet</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">contains</span></span>(x: <span class="type">Int</span>): <span class="type">Boolean</span> =</div><div class="line">    <span class="keyword">if</span> (x&lt;elem) left contains x</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (x&gt;elem) right contains x</div><div class="line">    <span class="keyword">else</span> <span class="literal">true</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">incl</span></span>(x: <span class="type">Int</span>): <span class="type">IntSet</span> =</div><div class="line">    <span class="keyword">if</span> (x&lt;elem) <span class="keyword">new</span> <span class="type">NonEmpty</span>(elem, left incl x, right)</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (x&gt;elem) <span class="keyword">new</span> <span class="type">NonEmpty</span>(elem, left, right incl x)</div><div class="line">    <span class="keyword">else</span> <span class="keyword">this</span></div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">toString</span> </span>= <span class="string">"&#123;"</span> + left + elem + right + <span class="string">"&#125;"</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">union</span></span>(other: <span class="type">IntSet</span>) <span class="type">Intset</span> =</div><div class="line">    ((left union right) union other) incl elem</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">IntSet</span> </span>&#123;</div><div class="line">  <span class="comment">// super class of Empty and NonEmpty</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">incl</span></span>(x:<span class="type">Int</span>): <span class="type">Intset</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">contains</span></span>(x: <span class="type">Int</span>): <span class="type">Boolean</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Super class to class C (all objects and classes) is base class.</p>
+<h3 id="How-classes-are-organized"><a href="#How-classes-are-organized" class="headerlink" title="How classes are organized"></a>How classes are organized</h3><p>Class and objects are organized in packages.</p>
+<p>Import packages:</p>
+<ul>
+<li>Name Import <code>import week3.Rational</code> ; <code>import week3.{Rational, Hello}</code></li>
+<li>Wildcard Import <code>import week3._</code></li>
+</ul>
+<p>Some entities are automatically imported in any Scala program.</p>
+<ul>
+<li>All members of package scala</li>
+<li>All members of package java.lang</li>
+<li>All members of the singleton object scala.Predef.</li>
+</ul>
+<p>e.g.<br><code>Int, Boolean, Object, require, assert</code></p>
+<h1 id="Week5"><a href="#Week5" class="headerlink" title="Week5"></a>Week5</h1><h4 id="Definition-of-Merge"><a href="#Definition-of-Merge" class="headerlink" title="Definition of Merge"></a>Definition of Merge</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span></span>(xs: <span class="type">List</span>[<span class="type">Int</span>], ys: <span class="type">List</span>[<span class="type">Int</span>]) = </div><div class="line"> xs <span class="keyword">match</span> &#123;</div><div class="line">  <span class="keyword">case</span> <span class="type">Nil</span> =&gt; ys</div><div class="line">  <span class="keyword">case</span> x::xs1 =&gt; </div><div class="line">    ys <span class="keyword">match</span> &#123;</div><div class="line">      <span class="keyword">case</span> <span class="type">Nil</span> =&gt; xs</div><div class="line">      <span class="keyword">case</span> y::ys1 =&gt; &#123;</div><div class="line">        <span class="keyword">if</span> (x &lt; y) x :: merge(xs1, ys)</div><div class="line">        <span class="keyword">else</span> y:: merge(xs, ys1)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>better use of pattern matching</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">mergesortGeneral</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">msort</span></span>[<span class="type">T</span>](xs: <span class="type">List</span>[<span class="type">T</span>])(lt: (<span class="type">T</span>,<span class="type">T</span>) =&gt; <span class="type">Boolean</span>): <span class="type">List</span>[<span class="type">T</span>] = &#123;</div><div class="line">    <span class="keyword">val</span> n = xs.length /<span class="number">2</span></div><div class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) xs</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">      <span class="function"><span class="keyword">def</span> <span class="title">merge</span></span>(xs: <span class="type">List</span>[<span class="type">T</span>], ys: <span class="type">List</span>[<span class="type">T</span>]): <span class="type">List</span>[<span class="type">T</span>] = (xs, ys) <span class="keyword">match</span> &#123;</div><div class="line">        <span class="keyword">case</span> (<span class="type">Nil</span>, ys) =&gt; ys</div><div class="line">        <span class="keyword">case</span> (xs, <span class="type">Nil</span>) =&gt; xs</div><div class="line">        <span class="keyword">case</span> (x :: xs1, y::ys1) =&gt; &#123;</div><div class="line">          <span class="keyword">if</span> (lt(x,y)) x :: merge(xs1, ys)</div><div class="line">          <span class="keyword">else</span> y :: merge(xs, ys1)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">      <span class="keyword">val</span> (fst, snd) = xs splitAt n</div><div class="line">      merge(msort(fst)(lt), msort(snd)(lt))</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">val</span> nums = <span class="type">List</span>(<span class="number">2</span>, <span class="number">-4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">1</span>)</div><div class="line">  <span class="keyword">val</span> fruits = <span class="type">List</span>( <span class="string">"apple"</span>, <span class="string">"pineapple"</span>, <span class="string">"orange"</span>, <span class="string">"banana"</span>)</div><div class="line"></div><div class="line">  msort(nums)((x, y) =&gt; x &lt; y)</div><div class="line">  msort(fruits)((x: <span class="type">String</span>, y: <span class="type">String</span>) =&gt; x.compareTo(y) &lt; <span class="number">0</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Rules-for-Implicit-Parameters"><a href="#Rules-for-Implicit-Parameters" class="headerlink" title="Rules for Implicit Parameters"></a>Rules for Implicit Parameters</h4><p>Say, a function takes an implicit parameter of type T.<br>The compiler will search an implicit definition that</p>
+<ul>
+<li>is marked <code>implicit</code></li>
+<li>has a type compatible with <code>T</code></li>
+<li>is visible at the point of the function call, or is defined with a companion object associated with T</li>
+</ul>
+<h4 id="Natural-Induction"><a href="#Natural-Induction" class="headerlink" title="Natural Induction"></a>Natural Induction</h4><p>n -&gt; n + 1</p>
+<h4 id="Structure-Induction"><a href="#Structure-Induction" class="headerlink" title="Structure Induction"></a>Structure Induction</h4><h4 id="Some-more-sequence-operations"><a href="#Some-more-sequence-operations" class="headerlink" title="Some more sequence operations"></a>Some more sequence operations</h4><ul>
+<li><code>xs exists p</code>: <code>true</code> if there is an element x of xs such that p(x) holds, false otherwise</li>
+<li><code>xs forall p</code>: <code>true</code> if p(x) holds for all elements x of xs, false otherwise</li>
+<li><code>xs zip ys</code>: a sequence of pairs drawn from corresponding elements of sequences xs and ys</li>
+<li><code>xs.unzip</code>: Splits a sequence of pairs xs into two sequences consisting of the first, respectively second halves of all pairs</li>
+<li><code>xs.flapMap f</code>: applies collection-valued function f to all elements of xs and concatenates the results</li>
+<li><code>xs.sum</code> the sum of all elements of this numeric collection</li>
+<li><code>xs.product</code>: the product of all elements of this numeric collection</li>
+<li><code>xs.max</code>: the maximum of all elements of this collection (an Ordering must exist)</li>
+<li><code>xs.min</code>: the minimum of all elements of this collection<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><a href="https://twitter.github.io/scala_school/collections.html" target="_blank" rel="external">https://twitter.github.io/scala_school/collections.html</a><br><a href="http://blog.tmorris.net/posts/scalaoption-cheat-sheet/" target="_blank" rel="external">http://blog.tmorris.net/posts/scalaoption-cheat-sheet/</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/14/Z-When-We-Talk-about-Network-Protocols/" rel="next" title="When We Talk about Network Protocols">
+                <i class="fa fa-chevron-left"></i> When We Talk about Network Protocols
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/20/How-do-I-prepare-for-data-science-interviews/" rel="prev" title="How do I prepare for data science interviews">
+                How do I prepare for data science interviews <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basics"><span class="nav-number">1.</span> <span class="nav-text">Basics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Structure"><span class="nav-number">1.1.</span> <span class="nav-text">Data Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Arrays"><span class="nav-number">1.1.1.</span> <span class="nav-text">Arrays</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lists"><span class="nav-number">1.1.2.</span> <span class="nav-text">Lists</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sets"><span class="nav-number">1.1.3.</span> <span class="nav-text">Sets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tuple"><span class="nav-number">1.1.4.</span> <span class="nav-text">Tuple</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maps"><span class="nav-number">1.1.5.</span> <span class="nav-text">Maps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Class-Constructor"><span class="nav-number">1.1.6.</span> <span class="nav-text">Class + Constructor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Inheritance-Overloading-Methods"><span class="nav-number">1.1.7.</span> <span class="nav-text">Inheritance + Overloading Methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Traits"><span class="nav-number">1.1.8.</span> <span class="nav-text">Traits</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Option"><span class="nav-number">1.1.9.</span> <span class="nav-text">Option</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Apply-Methods"><span class="nav-number">1.1.10.</span> <span class="nav-text">Apply Methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Objects"><span class="nav-number">1.1.11.</span> <span class="nav-text">Objects</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pattern-Matching"><span class="nav-number">1.1.12.</span> <span class="nav-text">Pattern Matching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Case-Classes"><span class="nav-number">1.1.13.</span> <span class="nav-text">Case Classes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exceptions"><span class="nav-number">1.1.14.</span> <span class="nav-text">Exceptions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Collections"><span class="nav-number">1.1.15.</span> <span class="nav-text">Collections</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Week-1-Fundaments"><span class="nav-number">2.</span> <span class="nav-text">Week 1 - Fundaments</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#substitution-model-reduce-an-expression-to-a-value-lambda-calculus"><span class="nav-number">2.0.1.</span> <span class="nav-text">substitution model - reduce an expression to a value (lambda calculus)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Week-2"><span class="nav-number">3.</span> <span class="nav-text">Week 2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Anonymous-function"><span class="nav-number">3.0.1.</span> <span class="nav-text">Anonymous function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Function-types"><span class="nav-number">3.0.2.</span> <span class="nav-text">Function types</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Curry"><span class="nav-number">3.0.3.</span> <span class="nav-text">Curry</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Week-3"><span class="nav-number">4.</span> <span class="nav-text">Week 3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract-Classes"><span class="nav-number">4.1.</span> <span class="nav-text">Abstract Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-classes-are-organized"><span class="nav-number">4.2.</span> <span class="nav-text">How classes are organized</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Week5"><span class="nav-number"></span> <span class="nav-text">Week5</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Definition-of-Merge"><span class="nav-number">0.0.1.</span> <span class="nav-text">Definition of Merge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rules-for-Implicit-Parameters"><span class="nav-number">0.0.2.</span> <span class="nav-text">Rules for Implicit Parameters</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Natural-Induction"><span class="nav-number">0.0.3.</span> <span class="nav-text">Natural Induction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Structure-Induction"><span class="nav-number">0.0.4.</span> <span class="nav-text">Structure Induction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Some-more-sequence-operations"><span class="nav-number">0.0.5.</span> <span class="nav-text">Some more sequence operations</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">1.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2017/06/04/Z-Scala-Notes-Functional-Programming-Principles-in-Scala/';
+          this.page.identifier = '2017/06/04/Z-Scala-Notes-Functional-Programming-Principles-in-Scala/';
+          this.page.title = 'Scala Notes - Functional Programming Principles in Scala';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

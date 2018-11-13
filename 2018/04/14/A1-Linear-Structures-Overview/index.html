@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="algorithm,interview," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="List/Array Max/Min subarray prefix sum array: pre calculate the sum track the current sum and max sum (min product and max product) + greedy two pointers (visit each num at most twice) use hash table">
+<meta name="keywords" content="algorithm,interview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linear Structures - Overview">
+<meta property="og:url" content="http://zfsang.github.io/2018/04/14/A1-Linear-Structures-Overview/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="List/Array Max/Min subarray prefix sum array: pre calculate the sum track the current sum and max sum (min product and max product) + greedy two pointers (visit each num at most twice) use hash table">
+<meta property="og:updated_time" content="2018-11-13T07:49:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linear Structures - Overview">
+<meta name="twitter:description" content="List/Array Max/Min subarray prefix sum array: pre calculate the sum track the current sum and max sum (min product and max product) + greedy two pointers (visit each num at most twice) use hash table">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2018/04/14/A1-Linear-Structures-Overview/"/>
+
+
+
+
+
+  <title>Linear Structures - Overview | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2018/04/14/A1-Linear-Structures-Overview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linear Structures - Overview</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-14T10:42:39-07:00">
+                2018-04-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview_Prep</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/14/A1-Linear-Structures-Overview/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/14/A1-Linear-Structures-Overview/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="List-Array"><a href="#List-Array" class="headerlink" title="List/Array"></a>List/Array</h1><ul>
+<li>Max/Min subarray<ul>
+<li>prefix sum array: pre calculate the sum</li>
+<li>track the current sum and max sum (min product and max product) + greedy</li>
+<li>two pointers (visit each num at most twice)</li>
+<li>use hash table to cache previous state (sum, index, count)</li>
+</ul>
+</li>
+</ul>
+<h2 id="K-sum"><a href="#K-sum" class="headerlink" title="K-sum"></a>K-sum</h2><ul>
+<li>Use dict</li>
+<li>Sort + pointers</li>
+<li>Skip duplications</li>
+<li>Reduce to smaller problems</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 1. Two Sum</span></div><div class="line"><span class="comment"># hash table</span></div><div class="line"><span class="comment"># Time: O(N) Space: O(N)</span></div><div class="line"><span class="comment"># https://leetcode.com/problems/two-sum/description/</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums, target)</span>:</span></div><div class="line">    dct = &#123;&#125;</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</div><div class="line">        <span class="keyword">if</span> nums[i] <span class="keyword">in</span> dct:</div><div class="line">            <span class="keyword">return</span> [dct.get(nums[i]), i]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            dct[target-nums[i]] = i</div><div class="line"></div><div class="line"><span class="comment"># Three Sum</span></div><div class="line"><span class="comment"># sort + two pointers</span></div><div class="line"><span class="comment"># time: O(N^2) space: O(1)</span></div><div class="line"><span class="comment"># https://leetcode.com/problems/3sum/description/</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">threeSum</span><span class="params">(self, nums)</span>:</span></div><div class="line">    <span class="keyword">if</span> len(nums)&lt;<span class="number">3</span>:</div><div class="line">        <span class="keyword">return</span> []</div><div class="line">    nums = sorted(nums)</div><div class="line">    res = []</div><div class="line">    s, l, r = <span class="number">0</span>, <span class="number">1</span>, len(nums) <span class="number">-1</span> </div><div class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> range(len(nums)<span class="number">-2</span>):</div><div class="line">        <span class="keyword">if</span> s &gt; <span class="number">0</span> <span class="keyword">and</span> nums[s] == nums[s<span class="number">-1</span>]:</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        l, r = s + <span class="number">1</span>, len(nums) - <span class="number">1</span></div><div class="line">        <span class="keyword">while</span> l &lt; r:</div><div class="line">            curr_sum = nums[s] + nums[l] + nums[r]</div><div class="line">            <span class="keyword">if</span> curr_sum &lt; <span class="number">0</span>:</div><div class="line">                l += <span class="number">1</span></div><div class="line">            <span class="keyword">elif</span> curr_sum &gt; <span class="number">0</span>:</div><div class="line">                r -= <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                res.append([nums[s], nums[l], nums[r]])</div><div class="line">                <span class="comment"># Skip duplications</span></div><div class="line">                <span class="keyword">while</span> l&lt;r <span class="keyword">and</span> nums[l] == nums[l+<span class="number">1</span>]:</div><div class="line">                    l += <span class="number">1</span></div><div class="line">                <span class="keyword">while</span> l&lt;r <span class="keyword">and</span> nums[r] == nums[r<span class="number">-1</span>]:</div><div class="line">                    r -= <span class="number">1</span></div><div class="line">                l, r = l + <span class="number">1</span>, r - <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> res</div><div class="line"></div><div class="line"><span class="comment"># Four Sum</span></div><div class="line"><span class="comment"># sort + two pointers (reduce to three sums)</span></div><div class="line"><span class="comment"># time: O(N^3) space: O(1)</span></div><div class="line"><span class="comment"># https://leetcode.com/problems/4sum/description/</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fourSum</span><span class="params">(self, nums, target)</span>:</span></div><div class="line">    <span class="comment"># time O(N^3)</span></div><div class="line">    nums = sorted(nums)</div><div class="line">    res = []</div><div class="line">    <span class="keyword">if</span> len(nums)&lt;<span class="number">4</span>:</div><div class="line">        <span class="keyword">return</span> []</div><div class="line">    <span class="keyword">for</span> l1 <span class="keyword">in</span> range(len(nums)<span class="number">-3</span>):</div><div class="line">        <span class="comment"># skip dup in l1</span></div><div class="line">        <span class="keyword">if</span> l1 &gt; <span class="number">0</span> <span class="keyword">and</span> nums[l1] == nums[l1<span class="number">-1</span>]:</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        <span class="keyword">for</span> r1 <span class="keyword">in</span> reversed(range(l1+<span class="number">3</span>, len(nums))): </div><div class="line">            <span class="comment"># skip dup in r1</span></div><div class="line">            <span class="keyword">if</span> r1 &lt; len(nums) - <span class="number">1</span> <span class="keyword">and</span> nums[r1] == nums[r1+<span class="number">1</span>]:</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            l2, r2 = l1 + <span class="number">1</span>, r1 - <span class="number">1</span></div><div class="line">            remain = target - nums[l1] - nums[r1]</div><div class="line">            <span class="keyword">while</span> l2 &lt; r2:</div><div class="line">                curr_sum = nums[l2] + nums[r2]</div><div class="line">                <span class="keyword">if</span> curr_sum &lt; remain:</div><div class="line">                    l2 += <span class="number">1</span></div><div class="line">                <span class="keyword">elif</span> curr_sum &gt; remain:</div><div class="line">                    r2 -= <span class="number">1</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    res.append([nums[l1], nums[l2], nums[r2], nums[r1]])</div><div class="line">                    <span class="comment"># skip dup in l2, r2 (use while to skip all duplications)</span></div><div class="line">                    <span class="keyword">while</span> l2 &lt; r2 <span class="keyword">and</span> nums[l2] == nums[l2 + <span class="number">1</span>]:</div><div class="line">                        l2 += <span class="number">1</span></div><div class="line">                    <span class="keyword">while</span> l2 &lt; r2 <span class="keyword">and</span> nums[r2] == nums[r2 - <span class="number">1</span>]:</div><div class="line">                        r2 -= <span class="number">1</span></div><div class="line">                    l2, r2 = l2 + <span class="number">1</span>, r2 - <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># https://leetcode.com/problems/minimum-window-substring/description/</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">minWindow</span><span class="params">(self, s, t)</span>:</span></div><div class="line">    target = Counter(t)</div><div class="line">    cnt = len(t)</div><div class="line">    start = <span class="number">0</span></div><div class="line">    res_s, res_e = <span class="number">0</span>, len(s) + <span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</div><div class="line">        <span class="keyword">if</span> target[s[i]] &gt; <span class="number">0</span>:</div><div class="line">            cnt -= <span class="number">1</span></div><div class="line">        target[s[i]] -= <span class="number">1</span></div><div class="line">        </div><div class="line">        <span class="comment"># checkpoint when cnt == 0, remove as many as possible (greedy)</span></div><div class="line">        <span class="keyword">while</span> cnt == <span class="number">0</span>:</div><div class="line">            <span class="keyword">if</span> i - start &lt; res_e - res_s:</div><div class="line">                res_s, res_e = start, i</div><div class="line">            <span class="keyword">if</span> target[s[start]] == <span class="number">0</span>:</div><div class="line">                cnt += <span class="number">1</span></div><div class="line">            target[s[start]] += <span class="number">1</span></div><div class="line">            start += <span class="number">1</span></div><div class="line">    <span class="keyword">if</span> res_e - res_s + <span class="number">1</span> &gt; len(s):</div><div class="line">        <span class="keyword">return</span> <span class="string">''</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">''</span>.join(s[res_s:res_e+<span class="number">1</span>])</div></pre></td></tr></table></figure>
+<h2 id="Subarray"><a href="#Subarray" class="headerlink" title="Subarray"></a>Subarray</h2><ul>
+<li><p>Make sure to use different kind of prefix sum array</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#1 https://leetcode.com/problems/maximum-subarray/description/</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span><span class="params">(self, nums)</span>:</span></div><div class="line">    max_sum = nums[<span class="number">0</span>]</div><div class="line">    curr_sum = nums[<span class="number">0</span>]</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(nums)):</div><div class="line">        curr_sum = max(nums[i], curr_sum + nums[i])</div><div class="line">        max_sum = max(max_sum, curr_sum)</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> max_sum         </div><div class="line"><span class="comment"># 2.</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProduct</span><span class="params">(self, nums)</span>:</span></div><div class="line">    max_product = nums[<span class="number">0</span>]</div><div class="line">    curr_min = nums[<span class="number">0</span>]</div><div class="line">    curr_max = nums[<span class="number">0</span>]</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(nums)):</div><div class="line">        a = nums[i] * curr_min</div><div class="line">        b = nums[i] * curr_max</div><div class="line">        c = nums[i]</div><div class="line">        curr_min = min(min(a,b), c)</div><div class="line">        curr_max = max(max(a,b), c)</div><div class="line">        max_product = max(max_product, curr_min, curr_max)</div><div class="line">    <span class="keyword">return</span> max_product</div><div class="line"></div><div class="line"><span class="comment"># 3 use hash + prefix sum O(n) O(n)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxSubArrayLen</span><span class="params">(self, nums, k)</span>:</span></div><div class="line"></div><div class="line">    res = <span class="number">0</span></div><div class="line">    sums = <span class="number">0</span></div><div class="line">    dct = &#123;&#125;</div><div class="line">    <span class="keyword">for</span> i, num <span class="keyword">in</span> enumerate(nums):</div><div class="line">        <span class="keyword">if</span> sums <span class="keyword">not</span> <span class="keyword">in</span> dct:</div><div class="line">            dct[sums] = i</div><div class="line">        sums += num</div><div class="line">        <span class="keyword">if</span> sums-k <span class="keyword">in</span> dct:</div><div class="line">            res = max(res, i-dct[sums-k] + <span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line"></div><div class="line"><span class="comment"># https://leetcode.com/problems/range-addition/description/</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getModifiedArray</span><span class="params">(self, length, updates)</span>:</span></div><div class="line">    <span class="comment"># range cache O(N + K) O(1)</span></div><div class="line">    res = [<span class="number">0</span>] * length</div><div class="line">    <span class="keyword">for</span> l, r, add <span class="keyword">in</span> updates:</div><div class="line">        res[l] += add</div><div class="line">        <span class="keyword">if</span> r + <span class="number">1</span> &lt;= length - <span class="number">1</span>:</div><div class="line">            res[r+<span class="number">1</span>] -= add</div><div class="line">    </div><div class="line">    curr_sum = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(length):</div><div class="line">        curr_sum += res[i]</div><div class="line">        res[i] = curr_sum</div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+</li>
+<li><p>Max rectangle</p>
+</li>
+</ul>
+<h2 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked List"></a>Linked List</h2><p><a href="https://www.jianshu.com/p/490cb181946f" target="_blank" rel="external">https://www.jianshu.com/p/490cb181946f</a></p>
+<ul>
+<li>fast, slow pointer (cyclic detection, find middle node, find intersection of linked list)</li>
+<li>reverse linked list to simplify problems</li>
+<li>create dummy node pointing to the head</li>
+<li>use prev node to reverse / track</li>
+<li>list with index 0 ~ n-1 can be treated as linked list (next method: nums[curr_index])</li>
+<li>add tmp link to reduce problems (intersection -&gt; detect cycle)</li>
+<li>use dict to achieve O(1) read/delete time for node<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># use prev Node</span></div><div class="line"><span class="comment"># Time: O(N) Space: O(1)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverseList</span><span class="params">(self, head)</span>:</span></div><div class="line">    prev, curr = <span class="keyword">None</span>, head</div><div class="line">    <span class="keyword">while</span> curr:</div><div class="line">        next_node = curr.next</div><div class="line">        curr.next = prev</div><div class="line">        prev = curr</div><div class="line">        curr = next_node</div><div class="line">    <span class="keyword">return</span> prev</div><div class="line"></div><div class="line"><span class="comment"># fast - slow pointers</span></div><div class="line"><span class="comment"># Time O(N) Space O(1)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">detectCycle</span><span class="params">(self, head)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.next:</div><div class="line">        <span class="keyword">return</span></div><div class="line">    slow = head</div><div class="line">    fast = head</div><div class="line">    <span class="keyword">while</span> fast <span class="keyword">and</span> fast.next:</div><div class="line">        slow = slow.next</div><div class="line">        fast = fast.next.next</div><div class="line">        <span class="keyword">if</span> slow == fast:</div><div class="line">            slow2 = head</div><div class="line">            <span class="keyword">while</span> slow != slow2:</div><div class="line">                slow = slow.next</div><div class="line">                slow2 = slow2.next</div><div class="line">            <span class="keyword">return</span> slow</div><div class="line">    <span class="keyword">return</span></div><div class="line"></div><div class="line"><span class="comment"># remove element</span></div><div class="line"><span class="comment"># 第一种是向后比较结点，发现重复就删掉。因为可能会删掉后面的结点，所以一定要注意cur的判空条件。当正常遍历时，cur可能为空，当删掉了后面结点时cur.next可能为空，都要判断。</span></div><div class="line"><span class="keyword">if</span> node.next.val == val:</div><div class="line">    node.next = node.next.next</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Collections-of-helper-functions"><a href="#Collections-of-helper-functions" class="headerlink" title="Collections of helper functions"></a>Collections of helper functions</h2><ol>
+<li>reversed linked list</li>
+</ol>
+<h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><ul>
+<li>in_stack and out_stack to build queue</li>
+<li>stack to check valid syntax, brackets, …</li>
+<li>append index and sign to stack</li>
+</ul>
+<h3 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h3><ul>
+<li>one queue to build stack (popleft all but the last one)</li>
+</ul>
+<h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3><ul>
+<li>stack + queue <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</div><div class="line">dq = deque([])</div><div class="line"><span class="comment"># could specify the length of deque</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Questions-Review"><a href="#Questions-Review" class="headerlink" title="Questions Review"></a>Questions Review</h2><h3 id="Intervals"><a href="#Intervals" class="headerlink" title="Intervals:"></a>Intervals:</h3><p>Evidently, two events [s1, e1) and [s2, e2) do not conflict if and only if one of them starts after the other one ends: either e1 &lt;= s2 OR e2 &lt;= s1. By De Morgan’s laws, this means the events conflict when s1 &lt; e2 AND s2 &lt; e1.</p>
+<p><a href="https://leetcode.com/problems/my-calendar-i/description/" target="_blank" rel="external">https://leetcode.com/problems/my-calendar-i/description/</a><br><a href="https://leetcode.com/problems/my-calendar-ii/description/" target="_blank" rel="external">https://leetcode.com/problems/my-calendar-ii/description/</a><br><a href="https://leetcode.com/problems/my-calendar-iii/description/" target="_blank" rel="external">https://leetcode.com/problems/my-calendar-iii/description/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+            <a href="/tags/interview/" rel="tag"># interview</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/19/M1-Popular-NLP-Algorithms/" rel="next" title="Popular NLP Algorithms">
+                <i class="fa fa-chevron-left"></i> Popular NLP Algorithms
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/13/A8-Bit-Manipulation-Tricks/" rel="prev" title="Bit Manipulation Tricks">
+                Bit Manipulation Tricks <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#List-Array"><span class="nav-number">1.</span> <span class="nav-text">List/Array</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#K-sum"><span class="nav-number">1.1.</span> <span class="nav-text">K-sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash"><span class="nav-number">1.2.</span> <span class="nav-text">Hash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Subarray"><span class="nav-number">1.3.</span> <span class="nav-text">Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linked-List"><span class="nav-number">1.4.</span> <span class="nav-text">Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collections-of-helper-functions"><span class="nav-number">1.5.</span> <span class="nav-text">Collections of helper functions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stack"><span class="nav-number">1.5.1.</span> <span class="nav-text">stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#queue"><span class="nav-number">1.5.2.</span> <span class="nav-text">queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque"><span class="nav-number">1.5.3.</span> <span class="nav-text">deque</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Questions-Review"><span class="nav-number">1.6.</span> <span class="nav-text">Questions Review</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intervals"><span class="nav-number">1.6.1.</span> <span class="nav-text">Intervals:</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2018/04/14/A1-Linear-Structures-Overview/';
+          this.page.identifier = '2018/04/14/A1-Linear-Structures-Overview/';
+          this.page.title = 'Linear Structures - Overview';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

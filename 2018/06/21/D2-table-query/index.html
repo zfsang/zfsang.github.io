@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="interview,database," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Metricsbased on postgresQL DAU/MAU1234567891011with dau_table as (      select date(ts) AS date, count(distinct userid) as dau      from dailysessions ds      group by date(ts)     )select date, dau,">
+<meta name="keywords" content="interview,database">
+<meta property="og:type" content="article">
+<meta property="og:title" content="table-query">
+<meta property="og:url" content="http://zfsang.github.io/2018/06/21/D2-table-query/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="Metricsbased on postgresQL DAU/MAU1234567891011with dau_table as (      select date(ts) AS date, count(distinct userid) as dau      from dailysessions ds      group by date(ts)     )select date, dau,">
+<meta property="og:updated_time" content="2018-11-13T08:37:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="table-query">
+<meta name="twitter:description" content="Metricsbased on postgresQL DAU/MAU1234567891011with dau_table as (      select date(ts) AS date, count(distinct userid) as dau      from dailysessions ds      group by date(ts)     )select date, dau,">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2018/06/21/D2-table-query/"/>
+
+
+
+
+
+  <title>table-query | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2018/06/21/D2-table-query/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">table-query</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-21T12:48:15-07:00">
+                2018-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview_Prep</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/21/D2-table-query/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/21/D2-table-query/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Metrics"><a href="#Metrics" class="headerlink" title="Metrics"></a>Metrics</h2><p>based on postgresQL</p>
+<h3 id="DAU-MAU"><a href="#DAU-MAU" class="headerlink" title="DAU/MAU"></a>DAU/MAU</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">with dau_table as (</div><div class="line">      <span class="keyword">select</span> <span class="built_in">date</span>(ts) <span class="keyword">AS</span> <span class="built_in">date</span>, <span class="keyword">count</span>(<span class="keyword">distinct</span> userid) <span class="keyword">as</span> dau</div><div class="line">      <span class="keyword">from</span> dailysessions ds</div><div class="line">      <span class="keyword">group</span> <span class="keyword">by</span> <span class="built_in">date</span>(ts)</div><div class="line">     )</div><div class="line"><span class="keyword">select</span> <span class="built_in">date</span>, dau,</div><div class="line">       (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">distinct</span> user_id)</div><div class="line">        <span class="keyword">from</span> dailysessions ds</div><div class="line">        <span class="keyword">where</span> ds.date <span class="keyword">between</span> <span class="built_in">date</span> - <span class="number">29</span> * <span class="built_in">interval</span> <span class="string">'1 day'</span> <span class="keyword">and</span> <span class="built_in">date</span></div><div class="line">       ) <span class="keyword">as</span> mau</div><div class="line"><span class="keyword">from</span> dau_table;</div></pre></td></tr></table></figure>
+<p>(based on <a href="https://stackoverflow.com/questions/24494373/querying-dau-mau-over-time-daily" target="_blank" rel="external">https://stackoverflow.com/questions/24494373/querying-dau-mau-over-time-daily</a>)</p>
+<h3 id="Click-Through-Rate-CTR"><a href="#Click-Through-Rate-CTR" class="headerlink" title="Click Through Rate (CTR)"></a>Click Through Rate (CTR)</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span></div><div class="line"> <span class="keyword">SUM</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> <span class="keyword">action</span> = <span class="string">"Click"</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">end</span>) /</div><div class="line"> <span class="keyword">SUM</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> <span class="keyword">action</span> = <span class="string">"View"</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">end</span>) <span class="keyword">AS</span> CTR</div><div class="line"><span class="keyword">FROM</span> <span class="keyword">events</span></div></pre></td></tr></table></figure>
+<h3 id="Retention"><a href="#Retention" class="headerlink" title="Retention"></a>Retention</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> </div><div class="line">  activity.date, </div><div class="line">  <span class="keyword">count</span>(<span class="keyword">distinct</span> activity.user_id) <span class="keyword">as</span> active_users, </div><div class="line">  <span class="keyword">count</span>(<span class="keyword">distinct</span> future_activity.user_id) <span class="keyword">as</span> retained_users,</div><div class="line">  <span class="keyword">count</span>(<span class="keyword">distinct</span> future_activity.user_id) / <span class="keyword">count</span>(<span class="keyword">distinct</span> activity.user_id)::<span class="built_in">float</span> <span class="keyword">as</span> <span class="keyword">retention</span></div><div class="line"><span class="keyword">from</span> activity</div><div class="line"><span class="keyword">left</span> <span class="keyword">join</span> activity <span class="keyword">as</span> future_activity <span class="keyword">on</span></div><div class="line">  activity.user_id = future_activity.user_id</div><div class="line">  <span class="keyword">and</span> activity.date = future_activity.date - <span class="built_in">interval</span> <span class="string">'1 day'</span></div><div class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></div></pre></td></tr></table></figure>
+<h3 id="Bounce"><a href="#Bounce" class="headerlink" title="Bounce"></a>Bounce</h3><h3 id="Impression"><a href="#Impression" class="headerlink" title="Impression"></a>Impression</h3><h3 id="churn"><a href="#churn" class="headerlink" title="churn"></a>churn</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">with monthly_activity as (</div><div class="line">  <span class="keyword">select</span> <span class="keyword">distinct</span></div><div class="line">    date_trunc(<span class="string">'month'</span>, created_at) <span class="keyword">as</span> <span class="keyword">month</span>,</div><div class="line">    user_id</div><div class="line">  <span class="keyword">from</span> <span class="keyword">events</span></div><div class="line">)</div><div class="line"><span class="keyword">select</span></div><div class="line">  last_month.month + <span class="built_in">interval</span> <span class="string">'1 month'</span>,</div><div class="line">  <span class="keyword">count</span>(<span class="keyword">distinct</span> last_month.user_id)</div><div class="line"><span class="keyword">from</span> monthly_activity last_month</div><div class="line"><span class="keyword">left</span> <span class="keyword">join</span> monthly_activity this_month</div><div class="line">  <span class="keyword">on</span> this_month.user_id = last_month.user_id</div><div class="line">  <span class="keyword">and</span> this_month.month = last_month.month + <span class="built_in">interval</span> <span class="string">'1 month'</span></div><div class="line"><span class="keyword">where</span> this_month.user_id <span class="keyword">is</span> <span class="literal">null</span></div><div class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></div></pre></td></tr></table></figure>
+<h3 id="churn-new-user-en-engage-active"><a href="#churn-new-user-en-engage-active" class="headerlink" title="churn + new user + en-engage + active"></a>churn + new user + en-engage + active</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> cummulative_client(</div><div class="line">  <span class="keyword">id</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="keyword">status</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>),</div><div class="line">  record_date <span class="built_in">DATE</span>,</div><div class="line">);</div><div class="line"></div><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> today_client(</div><div class="line">  <span class="keyword">id</span> <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  record_date <span class="built_in">DATE</span></div><div class="line">);</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> cumulative_client <span class="keyword">Values</span>(<span class="number">1</span>, <span class="string">'active'</span>,<span class="string">'2017-3-27'</span>);</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> cumulative_client <span class="keyword">Values</span>(<span class="number">2</span>, <span class="string">'active'</span>,<span class="string">'2017-3-27'</span>); </div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> cumulative_client <span class="keyword">Values</span>(<span class="number">5</span>, <span class="string">'churn'</span>,<span class="string">'2017-3-27'</span>);</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> cumulative_client <span class="keyword">Values</span>(<span class="number">6</span>, <span class="string">'churn'</span>,<span class="string">'2017-3-27'</span>);</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> cumulative_client <span class="keyword">Values</span>(<span class="number">7</span>, <span class="string">'re_engage'</span> ,<span class="string">'2017-3-27'</span>);</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> cumulative_client <span class="keyword">Values</span>(<span class="number">9</span>, <span class="string">'new'</span>,<span class="string">'2017-3-27'</span>);</div><div class="line"></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> today_client <span class="keyword">Values</span>(<span class="number">1</span>,<span class="string">'2017-3-28'</span>);</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> today_client <span class="keyword">Values</span>(<span class="number">5</span>,<span class="string">'2017-3-28'</span>);</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> today_client <span class="keyword">Values</span>(<span class="number">7</span>,<span class="string">'2017-3-28'</span>);</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> today_client <span class="keyword">Values</span>(<span class="number">9</span>,<span class="string">'2017-3-28'</span>);</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> today_client <span class="keyword">Values</span>(<span class="number">11</span>,<span class="string">'2017-3-28'</span>);</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> today_client;</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span>  <span class="keyword">CASE</span> <span class="keyword">WHEN</span> c.id <span class="keyword">IS</span> <span class="literal">NULL</span> <span class="keyword">THEN</span> t.id <span class="keyword">ELSE</span> c.id <span class="keyword">END</span> <span class="keyword">AS</span> <span class="keyword">id</span>,</div><div class="line">		<span class="keyword">CASE</span> <span class="keyword">WHEN</span> c.status <span class="keyword">IS</span> <span class="literal">NULL</span> <span class="keyword">THEN</span> <span class="string">'new'</span></div><div class="line">			<span class="keyword">WHEN</span> t.id <span class="keyword">IS</span> <span class="literal">NULL</span> <span class="keyword">THEN</span> <span class="string">'churn'</span></div><div class="line">			<span class="keyword">WHEN</span> c.status=<span class="string">'churn'</span> <span class="keyword">AND</span> t.id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">THEN</span> <span class="string">'re_engage'</span></div><div class="line">			<span class="keyword">ELSE</span> <span class="string">'active'</span> <span class="keyword">END</span> <span class="keyword">AS</span> <span class="keyword">status</span></div><div class="line"><span class="keyword">FROM</span> </div><div class="line">	cumulative_client c</div><div class="line">		 <span class="keyword">FULL</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> </div><div class="line">	today_client t</div><div class="line">		<span class="keyword">ON</span> c.id = t.id</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">id</span></div><div class="line">;</div></pre></td></tr></table></figure>
+<h3 id="ATV-Average-Transaction-Value"><a href="#ATV-Average-Transaction-Value" class="headerlink" title="ATV (Average Transaction Value)"></a>ATV (Average Transaction Value)</h3><h3 id="ARPU-Average-Revenue-Per-User"><a href="#ARPU-Average-Revenue-Per-User" class="headerlink" title="ARPU (Average Revenue Per User)"></a>ARPU (Average Revenue Per User)</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> </div><div class="line">  revenue.sum/total_installs.count <span class="keyword">AS</span> ARPU</div><div class="line"><span class="keyword">from</span> </div><div class="line">  (<span class="keyword">select</span> <span class="keyword">sum</span>(price) <span class="keyword">as</span> <span class="keyword">sum</span></div><div class="line">  <span class="keyword">from</span> purchases) <span class="keyword">as</span> revenue</div><div class="line">  ,</div><div class="line">  (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">as</span> <span class="keyword">count</span></div><div class="line">  <span class="keyword">from</span> installs) <span class="keyword">as</span> total_installs</div><div class="line"></div><div class="line"><span class="comment">-- ARPU by cohorts</span></div><div class="line"></div><div class="line"><span class="keyword">select</span></div><div class="line">  <span class="built_in">date</span>(installs.created_at) <span class="keyword">as</span> <span class="built_in">date</span> </div><div class="line">  , <span class="keyword">sum</span>(purchases.price)/<span class="keyword">count</span>(<span class="keyword">distinct</span> installs.user_id) <span class="keyword">as</span> ARPU</div><div class="line"><span class="keyword">from</span> installs <span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> purchases</div><div class="line">  <span class="keyword">on</span> installs.user_id = purchases.user_id</div><div class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></div></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://www.periscopedata.com/blog/game-revenue-metrics" target="_blank" rel="external">https://www.periscopedata.com/blog/game-revenue-metrics</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/interview/" rel="tag"># interview</a>
+          
+            <a href="/tags/database/" rel="tag"># database</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/21/P3-Product-Sense/" rel="next" title="Product-Sense">
+                <i class="fa fa-chevron-left"></i> Product-Sense
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/21/P2-Earning-Reports/" rel="prev" title="Earning-Reports">
+                Earning-Reports <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Metrics"><span class="nav-number">1.</span> <span class="nav-text">Metrics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DAU-MAU"><span class="nav-number">1.1.</span> <span class="nav-text">DAU/MAU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Click-Through-Rate-CTR"><span class="nav-number">1.2.</span> <span class="nav-text">Click Through Rate (CTR)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retention"><span class="nav-number">1.3.</span> <span class="nav-text">Retention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bounce"><span class="nav-number">1.4.</span> <span class="nav-text">Bounce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Impression"><span class="nav-number">1.5.</span> <span class="nav-text">Impression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#churn"><span class="nav-number">1.6.</span> <span class="nav-text">churn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#churn-new-user-en-engage-active"><span class="nav-number">1.7.</span> <span class="nav-text">churn + new user + en-engage + active</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ATV-Average-Transaction-Value"><span class="nav-number">1.8.</span> <span class="nav-text">ATV (Average Transaction Value)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARPU-Average-Revenue-Per-User"><span class="nav-number">1.9.</span> <span class="nav-text">ARPU (Average Revenue Per User)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2018/06/21/D2-table-query/';
+          this.page.identifier = '2018/06/21/D2-table-query/';
+          this.page.title = 'table-query';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

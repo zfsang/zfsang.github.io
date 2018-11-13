@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="algorithm,interview," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="AlgorithmTopological SortDijkstra’s Algorithm Dijkstra’s algorithm is an algorithm for finding the shortest paths between nodes in a graph,  Dijkstra is a special case for A* (when the heuristics is z">
+<meta name="keywords" content="algorithm,interview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Advanced-Topics">
+<meta property="og:url" content="http://zfsang.github.io/2018/05/13/A9-Advanced-Topics/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="AlgorithmTopological SortDijkstra’s Algorithm Dijkstra’s algorithm is an algorithm for finding the shortest paths between nodes in a graph,  Dijkstra is a special case for A* (when the heuristics is z">
+<meta property="og:updated_time" content="2018-11-13T08:37:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Advanced-Topics">
+<meta name="twitter:description" content="AlgorithmTopological SortDijkstra’s Algorithm Dijkstra’s algorithm is an algorithm for finding the shortest paths between nodes in a graph,  Dijkstra is a special case for A* (when the heuristics is z">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2018/05/13/A9-Advanced-Topics/"/>
+
+
+
+
+
+  <title>Advanced-Topics | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2018/05/13/A9-Advanced-Topics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Advanced-Topics</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-13T18:00:47-07:00">
+                2018-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview_Prep</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/13/A9-Advanced-Topics/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/13/A9-Advanced-Topics/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><h3 id="Topological-Sort"><a href="#Topological-Sort" class="headerlink" title="Topological Sort"></a>Topological Sort</h3><h3 id="Dijkstra’s-Algorithm"><a href="#Dijkstra’s-Algorithm" class="headerlink" title="Dijkstra’s Algorithm"></a>Dijkstra’s Algorithm</h3><ul>
+<li>Dijkstra’s algorithm is an algorithm for finding the shortest paths between nodes in a graph, </li>
+<li>Dijkstra is a special case for A* (when the heuristics is zero)</li>
+<li>It has one cost function, which is real cost value from source to each node: f(x)=g(x). It finds the shortest path from source to every other node by considering only real cost.</li>
+</ul>
+<p>A* search:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">astar</span><span class="params">(forest, sr, sc, tr, tc)</span>:</span></div><div class="line">    R, C = len(forest), len(forest[<span class="number">0</span>])</div><div class="line">    heap = [(<span class="number">0</span>, <span class="number">0</span>, sr, sc)]</div><div class="line">    cost = &#123;(sr, sc): <span class="number">0</span>&#125;</div><div class="line">    <span class="keyword">while</span> heap:</div><div class="line">        f, g, r, c = heapq.heappop(heap)</div><div class="line">        <span class="keyword">if</span> r == tr <span class="keyword">and</span> c == tc: <span class="keyword">return</span> g</div><div class="line">        <span class="keyword">for</span> nr, nc <span class="keyword">in</span> ((r<span class="number">-1</span>,c), (r+<span class="number">1</span>,c), (r,c<span class="number">-1</span>), (r,c+<span class="number">1</span>)):</div><div class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= nr &lt; R <span class="keyword">and</span> <span class="number">0</span> &lt;= nc &lt; C <span class="keyword">and</span> forest[nr][nc]:</div><div class="line">                ncost = g + <span class="number">1</span> + abs(nr - tr) + abs(nc - tc)</div><div class="line">                <span class="keyword">if</span> ncost &lt; cost.get((nr, nc), <span class="number">9999</span>):</div><div class="line">                    cost[nr, nc] = ncost</div><div class="line">                    heapq.heappush(heap, (ncost, g+<span class="number">1</span>, nr, nc))</div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span></div></pre></td></tr></table></figure>
+<ul>
+<li>Time: O(E + V * log(V))<ul>
+<li>For dense graph where E ~ V^2<h4 id="Python-heapq-implementation"><a href="#Python-heapq-implementation" class="headerlink" title="Python + heapq implementation"></a>Python + heapq implementation</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># https://gist.github.com/kachayev/5990802</span></div><div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</div><div class="line"><span class="keyword">from</span> heapq <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">dijkstra</span><span class="params">(edges, f, t)</span>:</span></div><div class="line">    g = defaultdict(list)</div><div class="line">    <span class="keyword">for</span> l,r,c <span class="keyword">in</span> edges:</div><div class="line">        g[l].append((c,r))</div><div class="line"></div><div class="line">    q, seen = [(<span class="number">0</span>,f,[])], set()</div><div class="line">    <span class="keyword">while</span> q:</div><div class="line">        (cost,v1,path) = heappop(q)</div><div class="line">        <span class="keyword">if</span> v1 <span class="keyword">not</span> <span class="keyword">in</span> seen:</div><div class="line">            seen.add(v1)</div><div class="line">            path = path + [v1]</div><div class="line">            <span class="keyword">if</span> v1 == t: <span class="keyword">return</span> (cost, path)</div><div class="line"></div><div class="line">            <span class="keyword">for</span> c2, v2 <span class="keyword">in</span> g.get(v1, ()):</div><div class="line">                <span class="keyword">if</span> v2 <span class="keyword">not</span> <span class="keyword">in</span> seen:</div><div class="line">                    heappush(q, (cost+c2, v2, path))</div><div class="line">    <span class="keyword">return</span> float(<span class="string">"inf"</span>)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    edges = [</div><div class="line">        (<span class="string">"A"</span>, <span class="string">"B"</span>, <span class="number">7</span>),</div><div class="line">        (<span class="string">"A"</span>, <span class="string">"D"</span>, <span class="number">5</span>),</div><div class="line">        (<span class="string">"B"</span>, <span class="string">"C"</span>, <span class="number">8</span>),</div><div class="line">        (<span class="string">"B"</span>, <span class="string">"D"</span>, <span class="number">9</span>),</div><div class="line">        (<span class="string">"B"</span>, <span class="string">"E"</span>, <span class="number">7</span>),</div><div class="line">        (<span class="string">"C"</span>, <span class="string">"E"</span>, <span class="number">5</span>),</div><div class="line">        (<span class="string">"D"</span>, <span class="string">"E"</span>, <span class="number">15</span>),</div><div class="line">        (<span class="string">"D"</span>, <span class="string">"F"</span>, <span class="number">6</span>),</div><div class="line">        (<span class="string">"E"</span>, <span class="string">"F"</span>, <span class="number">8</span>),</div><div class="line">        (<span class="string">"E"</span>, <span class="string">"G"</span>, <span class="number">9</span>),</div><div class="line">        (<span class="string">"F"</span>, <span class="string">"G"</span>, <span class="number">11</span>)</div><div class="line">    ]</div><div class="line">    <span class="keyword">print</span> <span class="string">"A -&gt; E:"</span></div><div class="line">    <span class="keyword">print</span> dijkstra(edges, <span class="string">"A"</span>, <span class="string">"E"</span>)</div><div class="line">    <span class="keyword">print</span> <span class="string">"F -&gt; G:"</span></div><div class="line">    <span class="keyword">print</span> dijkstra(edges, <span class="string">"F"</span>, <span class="string">"G"</span>)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="exercises"><a href="#exercises" class="headerlink" title="exercises"></a>exercises</h4><p><a href="https://leetcode.com/problems/cheapest-flights-within-k-stops/description/" target="_blank" rel="external">https://leetcode.com/problems/cheapest-flights-within-k-stops/description/</a></p>
+<h3 id="A-search"><a href="#A-search" class="headerlink" title="A* search"></a>A* search</h3><p>A* is an informed search algorithm, or a best-first search, meaning that it solves problems by searching among all possible paths to the solution (goal) for the one that incurs the smallest cost (least distance travelled, shortest time, etc.), and among these paths it first considers the ones that appear to lead most quickly to the solution</p>
+<ul>
+<li><p>It has two cost function.</p>
+<ul>
+<li>g(x): same as Dijkstra. The real cost to reach a node x.</li>
+<li>h(x): approximate cost from node x to goal node. It is a heuristic function. This heuristic function should never overestimate the cost. That means, the real cost to reach goal node from node x should be greater than or equal h(x). It is called admissible heuristic.</li>
+<li>The total cost of each node is calculated by f(x)=g(x)+h(x)</li>
+</ul>
+</li>
+<li><p>References: <a href="https://stackoverflow.com/questions/1332466/how-does-dijkstras-algorithm-and-a-star-compare" target="_blank" rel="external">https://stackoverflow.com/questions/1332466/how-does-dijkstras-algorithm-and-a-star-compare</a></p>
+</li>
+</ul>
+<h3 id="Eulerian-path"><a href="#Eulerian-path" class="headerlink" title="Eulerian path"></a>Eulerian path</h3><p>e.g.<br><a href="https://leetcode.com/problems/reconstruct-itinerary/discuss/78768/Short-Ruby-Python-Java-C++" target="_blank" rel="external">https://leetcode.com/problems/reconstruct-itinerary/discuss/78768/Short-Ruby-Python-Java-C++</a></p>
+<h3 id="Hamiltonian-path"><a href="#Hamiltonian-path" class="headerlink" title="Hamiltonian path"></a>Hamiltonian path</h3><p> a Hamiltonian path (or traceable path) is a path in an undirected or directed graph that visits each vertex exactly once. A Hamiltonian cycle (or Hamiltonian circuit) is a Hamiltonian path that is a cycle</p>
+<h3 id="AVL-Tree"><a href="#AVL-Tree" class="headerlink" title="AVL Tree"></a>AVL Tree</h3><h3 id="Red-Black-Tree"><a href="#Red-Black-Tree" class="headerlink" title="Red Black Tree"></a>Red Black Tree</h3><h3 id="Binary-Index-Tree"><a href="#Binary-Index-Tree" class="headerlink" title="Binary Index Tree"></a>Binary Index Tree</h3><h3 id="Segement-Tree"><a href="#Segement-Tree" class="headerlink" title="Segement Tree"></a>Segement Tree</h3><h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h2><h2 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h2><p>关于kmp算法,讲的最好的当属阮一峰的<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html" target="_blank" rel="external">字符串匹配的KMP算法</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#KMP  </span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kmp_match</span><span class="params">(s, p)</span>:</span>  </div><div class="line">    m = len(s); n = len(p)  </div><div class="line">    cur = <span class="number">0</span><span class="comment">#起始指针cur  </span></div><div class="line">    table = partial_table(p)  </div><div class="line">    <span class="keyword">while</span> cur&lt;=m-n:  </div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):  </div><div class="line">            <span class="keyword">if</span> s[i+cur]!=p[i]:  </div><div class="line">                cur += max(i - table[i<span class="number">-1</span>], <span class="number">1</span>)<span class="comment">#有了部分匹配表,我们不只是单纯的1位1位往右移,可以一次移动多位  </span></div><div class="line">                <span class="keyword">break</span>  </div><div class="line">        <span class="keyword">else</span>:  </div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span>  </div><div class="line">    <span class="keyword">return</span> <span class="keyword">False</span>  </div><div class="line">  </div><div class="line"><span class="comment">#部分匹配表  (The Partial Match Table)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">partial_table</span><span class="params">(p)</span>:</span>  </div><div class="line">    <span class="string">'''''partial_table("ABCDABD") -&gt; [0, 0, 0, 0, 1, 2, 0]'''</span>  </div><div class="line">    prefix = set()  </div><div class="line">    postfix = set()  </div><div class="line">    res = [<span class="number">0</span>]  </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(p)):  </div><div class="line">        prefix.add(p[:i])  </div><div class="line">        postfix = &#123;p[j:i+<span class="number">1</span>] <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,i+<span class="number">1</span>)&#125;  </div><div class="line">        res.append(max(map(len,prefix &amp; postfix)))  </div><div class="line">    <span class="keyword">return</span> res  </div><div class="line">  </div><div class="line"><span class="keyword">print</span> naive_match(<span class="string">"BBC ABCDAB ABCDABCDABDE"</span>, <span class="string">"ABCDABD"</span>)  </div><div class="line"><span class="keyword">print</span> partial_table(<span class="string">"ABCDABD"</span>)</div></pre></td></tr></table></figure>
+<h3 id="Hash-collision"><a href="#Hash-collision" class="headerlink" title="Hash collision"></a>Hash collision</h3><h4 id="Bloomfilter"><a href="#Bloomfilter" class="headerlink" title="Bloomfilter"></a>Bloomfilter</h4><h4 id="LSH"><a href="#LSH" class="headerlink" title="LSH"></a>LSH</h4><h3 id="scalaibility"><a href="#scalaibility" class="headerlink" title="scalaibility"></a>scalaibility</h3><h3 id="object-oriented-design"><a href="#object-oriented-design" class="headerlink" title="object-oriented design"></a>object-oriented design</h3><h3 id="multi-thread-multi-processs"><a href="#multi-thread-multi-processs" class="headerlink" title="multi-thread/multi-processs"></a>multi-thread/multi-processs</h3><h3 id="lock-dead-lock"><a href="#lock-dead-lock" class="headerlink" title="lock / dead-lock"></a>lock / dead-lock</h3><h3 id="async"><a href="#async" class="headerlink" title="async"></a>async</h3><h3 id="Hyperloglog"><a href="#Hyperloglog" class="headerlink" title="Hyperloglog"></a>Hyperloglog</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+            <a href="/tags/interview/" rel="tag"># interview</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/26/A3-Binary-Search/" rel="next" title="Binary-Search">
+                <i class="fa fa-chevron-left"></i> Binary-Search
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/13/A5-Graph-Algorithms/" rel="prev" title="Graph-Algorithms">
+                Graph-Algorithms <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Topological-Sort"><span class="nav-number">1.1.</span> <span class="nav-text">Topological Sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra’s-Algorithm"><span class="nav-number">1.2.</span> <span class="nav-text">Dijkstra’s Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python-heapq-implementation"><span class="nav-number">1.2.1.</span> <span class="nav-text">Python + heapq implementation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#exercises"><span class="nav-number">1.2.2.</span> <span class="nav-text">exercises</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-search"><span class="nav-number">1.3.</span> <span class="nav-text">A* search</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Eulerian-path"><span class="nav-number">1.4.</span> <span class="nav-text">Eulerian path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hamiltonian-path"><span class="nav-number">1.5.</span> <span class="nav-text">Hamiltonian path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AVL-Tree"><span class="nav-number">1.6.</span> <span class="nav-text">AVL Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Red-Black-Tree"><span class="nav-number">1.7.</span> <span class="nav-text">Red Black Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Index-Tree"><span class="nav-number">1.8.</span> <span class="nav-text">Binary Index Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Segement-Tree"><span class="nav-number">1.9.</span> <span class="nav-text">Segement Tree</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Design"><span class="nav-number">2.</span> <span class="nav-text">Design</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP"><span class="nav-number">3.</span> <span class="nav-text">KMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash-collision"><span class="nav-number">3.1.</span> <span class="nav-text">Hash collision</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bloomfilter"><span class="nav-number">3.1.1.</span> <span class="nav-text">Bloomfilter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LSH"><span class="nav-number">3.1.2.</span> <span class="nav-text">LSH</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scalaibility"><span class="nav-number">3.2.</span> <span class="nav-text">scalaibility</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#object-oriented-design"><span class="nav-number">3.3.</span> <span class="nav-text">object-oriented design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multi-thread-multi-processs"><span class="nav-number">3.4.</span> <span class="nav-text">multi-thread/multi-processs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lock-dead-lock"><span class="nav-number">3.5.</span> <span class="nav-text">lock / dead-lock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async"><span class="nav-number">3.6.</span> <span class="nav-text">async</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hyperloglog"><span class="nav-number">3.7.</span> <span class="nav-text">Hyperloglog</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2018/05/13/A9-Advanced-Topics/';
+          this.page.identifier = '2018/05/13/A9-Advanced-Topics/';
+          this.page.title = 'Advanced-Topics';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

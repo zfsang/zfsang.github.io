@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Interview_Prep," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OverviewBoth multiprocessing and multithreading both are ways to achieve multitasking Multithreading will share the same address space (global variable can be access)  12345678910111213141516171819202">
+<meta name="keywords" content="Interview_Prep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multiprocessing-Multithreading.md">
+<meta property="og:url" content="http://zfsang.github.io/2018/06/15/S1-Multiprocessing-Multithreading/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="OverviewBoth multiprocessing and multithreading both are ways to achieve multitasking Multithreading will share the same address space (global variable can be access)  12345678910111213141516171819202">
+<meta property="og:updated_time" content="2018-11-13T08:37:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Multiprocessing-Multithreading.md">
+<meta name="twitter:description" content="OverviewBoth multiprocessing and multithreading both are ways to achieve multitasking Multithreading will share the same address space (global variable can be access)  12345678910111213141516171819202">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2018/06/15/S1-Multiprocessing-Multithreading/"/>
+
+
+
+
+
+  <title>Multiprocessing-Multithreading.md | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2018/06/15/S1-Multiprocessing-Multithreading/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Multiprocessing-Multithreading.md</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-15T08:51:14-07:00">
+                2018-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview_Prep</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/15/S1-Multiprocessing-Multithreading/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/15/S1-Multiprocessing-Multithreading/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>Both multiprocessing and multithreading both are ways to achieve multitasking</p>
+<h2 id="Multithreading"><a href="#Multithreading" class="headerlink" title="Multithreading"></a>Multithreading</h2><ul>
+<li>will share the same address space (global variable can be access)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> threading</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_square</span><span class="params">(numbers)</span>:</span></div><div class="line">    print(<span class="string">"calculate square numbers"</span>)</div><div class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> numbers:</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        print(<span class="string">'square:'</span>,n*n)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_cube</span><span class="params">(numbers)</span>:</span></div><div class="line">    print(<span class="string">"calculate cube of numbers"</span>)</div><div class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> numbers:</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        print(<span class="string">'cube:'</span>,n*n*n)</div><div class="line"></div><div class="line">arr = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">9</span>]</div><div class="line"></div><div class="line">t = time.time()</div><div class="line"></div><div class="line">t1= threading.Thread(target=calc_square, args=(arr,))</div><div class="line">t2= threading.Thread(target=calc_cube, args=(arr,))</div><div class="line"></div><div class="line">t1.start()</div><div class="line">t2.start()</div><div class="line"></div><div class="line">t1.join()</div><div class="line">t2.join()</div><div class="line"></div><div class="line">print(<span class="string">"done in : "</span>,time.time()-t)</div><div class="line">print(<span class="string">"Hah... I am done with all my work now!"</span>)</div></pre></td></tr></table></figure>
+<h3 id="real-example-of-making-async-calls"><a href="#real-example-of-making-async-calls" class="headerlink" title="real example of making async calls"></a>real example of making async calls</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">from</span> queue <span class="keyword">import</span> Queue</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</div><div class="line"></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"></div><div class="line"><span class="comment"># endpoint = 'http://localhost:8000/api/v1/search'</span></div><div class="line">num_threads = <span class="number">20</span></div><div class="line">requests_q = Queue(maxsize=<span class="number">0</span>)</div><div class="line">write_q = Queue(maxsize=<span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_query</span><span class="params">(rq, stat_dict, wq)</span>:</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        next_request = rq.get()</div><div class="line"></div><div class="line">        to_save = &#123;<span class="string">'input'</span>: formatted_data, <span class="string">'output'</span>: <span class="keyword">None</span>&#125;</div><div class="line"></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            res = requests.post(endpoint, json=next_request)</div><div class="line">            res_json = res.json()</div><div class="line">            to_save[<span class="string">'output'</span>] = res_json</div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">            print(e)</div><div class="line">            <span class="comment"># put in queue to write to file</span></div><div class="line">            wq.put(to_save)</div><div class="line">            rq.task_done()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_to_file</span><span class="params">(wq)</span>:</span></div><div class="line">    <span class="keyword">with</span> open(<span class="string">'output.json'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> out_file:</div><div class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">            line_to_write = wq.get()</div><div class="line">            print(json.dumps(line_to_write), file=out_file)</div><div class="line">            wq.task_done()</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_threads):</div><div class="line">    worker = Thread(target=make_query, args=(requests_q, stats, write_q))</div><div class="line">    <span class="comment"># spawn a thread as a daemon that runs without blocking the main program from exiting </span></div><div class="line">    <span class="comment"># (if the thread dies in the middle of its work, it does not cause losing or corrupting data)</span></div><div class="line">    worker.setDaemon(<span class="keyword">True</span>)</div><div class="line">    worker.start()</div><div class="line"></div><div class="line">worker = Thread(target=write_to_file, args=(write_q, ))</div><div class="line">worker.setDaemon(<span class="keyword">True</span>)</div><div class="line">worker.start()</div><div class="line"></div><div class="line"><span class="comment"># populate queue for requests </span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'input.json'</span>.format(customer_name)) <span class="keyword">as</span> f:</div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</div><div class="line">        requests_q.put(json.loads(line))</div><div class="line">requests_q.join()</div><div class="line">write_q.join()</div></pre></td></tr></table></figure>
+<h2 id="Multiprocessing"><a href="#Multiprocessing" class="headerlink" title="Multiprocessing"></a>Multiprocessing</h2><h3 id="Multiprocessing-via-Queue"><a href="#Multiprocessing-via-Queue" class="headerlink" title="Multiprocessing via Queue"></a>Multiprocessing via Queue</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> multiprocessing</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_square</span><span class="params">(numbers, q)</span>:</span></div><div class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> numbers:</div><div class="line">        q.put(n*n)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    numbers = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>]</div><div class="line">    q = multiprocessing.Queue()</div><div class="line">    p = multiprocessing.Process(target=calc_square, args=(numbers,q))</div><div class="line"></div><div class="line">    p.start()</div><div class="line">    p.join()</div><div class="line"></div><div class="line">    <span class="keyword">while</span> q.empty() <span class="keyword">is</span> <span class="keyword">False</span>:</div><div class="line">        print(q.get())</div></pre></td></tr></table></figure>
+<h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><p>Process or Thread 1 -&gt; Shared Resource (Memory, Files, Databases etc.)<br>Process or Thread 2 -&gt;  Shared Resource (Memory, Files, Databases etc.)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> multiprocessing</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">deposit</span><span class="params">(balance, lock)</span>:</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</div><div class="line">        time.sleep(<span class="number">0.01</span>)</div><div class="line">        <span class="comment"># critical section (lock)</span></div><div class="line">        lock.acquire()</div><div class="line">        balance.value = balance.value + <span class="number">1</span></div><div class="line">        lock.release()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">withdraw</span><span class="params">(balance, lock)</span>:</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</div><div class="line">        time.sleep(<span class="number">0.01</span>)</div><div class="line">        <span class="comment"># critical section (lock)</span></div><div class="line">        lock.acquire()</div><div class="line">        balance.value = balance.value - <span class="number">1</span></div><div class="line">        lock.release()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    balance = multiprocessing.Value(<span class="string">'i'</span>, <span class="number">200</span>)</div><div class="line">    lock = multiprocessing.Lock()</div><div class="line">    d = multiprocessing.Process(target=deposit, args=(balance,lock))</div><div class="line">    w = multiprocessing.Process(target=withdraw, args=(balance,lock))</div><div class="line">    d.start()</div><div class="line">    w.start()</div><div class="line">    d.join()</div><div class="line">    w.join()</div><div class="line">    print(balance.value)</div></pre></td></tr></table></figure></p>
+<h3 id="Pool"><a href="#Pool" class="headerlink" title="Pool"></a>Pool</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(n)</span>:</span></div><div class="line">    <span class="keyword">return</span> n*n</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    p = Pool(processes=<span class="number">3</span>)</div><div class="line">    result = p.map(f,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</div><div class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> result:</div><div class="line">        print(n)</div></pre></td></tr></table></figure>
+<h2 id="Multiprocessing-Queue-v-s-Queue-Module"><a href="#Multiprocessing-Queue-v-s-Queue-Module" class="headerlink" title="Multiprocessing Queue v.s. Queue Module"></a>Multiprocessing Queue v.s. Queue Module</h2><ul>
+<li>different processes use different memory space</li>
+<li>heavy</li>
+<li>the benefit of multiprocessing is that error or memory leak in one process won’t hurt execution of another process</li>
+</ul>
+<h3 id="Multiprocessing-Queue"><a href="#Multiprocessing-Queue" class="headerlink" title="Multiprocessing Queue"></a>Multiprocessing Queue</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> multiprocessing</div><div class="line">q = multiprocessing.Queue()</div></pre></td></tr></table></figure>
+<ul>
+<li>Lives in shared memory</li>
+<li>Used to share data between processes</li>
+</ul>
+<h3 id="Queue-Module"><a href="#Queue-Module" class="headerlink" title="Queue Module"></a>Queue Module</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> queue</div><div class="line">q = queue.Queue()</div></pre></td></tr></table></figure>
+<ul>
+<li>Lives in in-process memory</li>
+<li>Used to share data between threads</li>
+</ul>
+<h2 id="Questions"><a href="#Questions" class="headerlink" title="Questions"></a>Questions</h2><ul>
+<li>How to know when all threads are done with the tasks?<br>Global counter with initial value of the total number of tasks, and threads update the global counter with a global lock.  Once the global count turns 0, the thread that gets the lock and counter report back to the main process that all the work is done.</li>
+<li><h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3></li>
+<li><a href="https://www.youtube.com/playlist?list=PLeo1K3hjS3uub3PRhdoCTY8BxMKSW7RjN" target="_blank" rel="external">https://www.youtube.com/playlist?list=PLeo1K3hjS3uub3PRhdoCTY8BxMKSW7RjN</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Interview-Prep/" rel="tag"># Interview_Prep</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/15/S2-Object-Oriented-Design/" rel="next" title="Object-Oriented_Design">
+                <i class="fa fa-chevron-left"></i> Object-Oriented_Design
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/26/A7-Dynamic-Programming/" rel="prev" title="Dynamic-Programming">
+                Dynamic-Programming <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multithreading"><span class="nav-number">2.</span> <span class="nav-text">Multithreading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#real-example-of-making-async-calls"><span class="nav-number">2.1.</span> <span class="nav-text">real example of making async calls</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiprocessing"><span class="nav-number">3.</span> <span class="nav-text">Multiprocessing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiprocessing-via-Queue"><span class="nav-number">3.1.</span> <span class="nav-text">Multiprocessing via Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock"><span class="nav-number">3.2.</span> <span class="nav-text">Lock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pool"><span class="nav-number">3.3.</span> <span class="nav-text">Pool</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiprocessing-Queue-v-s-Queue-Module"><span class="nav-number">4.</span> <span class="nav-text">Multiprocessing Queue v.s. Queue Module</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiprocessing-Queue"><span class="nav-number">4.1.</span> <span class="nav-text">Multiprocessing Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Module"><span class="nav-number">4.2.</span> <span class="nav-text">Queue Module</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Questions"><span class="nav-number">5.</span> <span class="nav-text">Questions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">5.1.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2018/06/15/S1-Multiprocessing-Multithreading/';
+          this.page.identifier = '2018/06/15/S1-Multiprocessing-Multithreading/';
+          this.page.title = 'Multiprocessing-Multithreading.md';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

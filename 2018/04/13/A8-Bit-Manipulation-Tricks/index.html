@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="algorithm,interview," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Summary操作符    功能         用法~      位求反        ~var&amp;lt;&amp;lt;      左移(乘法)    var &amp;lt;&amp;lt; position   右移(除法)    var &amp;gt;&amp;gt; position &amp;amp;      位与           var1 &amp;amp; var2^      位异或       var1 ^ var2|">
+<meta name="keywords" content="algorithm,interview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bit Manipulation Tricks">
+<meta property="og:url" content="http://zfsang.github.io/2018/04/13/A8-Bit-Manipulation-Tricks/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="Summary操作符    功能         用法~      位求反        ~var&amp;lt;&amp;lt;      左移(乘法)    var &amp;lt;&amp;lt; position   右移(除法)    var &amp;gt;&amp;gt; position &amp;amp;      位与           var1 &amp;amp; var2^      位异或       var1 ^ var2|">
+<meta property="og:updated_time" content="2018-11-13T07:49:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bit Manipulation Tricks">
+<meta name="twitter:description" content="Summary操作符    功能         用法~      位求反        ~var&amp;lt;&amp;lt;      左移(乘法)    var &amp;lt;&amp;lt; position   右移(除法)    var &amp;gt;&amp;gt; position &amp;amp;      位与           var1 &amp;amp; var2^      位异或       var1 ^ var2|">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2018/04/13/A8-Bit-Manipulation-Tricks/"/>
+
+
+
+
+
+  <title>Bit Manipulation Tricks | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2018/04/13/A8-Bit-Manipulation-Tricks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Bit Manipulation Tricks</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-13T18:32:23-07:00">
+                2018-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview_Prep</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/13/A8-Bit-Manipulation-Tricks/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/13/A8-Bit-Manipulation-Tricks/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>操作符    功能         用法<br>~      位求反        ~var<br>&lt;&lt;      左移(乘法)    var &lt;&lt; position</p>
+<blockquote>
+<blockquote>
+<pre><code>右移(除法)    var &gt;&gt; position
+</code></pre><p>&amp;      位与           var1 &amp; var2<br>^      位异或       var1 ^ var2<br>|      位或           var1 | var2</p>
+</blockquote>
+</blockquote>
+<p><strong>NOT ( ~ )</strong>: Bitwise NOT is an unary operator that flips the bits of the number i.e., if the ith bit is 0, it will change it to 1 and vice versa. Bitwise NOT is nothing but simply the one’s complement of a number. Lets take an example.<br>N = 5 = (101)2<br>~N = ~5 = ~(101)2 = (010)2 = 2</p>
+<p><strong>AND ( &amp; )</strong>: Bitwise AND is a binary operator that operates on two equal-length bit patterns. If both bits in the compared position of the bit patterns are 1, the bit in the resulting bit pattern is 1, otherwise 0.<br>A = 5 = (101)2 , B = 3 = (011)2 A &amp; B = (101)2 &amp; (011)2= (001)2 = 1</p>
+<ul>
+<li>useful in masks; masked_bits = bits &amp; mask</li>
+</ul>
+<p><strong>OR ( | )</strong>: Bitwise OR is also a binary operator that operates on two equal-length bit patterns, similar to bitwise AND. If both bits in the compared position of the bit patterns are 0, the bit in the resulting bit pattern is 0, otherwise 1.<br>A = 5 = (101)2 , B = 3 = (011)2<br>A | B = (101)2 | (011)2 = (111)2 = 7</p>
+<ul>
+<li>useful in combinition bits on different position b’100’ | b’10’  = b’110’ (think about bit-wise iteration)</li>
+</ul>
+<p><strong>XOR ( ^ )</strong>: Bitwise XOR also takes two equal-length bit patterns. If both bits in the compared position of the bit patterns are 0 or 1, the bit in the resulting bit pattern is 0, otherwise 1.<br>A = 5 = (101)2 , B = 3 = (011)2<br>A ^ B = (101)2 ^ (011)2 = (110)2 = 6</p>
+<p>XOR 异或<br>异或：相同为0，不同为1。也可用「不进位加法」来理解。</p>
+<p>异或操作的一些特点：</p>
+<ul>
+<li>x ^ 0 = x</li>
+<li>x ^ 1s = ~x // 1s = ~0</li>
+<li>x ^ (~x) = 1s</li>
+<li>x ^ x = 0 // interesting and important!</li>
+<li>a ^ b = c =&gt; a ^ c = b, b ^ c = a // swap</li>
+<li>a ^ b ^ c = a ^ (b ^ c) = (a ^ b) ^ c // associative</li>
+</ul>
+<p><strong>Left Shift ( &lt;&lt; )</strong>: Left shift operator is a binary operator which shift the some number of bits, in the given bit pattern, to the left and append 0 at the end. Left shift is equivalent to multiplying the bit pattern with 2k ( if we are shifting k bits ).<br>1 &lt;&lt; 1 = 2 = 21<br>1 &lt;&lt; 2 = 4 = 22 1 &lt;&lt; 3 = 8 = 23<br>1 &lt;&lt; 4 = 16 = 24<br>…<br>1 &lt;&lt; n = 2^n<br>将x最右边的n位清零 <code>x &amp; (~0 &lt;&lt; n)</code><br>获取x的第n位值(0或者1) <code>x &amp; (1 &lt;&lt; n)</code><br>获取x的第n位的幂值 <code>(x &gt;&gt; n) &amp; 1</code><br>仅将第n位置为1 <code>x | (1 &lt;&lt; n)</code><br>仅将第n位置为0 <code>x &amp; (~(1 &lt;&lt; n))</code><br>将x最高位至第n位(含)清零 <code>x &amp; ((1 &lt;&lt; n) - 1)</code><br>将第n位至第0位(含)清零 <code>x &amp; (~((1 &lt;&lt; (n + 1)) - 1))</code><br>仅更新第n位，写入值为v; v为1则更新为1，否则为0 <code>mask = ~(1 &lt;&lt; n); x = (x &amp; mask) | (v &lt;&lt; i)</code></p>
+<p>last digit: <code>x &amp; -x</code></p>
+<p><strong>Right Shift ( &gt;&gt; )</strong>: Right shift operator is a binary operator which shift the some number of bits, in the given bit pattern, to the right and append 1 at the end. Right shift is equivalent to dividing the bit pattern with 2k ( if we are shifting k bits ).<br>4 &gt;&gt; 1 = 2<br>6 &gt;&gt; 1 = 3<br>5 &gt;&gt; 1 = 2<br>16 &gt;&gt; 4 = 1</p>
+<h1 id="Tricks"><a href="#Tricks" class="headerlink" title="Tricks"></a>Tricks</h1><p> We can harness the fact that XOR is its own inverse to find the missing element in linear time.</p>
+<p>Because we know that nums contains nn numbers and that it is missing exactly one number on the range [0..n-1][0..n−1], we know that nn definitely replaces the missing number in nums. Therefore, if we initialize an integer to nn and XOR it with every index and value, we will be left with the missing number. Consider the following example (the values have been sorted for intuitive convenience, but need not be):</p>
+<ul>
+<li>count number of 1 Bits</li>
+</ul>
+<p>repeatedly flip the least-significant 1-bit of the number to 0, and add 1 to the sum. As soon as the number becomes 0, we know that it does not have any more 1-bits, and we return the sum.</p>
+<h2 id="Questions"><a href="#Questions" class="headerlink" title="Questions"></a>Questions</h2><p>Single Numbers<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># XOR to find number appears once</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleNumber</span><span class="params">(self, nums)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    Given a non-empty array of integers, every element appears twice except for one. Find that single one.</div><div class="line">    """</div><div class="line">    <span class="keyword">return</span> reduce(<span class="keyword">lambda</span> x, y: x^y, nums)</div><div class="line"></div><div class="line"><span class="comment"># Mimic three-order in bitwise method</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleNumber_3</span><span class="params">(self, nums)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    Given a non-empty array of integers, every element appears three times except for one, which appears exactly once</div><div class="line">    """</div><div class="line">    one = <span class="number">0</span></div><div class="line">    two = <span class="number">0</span></div><div class="line">    three = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(nums)):</div><div class="line">        two |= one &amp; nums[i] <span class="comment">#当新来的为0时，two = two | 0，two不变，当新来的为1时，（当one此时为0，则two = two|0，two不变；当one此时为1时，则two = two | 1，two变为1</span></div><div class="line">        one ^= nums[i]       <span class="comment">#新来的为0，one不变，新来为1时，one是0、1交替改变</span></div><div class="line">        three = one &amp; two    <span class="comment">#当one和two为1是，three为1（此时代表要把one和two清零了）</span></div><div class="line">        one &amp;= ~three        <span class="comment">#把one清0</span></div><div class="line">        two &amp;= ~three        <span class="comment">#把two清0</span></div><div class="line">    <span class="keyword">return</span> one</div><div class="line"></div><div class="line"><span class="comment"># xor + low bit</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleNumber_2</span><span class="params">(self, nums)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    given nums, in which exactly two elements appear only once and all the other elements appear exactly twice. Find the two elements that appear only once.</div><div class="line">    """</div><div class="line">    xor = reduce(<span class="keyword">lambda</span> x, y : x ^ y, nums)</div><div class="line">    lowbit = xor &amp; -xor <span class="comment"># lowbit的含义为xor从低位向高位，第一个非0位所对应的数字</span></div><div class="line">    <span class="comment"># 例如假设xor = 6（二进制：0110），则-xor为（二进制：1010，-6的补码，two's complement） 则lowbit = 2（二进制：0010）</span></div><div class="line">    a = b = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums:</div><div class="line">        <span class="comment"># a &amp; lowbit与b &amp; lowbit的结果一定不同.而其他元素相同且出现两次相消，这样可以将a与b拆分开来</span></div><div class="line">        <span class="keyword">if</span> num &amp; lowbit:</div><div class="line">            a ^= num</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            b ^= num</div><div class="line">    <span class="keyword">return</span> [a, b]</div></pre></td></tr></table></figure></p>
+<p>Get sum<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># a ^ b 直接算出a + b 每位上%2的结果， 进位的话可以直接 (a &amp; b)&lt;&lt;1得到（只有两个位均为1才会进位嘛，左移表示进到下一位啊）</span></div><div class="line"><span class="comment"># https://www.hrwhisper.me/leetcode-sum-two-integers/</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getSum</span><span class="params">(self, a, b)</span>:</span></div><div class="line">    MOD     = <span class="number">0xFFFFFFFF</span></div><div class="line">    MAX_INT = <span class="number">0x7FFFFFFF</span></div><div class="line">    <span class="keyword">while</span> b != <span class="number">0</span>:</div><div class="line">        <span class="comment"># b is carry</span></div><div class="line">        a, b = (a ^ b) &amp; MOD, ((a &amp; b) &lt;&lt; <span class="number">1</span>) &amp; MOD</div><div class="line">    <span class="keyword">return</span> a <span class="keyword">if</span> a &lt;= MAX_INT <span class="keyword">else</span> ~(a &amp; MAX_INT) ^ MAX_INT</div></pre></td></tr></table></figure></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://www.hackerearth.com/practice/notes/bit-manipulation/" target="_blank" rel="external">https://www.hackerearth.com/practice/notes/bit-manipulation/</a></li>
+<li><a href="http://wdxtub.com/interview/14520595848890.html" target="_blank" rel="external">http://wdxtub.com/interview/14520595848890.html</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+            <a href="/tags/interview/" rel="tag"># interview</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/14/A1-Linear-Structures-Overview/" rel="next" title="Linear Structures - Overview">
+                <i class="fa fa-chevron-left"></i> Linear Structures - Overview
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/31/Z-Intro-to-Ether-programming/" rel="prev" title="Intro to Ether programming">
+                Intro to Ether programming <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary"><span class="nav-number">1.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tricks"><span class="nav-number">2.</span> <span class="nav-text">Tricks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Questions"><span class="nav-number">2.1.</span> <span class="nav-text">Questions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2018/04/13/A8-Bit-Manipulation-Tricks/';
+          this.page.identifier = '2018/04/13/A8-Bit-Manipulation-Tricks/';
+          this.page.title = 'Bit Manipulation Tricks';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

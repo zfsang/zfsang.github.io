@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Interview_Prep," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Multiple Inheritance12345678910111213141516class Father():   def skills(self):       print(&quot;gardening,programming&quot;)class Mother():   def skills(self):       print(&quot;cooking,art&quot;)class Child(Father,Moth">
+<meta name="keywords" content="Interview_Prep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Object-Oriented_Design">
+<meta property="og:url" content="http://zfsang.github.io/2018/06/15/S2-Object-Oriented-Design/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="Multiple Inheritance12345678910111213141516class Father():   def skills(self):       print(&quot;gardening,programming&quot;)class Mother():   def skills(self):       print(&quot;cooking,art&quot;)class Child(Father,Moth">
+<meta property="og:updated_time" content="2018-11-13T08:38:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Object-Oriented_Design">
+<meta name="twitter:description" content="Multiple Inheritance12345678910111213141516class Father():   def skills(self):       print(&quot;gardening,programming&quot;)class Mother():   def skills(self):       print(&quot;cooking,art&quot;)class Child(Father,Moth">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2018/06/15/S2-Object-Oriented-Design/"/>
+
+
+
+
+
+  <title>Object-Oriented_Design | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2018/06/15/S2-Object-Oriented-Design/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Object-Oriented_Design</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-15T09:58:02-07:00">
+                2018-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview_Prep</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/design/" itemprop="url" rel="index">
+                    <span itemprop="name">design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/15/S2-Object-Oriented-Design/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/15/S2-Object-Oriented-Design/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Multiple-Inheritance"><a href="#Multiple-Inheritance" class="headerlink" title="Multiple Inheritance"></a>Multiple Inheritance</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span><span class="params">()</span>:</span></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">skills</span><span class="params">(self)</span>:</span></div><div class="line">       print(<span class="string">"gardening,programming"</span>)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mother</span><span class="params">()</span>:</span></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">skills</span><span class="params">(self)</span>:</span></div><div class="line">       print(<span class="string">"cooking,art"</span>)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(Father,Mother)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">skills</span><span class="params">(self)</span>:</span></div><div class="line">        Father.skills(self)</div><div class="line">        Mother.skills(self)</div><div class="line">        print(<span class="string">"sports"</span>)</div><div class="line"></div><div class="line">c = Child()</div><div class="line">c.skills()</div></pre></td></tr></table></figure>
+<h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><h2 id="Hash-Table"><a href="#Hash-Table" class="headerlink" title="Hash Table"></a>Hash Table</h2><ul>
+<li>For simplicity, are the keys integers only? (Yes)</li>
+<li>For collision resolution, can we use chaining? (Yes)</li>
+<li>Do we have to worry about load factors? (No)</li>
+<li>Can we assume inputs are valid or do we have to validate them?  (Assume they’re valid)</li>
+<li>Can we assume this fits memory?  (Yes)<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Item</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, key, value)</span>:</span></div><div class="line">        self.key = key</div><div class="line">        self.value = value</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HashTable</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, size)</span>:</span></div><div class="line">        self.size = size</div><div class="line">        self.table = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(self.size)]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_hash_function</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="keyword">return</span> key % self.size</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set</span><span class="params">(self, key, value)</span>:</span></div><div class="line">        hash_index = self._hash_function(key)</div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> self.table[hash_index]:</div><div class="line">            <span class="keyword">if</span> item.key == key:</div><div class="line">                item.value = value</div><div class="line">                <span class="keyword">return</span></div><div class="line">        self.table[hash_index].append(Item(key, value))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, key)</span>:</span></div><div class="line">        hash_index = self._hash_function(key)</div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> self.table[hash_index]:</div><div class="line">            <span class="keyword">if</span> item.key == key:</div><div class="line">                <span class="keyword">return</span> item.value</div><div class="line">        <span class="keyword">raise</span> KeyError(<span class="string">'Key not found'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remove</span><span class="params">(self, key)</span>:</span></div><div class="line">        hash_index = self._hash_function(key)</div><div class="line">        <span class="keyword">for</span> index, item <span class="keyword">in</span> enumerate(self.table[hash_index]):</div><div class="line">            <span class="keyword">if</span> item.key == key:</div><div class="line">                <span class="keyword">del</span> self.table[hash_index][index]</div><div class="line">                <span class="keyword">return</span></div><div class="line">        <span class="keyword">raise</span> KeyError(<span class="string">'Key not found'</span>)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Parking-Lot"><a href="#Parking-Lot" class="headerlink" title="Parking Lot"></a>Parking Lot</h2><ul>
+<li>What types of vehicles should we support?  (Motorcycle, Car, Bus)</li>
+<li>Does each vehicle type take up a different amount of parking spots?<br>Yes<ul>
+<li>Motorcycle spot -&gt; Motorcycle</li>
+<li>Compact spot -&gt; Motorcycle, Car </li>
+<li>Large spot -&gt; Motorcycle, Car</li>
+<li>Bus can park if we have 5 consecutive “large” spots</li>
+</ul>
+</li>
+<li>Does the parking lot have multiple levels? (Yes)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABCMeta, abstractmethod</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">VehicleSize</span><span class="params">(Enum)</span>:</span></div><div class="line"></div><div class="line">    MOTORCYCLE = <span class="number">0</span></div><div class="line">    COMPACT = <span class="number">1</span></div><div class="line">    LARGE = <span class="number">2</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vehicle</span><span class="params">(metaclass=ABCMeta)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, vehicle_size, license_plate, spot_size)</span>:</span></div><div class="line">        self.vehicle_size = vehicle_size</div><div class="line">        self.license_plate = license_plate</div><div class="line">        self.spot_size = spot_size</div><div class="line">        self.spots_taken = []</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clear_spots</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">for</span> spot <span class="keyword">in</span> self.spots_taken:</div><div class="line">            spot.remove_vehicle(self)</div><div class="line">        self.spots_taken = []</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">take_spot</span><span class="params">(self, spot)</span>:</span></div><div class="line">        self.spots_taken.append(spot)</div><div class="line"></div><div class="line"><span class="meta">    @abstractmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">can_fit_in_spot</span><span class="params">(self, spot)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Motorcycle</span><span class="params">(Vehicle)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, license_plate)</span>:</span></div><div class="line">        super(Motorcycle, self).__init__(VehicleSize.MOTORCYCLE, license_plate, spot_size=<span class="number">1</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">can_fit_in_spot</span><span class="params">(self, spot)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span><span class="params">(Vehicle)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, license_plate)</span>:</span></div><div class="line">        super(Car, self).__init__(VehicleSize.COMPACT, license_plate, spot_size=<span class="number">1</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">can_fit_in_spot</span><span class="params">(self, spot)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span> <span class="keyword">if</span> (spot.size == LARGE <span class="keyword">or</span> spot.size == COMPACT) <span class="keyword">else</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bus</span><span class="params">(Vehicle)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, license_plate)</span>:</span></div><div class="line">        super(Bus, self).__init__(VehicleSize.LARGE, license_plate, spot_size=<span class="number">5</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">can_fit_in_spot</span><span class="params">(self, spot)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span> <span class="keyword">if</span> spot.size == LARGE <span class="keyword">else</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ParkingLot</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_levels)</span>:</span></div><div class="line">        self.num_levels = num_levels</div><div class="line">        self.levels = []</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">park_vehicle</span><span class="params">(self, vehicle)</span>:</span></div><div class="line">        <span class="keyword">for</span> level <span class="keyword">in</span> levels:</div><div class="line">            <span class="keyword">if</span> level.park_vehicle(vehicle):</div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Level</span><span class="params">(object)</span>:</span></div><div class="line">    SPOTS_PER_ROW = <span class="number">10</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, floor, total_spots)</span>:</span></div><div class="line">        self.floor = floor</div><div class="line">        self.num_spots = total_spots</div><div class="line">        self.available_spots = <span class="number">0</span></div><div class="line">        self.parking_spots = []</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">spot_freed</span><span class="params">(self)</span>:</span></div><div class="line">        self.available_spots += <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">park_vehicle</span><span class="params">(self, vehicle)</span>:</span></div><div class="line">        spot = self._find_available_spot(vehicle)</div><div class="line">        <span class="keyword">if</span> spot <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            spot.park_vehicle(vehicle)</div><div class="line">            <span class="keyword">return</span> spot</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_find_available_spot</span><span class="params">(self, vehicle)</span>:</span></div><div class="line">        <span class="string">"""Find an available spot where vehicle can fit, or return None"""</span></div><div class="line">        <span class="comment"># ...</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_park_starting_at_spot</span><span class="params">(self, spot, vehicle)</span>:</span></div><div class="line">        <span class="string">"""Occupy starting at spot.spot_number to vehicle.spot_size."""</span></div><div class="line">        <span class="comment"># ...</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ParkingSpot</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, level, row, spot_number, spot_size, vehicle_size)</span>:</span></div><div class="line">        self.level = level</div><div class="line">        self.row = row</div><div class="line">        self.spot_number = spot_number</div><div class="line">        self.spot_size = spot_size</div><div class="line">        self.vehicle_size = vehicle_size</div><div class="line">        self.vehicle = <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_available</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span> <span class="keyword">if</span> self.vehicle <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> <span class="keyword">False</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">can_fit_vehicle</span><span class="params">(self, vehicle)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.vehicle <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">return</span> vehicle.can_fit_in_spot(self)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">park_vehicle</span><span class="params">(self, vehicle)</span>:</span>  <span class="comment"># ...</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remove_vehicle</span><span class="params">(self)</span>:</span>  <span class="comment"># ...</span></div></pre></td></tr></table></figure>
+<h2 id="Call-Center"><a href="#Call-Center" class="headerlink" title="Call Center"></a>Call Center</h2><ul>
+<li>What levels of employees are in the call center?  (Operator, supervisor, director)</li>
+<li>Can we assume operators always get the initial calls?  (Yes)</li>
+<li>If there is no free operators or the operator can’t handle the call, does the call go to the supervisors?  (Yes)</li>
+<li>If there is no free supervisors or the supervisor can’t handle the call, does the call go to the directors?  (Yes)</li>
+<li>Can we assume the directors can handle all calls?  (Yes)</li>
+<li>What happens if nobody can answer the call?  (It gets queued)</li>
+<li>Do we need to handle ‘VIP’ calls where we put someone to the front of the line? (No)</li>
+<li>Can we assume inputs are valid or do we have to validate them?  (Assume they’re valid)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABCMeta, abstractmethod</div><div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</div><div class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rank</span><span class="params">(Enum)</span>:</span></div><div class="line">    OPERATOR = <span class="number">0</span></div><div class="line">    SUPERVISOR = <span class="number">1</span></div><div class="line">    DIRECTOR = <span class="number">2</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span><span class="params">(metaclass=ABCMeta)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, employee_id, name, rank, call_center)</span>:</span></div><div class="line">        self.employee_id = employee_id</div><div class="line">        self.name = name</div><div class="line">        self.rank = rank</div><div class="line">        self.call = <span class="keyword">None</span></div><div class="line">        self.call_center = call_center</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">take_call</span><span class="params">(self, call)</span>:</span></div><div class="line">        <span class="string">"""Assume the employee will always successfully take the call."""</span></div><div class="line">        self.call = call</div><div class="line">        self.call.employee = self</div><div class="line">        self.call.state = CallState.IN_PROGRESS</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">complete_call</span><span class="params">(self)</span>:</span></div><div class="line">        self.call.state = CallState.COMPLETE</div><div class="line">        self.call_center.notify_call_completed(self.call)</div><div class="line"></div><div class="line"><span class="meta">    @abstractmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">escalate_call</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_escalate_call</span><span class="params">(self)</span>:</span></div><div class="line">        self.call.state = CallState.READY</div><div class="line">        call = self.call</div><div class="line">        self.call = <span class="keyword">None</span></div><div class="line">        self.call_center.notify_call_escalated(call)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Operator</span><span class="params">(Employee)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, employee_id, name)</span>:</span></div><div class="line">        super(Operator, self).__init__(employee_id, name, Rank.OPERATOR)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">escalate_call</span><span class="params">(self)</span>:</span></div><div class="line">        self.call.level = Rank.SUPERVISOR</div><div class="line">        self._escalate_call()</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Supervisor</span><span class="params">(Employee)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, employee_id, name)</span>:</span></div><div class="line">        super(Operator, self).__init__(employee_id, name, Rank.SUPERVISOR)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">escalate_call</span><span class="params">(self)</span>:</span></div><div class="line">        self.call.level = Rank.DIRECTOR</div><div class="line">        self._escalate_call()</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Director</span><span class="params">(Employee)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, employee_id, name)</span>:</span></div><div class="line">        super(Operator, self).__init__(employee_id, name, Rank.DIRECTOR)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">escalate_call</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">raise</span> <span class="built_in">NotImplemented</span>(<span class="string">'Directors must be able to handle any call'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CallState</span><span class="params">(Enum)</span>:</span></div><div class="line"></div><div class="line">    READY = <span class="number">0</span></div><div class="line">    IN_PROGRESS = <span class="number">1</span></div><div class="line">    COMPLETE = <span class="number">2</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Call</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, rank)</span>:</span></div><div class="line">        self.state = CallState.READY</div><div class="line">        self.rank = rank</div><div class="line">        self.employee = <span class="keyword">None</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CallCenter</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, operators, supervisors, directors)</span>:</span></div><div class="line">        self.operators = operators</div><div class="line">        self.supervisors = supervisors</div><div class="line">        self.directors = directors</div><div class="line">        self.queued_calls = deque()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch_call</span><span class="params">(self, call)</span>:</span></div><div class="line">        <span class="keyword">if</span> call.rank <span class="keyword">not</span> <span class="keyword">in</span> (Rank.OPERATOR, Rank.SUPERVISOR, Rank.DIRECTOR):</div><div class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'Invalid call rank: &#123;&#125;'</span>.format(call.rank))</div><div class="line">        employee = <span class="keyword">None</span></div><div class="line">        <span class="keyword">if</span> call.rank == Rank.OPERATOR:</div><div class="line">            employee = self._dispatch_call(call, self.operators)</div><div class="line">        <span class="keyword">if</span> call.rank == Rank.SUPERVISOR <span class="keyword">or</span> employee <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            employee = self._dispatch_call(call, self.supervisors)</div><div class="line">        <span class="keyword">if</span> call.rank == Rank.DIRECTOR <span class="keyword">or</span> employee <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            employee = self._dispatch_call(call, self.directors)</div><div class="line">        <span class="keyword">if</span> employee <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            self.queued_calls.append(call)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_dispatch_call</span><span class="params">(self, call, employees)</span>:</span></div><div class="line">        <span class="keyword">for</span> employee <span class="keyword">in</span> employees:</div><div class="line">            <span class="keyword">if</span> employee.call <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">                employee.take_call(call)</div><div class="line">                <span class="keyword">return</span> employee</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">notify_call_escalated</span><span class="params">(self, call)</span>:</span>  <span class="comment"># ...</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">notify_call_completed</span><span class="params">(self, call)</span>:</span>  <span class="comment"># ...</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch_queued_call_to_newly_freed_employee</span><span class="params">(self, call, employee)</span>:</span>  <span class="comment"># ...</span></div></pre></td></tr></table></figure>
+<h2 id="Deck-of-Cards"><a href="#Deck-of-Cards" class="headerlink" title="Deck of Cards"></a>Deck of Cards</h2><ul>
+<li>Is this a generic deck of cards for games like poker and black jack?  (Yes, design a generic deck then extend it to black jack)</li>
+<li>Can we assume the deck has 52 cards (2-10, Jack, Queen, King, Ace) and 4 suits?  (Yes)</li>
+<li>Can we assume inputs are valid or do we have to validate them?  (Assume they’re valid)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABCMeta, abstractmethod</div><div class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Suit</span><span class="params">(Enum)</span>:</span></div><div class="line"></div><div class="line">    HEART = <span class="number">0</span></div><div class="line">    DIAMOND = <span class="number">1</span></div><div class="line">    CLUBS = <span class="number">2</span></div><div class="line">    SPADE = <span class="number">3</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Card</span><span class="params">(metaclass=ABCMeta)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value, suit)</span>:</span></div><div class="line">        self.value = value</div><div class="line">        self.suit = suit</div><div class="line">        self.is_available = <span class="keyword">True</span></div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line"><span class="meta">    @abstractmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">value</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="meta">    @value.setter</span></div><div class="line"><span class="meta">    @abstractmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">value</span><span class="params">(self, other)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlackJackCard</span><span class="params">(Card)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value, suit)</span>:</span></div><div class="line">        super(BlackJackCard, self).__init__(value, suit)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_ace</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self._value == <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_face_card</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""Jack = 11, Queen = 12, King = 13"""</span></div><div class="line">        <span class="keyword">return</span> <span class="number">10</span> &lt; self._value &lt;= <span class="number">13</span></div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">value</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.is_ace() == <span class="number">1</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span></div><div class="line">        <span class="keyword">elif</span> self.is_face_card():</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> self._value</div><div class="line"></div><div class="line"><span class="meta">    @value.setter</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">value</span><span class="params">(self, new_value)</span>:</span></div><div class="line">        <span class="keyword">if</span> <span class="number">1</span> &lt;= new_value &lt;= <span class="number">13</span>:</div><div class="line">            self._value = new_value</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'Invalid card value: &#123;&#125;'</span>.format(new_value))</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hand</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cards)</span>:</span></div><div class="line">        self.cards = cards</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_card</span><span class="params">(self, card)</span>:</span></div><div class="line">        self.cards.append(card)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self)</span>:</span></div><div class="line">        total_value = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> card <span class="keyword">in</span> card:</div><div class="line">            total_value += card.value</div><div class="line">        <span class="keyword">return</span> total_value</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlackJackHand</span><span class="params">(Hand)</span>:</span></div><div class="line"></div><div class="line">    BLACKJACK = <span class="number">21</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cards)</span>:</span></div><div class="line">        super(BlackJackHand, self).__init__(cards)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self)</span>:</span></div><div class="line">        min_over = sys.MAXSIZE</div><div class="line">        max_under = -sys.MAXSIZE</div><div class="line">        <span class="keyword">for</span> score <span class="keyword">in</span> self.possible_scores():</div><div class="line">            <span class="keyword">if</span> self.BLACKJACK &lt; score &lt; min_over:</div><div class="line">                min_over = score</div><div class="line">            <span class="keyword">elif</span> max_under &lt; score &lt;= self.BLACKJACK:</div><div class="line">                max_under = score</div><div class="line">        <span class="keyword">return</span> max_under <span class="keyword">if</span> max_under != -sys.MAXSIZE <span class="keyword">else</span> min_over</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">possible_scores</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""Return a list of possible scores, taking Aces into account."""</span></div><div class="line">        <span class="comment"># ...</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Deck</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cards)</span>:</span></div><div class="line">        self.cards = cards</div><div class="line">        self.deal_index = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remaining_cards</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> len(self.cards) - deal_index</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deal_card</span><span class="params">()</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            card = self.cards[self.deal_index]</div><div class="line">            card.is_available = <span class="keyword">False</span></div><div class="line">            self.deal_index += <span class="number">1</span></div><div class="line">        <span class="keyword">except</span> IndexError:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">return</span> card</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">shuffle</span><span class="params">(self)</span>:</span>  <span class="comment"># ...</span></div></pre></td></tr></table></figure>
+<h2 id="Design-an-LRU-cache¶"><a href="#Design-an-LRU-cache¶" class="headerlink" title="Design an LRU cache¶"></a>Design an LRU cache¶</h2><ul>
+<li>What are we caching?   (cahing the results of web queries)</li>
+<li>Can we assume inputs are valid or do we have to validate them?  (Assume they’re valid)</li>
+<li>Can we assume this fits memory?  (Yes)</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">class Node(object):</div><div class="line"></div><div class="line">    def __init__(self, results):</div><div class="line">        self.results = results</div><div class="line">        self.prev = None</div><div class="line">        self.next = None</div><div class="line"></div><div class="line"></div><div class="line">class LinkedList(object):</div><div class="line">    def __init__(self):</div><div class="line">        self.head = None</div><div class="line">        self.tail = None</div><div class="line"></div><div class="line">    def move_to_front(self, node):  # ...</div><div class="line">    def append_to_front(self, node):  # ...</div><div class="line">    def remove_from_tail(self):  # ...</div><div class="line"></div><div class="line"></div><div class="line">class Cache(object):</div><div class="line">    def __init__(self, MAX_SIZE):</div><div class="line">        self.MAX_SIZE = MAX_SIZE</div><div class="line">        self.size = 0</div><div class="line">        self.lookup = &#123;&#125;  # key: query, value: node</div><div class="line">        self.linked_list = LinkedList()</div><div class="line"></div><div class="line">    def get(self, query)</div><div class="line">        """Get the stored query result from the cache.</div><div class="line">        </div><div class="line">        Accessing a node updates its position to the front of the LRU list.</div><div class="line">        """</div><div class="line">        node = self.lookup.get(query)</div><div class="line">        if node is None:</div><div class="line">            return None</div><div class="line">        self.linked_list.move_to_front(node)</div><div class="line">        return node.results</div><div class="line"></div><div class="line">    def set(self, results, query):</div><div class="line">        """Set the result for the given query key in the cache.</div><div class="line">        </div><div class="line">        When updating an entry, updates its position to the front of the LRU list.</div><div class="line">        If the entry is new and the cache is at capacity, removes the oldest entry</div><div class="line">        before the new entry is added.</div><div class="line">        """</div><div class="line">        node = self.lookup.get(query)</div><div class="line">        if node is not None:</div><div class="line">            # Key exists in cache, update the value</div><div class="line">            node.results = results</div><div class="line">            self.linked_list.move_to_front(node)</div><div class="line">        else:</div><div class="line">            # Key does not exist in cache</div><div class="line">            if self.size == self.MAX_SIZE:</div><div class="line">                # Remove the oldest entry from the linked list and lookup</div><div class="line">                self.lookup.pop(self.linked_list.tail.query, None)</div><div class="line">                self.linked_list.remove_from_tail()</div><div class="line">            else:</div><div class="line">                self.size += 1</div><div class="line">            # Add the new key and value</div><div class="line">            new_node = Node(results)</div><div class="line">            self.linked_list.append_to_front(new_node)</div><div class="line">            self.lookup[query] = new_node</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Interview-Prep/" rel="tag"># Interview_Prep</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/15/S4-Distributed-Systems/" rel="next" title="Distributed-Systems">
+                <i class="fa fa-chevron-left"></i> Distributed-Systems
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/15/S1-Multiprocessing-Multithreading/" rel="prev" title="Multiprocessing-Multithreading.md">
+                Multiprocessing-Multithreading.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiple-Inheritance"><span class="nav-number">1.</span> <span class="nav-text">Multiple Inheritance</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Examples"><span class="nav-number"></span> <span class="nav-text">Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash-Table"><span class="nav-number">1.</span> <span class="nav-text">Hash Table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parking-Lot"><span class="nav-number">2.</span> <span class="nav-text">Parking Lot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Call-Center"><span class="nav-number">3.</span> <span class="nav-text">Call Center</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deck-of-Cards"><span class="nav-number">4.</span> <span class="nav-text">Deck of Cards</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Design-an-LRU-cache¶"><span class="nav-number">5.</span> <span class="nav-text">Design an LRU cache¶</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2018/06/15/S2-Object-Oriented-Design/';
+          this.page.identifier = '2018/06/15/S2-Object-Oriented-Design/';
+          this.page.title = 'Object-Oriented_Design';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

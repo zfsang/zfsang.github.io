@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="algorithm,interview," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="general strategy Start with the recursive backtracking solution Optimize by using a memoization table (top-down[3] dynamic programming) Remove the need for recursion (bottom-up dynamic programming) Ap">
+<meta name="keywords" content="algorithm,interview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dynamic-Programming">
+<meta property="og:url" content="http://zfsang.github.io/2018/05/26/A7-Dynamic-Programming/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="general strategy Start with the recursive backtracking solution Optimize by using a memoization table (top-down[3] dynamic programming) Remove the need for recursion (bottom-up dynamic programming) Ap">
+<meta property="og:updated_time" content="2018-11-13T08:37:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dynamic-Programming">
+<meta name="twitter:description" content="general strategy Start with the recursive backtracking solution Optimize by using a memoization table (top-down[3] dynamic programming) Remove the need for recursion (bottom-up dynamic programming) Ap">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2018/05/26/A7-Dynamic-Programming/"/>
+
+
+
+
+
+  <title>Dynamic-Programming | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2018/05/26/A7-Dynamic-Programming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Dynamic-Programming</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T10:25:36-07:00">
+                2018-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview_Prep</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/26/A7-Dynamic-Programming/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/26/A7-Dynamic-Programming/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="general-strategy"><a href="#general-strategy" class="headerlink" title="general strategy"></a>general strategy</h2><ol>
+<li>Start with the recursive backtracking solution</li>
+<li>Optimize by using a memoization table (top-down[3] dynamic programming)</li>
+<li>Remove the need for recursion (bottom-up dynamic programming)</li>
+<li>Apply final tricks to reduce the time / memory complexity</li>
+</ol>
+<h2 id="When-to-use"><a href="#When-to-use" class="headerlink" title="When to use"></a>When to use</h2><ul>
+<li>Input cannot sort</li>
+<li>Find minimum/maximum result</li>
+<li>Check the feasibility 找可行性</li>
+<li>Count all possible solutions 列出所有解 (Find count)</li>
+</ul>
+<h2 id="Principles"><a href="#Principles" class="headerlink" title="Principles"></a>Principles</h2><p>(1) 最优化原理：如果问题的最优解所包含的子问题的解也是最优的，就称该问题具有最优子结构，即满足最优化原理。<br>(2) 无后效性：即某阶段状态一旦确定，就不受这个状态以后决策的影响。也就是说，某状态以后的过程不会影响以前的状态，只与当前状态有关。<br>（3）有重叠子问题：即子问题之间是不独立的，一个子问题在下一阶段决策中可能被多次使用到。（该性质并不是动态规划适用的必要条件，但是如果没有这条性质，动态规划算法同其他算法相比就不具备优势<br><a href="http://klausguan.com/2017/07/09/dynamic-programing/" target="_blank" rel="external">http://klausguan.com/2017/07/09/dynamic-programing/</a><br><a href="https://blog.csdn.net/cc_again/article/details/25866971" target="_blank" rel="external">ACM动态规划总结</a></p>
+<h2 id="Memorization-Search"><a href="#Memorization-Search" class="headerlink" title="Memorization + Search"></a>Memorization + Search</h2><p>e.g.<br><a href="http://univasity.iteye.com/blog/1170216" target="_blank" rel="external">http://univasity.iteye.com/blog/1170216</a></p>
+<h2 id="Minmax"><a href="#Minmax" class="headerlink" title="Minmax"></a>Minmax</h2><p><a href="https://segmentfault.com/a/1190000013527949" target="_blank" rel="external">https://segmentfault.com/a/1190000013527949</a></p>
+<p>Minimax is to deep search for the best value, assuming the opponent will always play the move with the worst value (worst for us, so best for them).</p>
+<h2 id="Classical-Problems"><a href="#Classical-Problems" class="headerlink" title="Classical Problems"></a>Classical Problems</h2><h3 id="Regex-Matching"><a href="#Regex-Matching" class="headerlink" title="Regex Matching"></a>Regex Matching</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># https://leetcode.com/problems/regular-expression-matching/description/</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">isMatch</span><span class="params">(self, s, p)</span>:</span></div><div class="line">    <span class="keyword">if</span> len(p) == <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> len(s) == <span class="number">0</span></div><div class="line">    </div><div class="line">    dp = [[<span class="keyword">False</span>] * (len(p)+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(s)+<span class="number">1</span>)]</div><div class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="keyword">True</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, len(p)+<span class="number">1</span>):</div><div class="line">        <span class="keyword">if</span> p[j<span class="number">-1</span>] == <span class="string">'*'</span> <span class="keyword">and</span> j &gt;=<span class="number">2</span>:</div><div class="line">            dp[<span class="number">0</span>][j] = dp[<span class="number">0</span>][j<span class="number">-2</span>]</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(s) + <span class="number">1</span>):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, len(p) + <span class="number">1</span>):</div><div class="line">            <span class="keyword">if</span> s[i<span class="number">-1</span>] == p[j<span class="number">-1</span>] <span class="keyword">or</span> p[j<span class="number">-1</span>] == <span class="string">'.'</span>:</div><div class="line">                dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>]</div><div class="line">                </div><div class="line">            <span class="keyword">if</span> p[j<span class="number">-1</span>] == <span class="string">'*'</span>:</div><div class="line">                dp[i][j] = dp[i][j<span class="number">-2</span>] <span class="keyword">or</span> dp[i][j<span class="number">-1</span>] <span class="keyword">or</span> (dp[i<span class="number">-1</span>][j] <span class="keyword">and</span> (s[i<span class="number">-1</span>] == p[j<span class="number">-2</span>] <span class="keyword">or</span> p[j<span class="number">-2</span>]==<span class="string">'.'</span>))</div><div class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>][<span class="number">-1</span>]</div><div class="line"></div><div class="line"><span class="comment"># see also https://leetcode.com/problems/wildcard-matching/description/</span></div></pre></td></tr></table></figure>
+<h4 id="LIS-Linear"><a href="#LIS-Linear" class="headerlink" title="LIS (Linear)"></a>LIS (Linear)</h4><h4 id="Edit-Distance-2D-Array"><a href="#Edit-Distance-2D-Array" class="headerlink" title="Edit Distance (2D Array)"></a>Edit Distance (2D Array)</h4><h4 id="Backpack"><a href="#Backpack" class="headerlink" title="Backpack"></a>Backpack</h4><h4 id="guess-money"><a href="#guess-money" class="headerlink" title="guess money"></a><a href="https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/" target="_blank" rel="external">guess money</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getMoneyAmount</span><span class="params">(self, n)</span>:</span></div><div class="line">    dp = [[<span class="number">0</span>] * (n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">1</span>)]</div><div class="line">    <span class="comment">#top-down search + memorization</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">solve</span><span class="params">(low, high)</span>:</span></div><div class="line">        <span class="keyword">if</span> low &gt;= high:</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> dp[low][high] == <span class="number">0</span> <span class="keyword">and</span> low &lt; high:</div><div class="line">            dp[low][high] = min([k + max(solve(low, k<span class="number">-1</span>), solve(k+<span class="number">1</span>, high)) <span class="keyword">for</span> k <span class="keyword">in</span> range(low, high)])</div><div class="line">        <span class="keyword">return</span> dp[low][high]</div><div class="line">    <span class="keyword">return</span> solve(<span class="number">1</span>, n)</div><div class="line"></div><div class="line">    <span class="comment"># dp</span></div><div class="line">    <span class="keyword">for</span> gap <span class="keyword">in</span> range(<span class="number">1</span>, n):</div><div class="line">        <span class="keyword">for</span> low <span class="keyword">in</span> range(<span class="number">1</span>, n-gap+<span class="number">1</span>):</div><div class="line">            high = low + gap</div><div class="line">            dp[low][high] = min([k + max(dp[low][k<span class="number">-1</span>], dp[k+<span class="number">1</span>][high]) <span class="keyword">for</span> k <span class="keyword">in</span> range(low, high)])</div><div class="line">    <span class="keyword">return</span> dp[<span class="number">1</span>][n]</div></pre></td></tr></table></figure>
+<h4 id="best-time-to-buy-and-sell-stock"><a href="#best-time-to-buy-and-sell-stock" class="headerlink" title="best time to buy and sell stock"></a>best time to buy and sell stock</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># buy 1 sell 1</span></div><div class="line"><span class="comment"># track current min and max </span></div><div class="line"><span class="comment"># Time O(N) Space O(1)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices)</span>:</span></div><div class="line">    <span class="keyword">if</span> len(prices) &lt;= <span class="number">1</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    max_profit = <span class="number">0</span></div><div class="line">    min_buy = <span class="keyword">None</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prices)):</div><div class="line">        <span class="comment"># No profit first day since no stock to sell</span></div><div class="line">        <span class="keyword">if</span> min_buy <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            min_buy = prices[i]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            max_profit = max(max_profit, prices[i] - min_buy)</div><div class="line">            min_buy = min(min_buy, prices[i])</div><div class="line">    <span class="keyword">return</span> max_profit</div><div class="line"></div><div class="line"><span class="comment"># buy sell unlimited</span></div><div class="line"><span class="comment"># Time O(N) Space O(1)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit_unlimited</span><span class="params">(self, prices)</span>:</span></div><div class="line">    <span class="keyword">if</span> len(prices) &lt;= <span class="number">1</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    profit = <span class="number">0</span></div><div class="line">    curr_buy = <span class="keyword">None</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prices)):</div><div class="line">        <span class="keyword">if</span> curr_buy <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            curr_buy = prices[i]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">if</span> curr_buy &lt; prices[i]:</div><div class="line">                <span class="comment"># accumulate all profit day by day</span></div><div class="line">                profit +=  prices[i] - curr_buy</div><div class="line">                curr_buy = prices[i]</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                curr_buy = prices[i]</div><div class="line">    <span class="keyword">return</span> profit</div><div class="line"><span class="comment"># &lt;= k transactions</span></div><div class="line"><span class="comment"># Time O(N * k) Space O(k)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit_k</span><span class="params">(k, prices)</span>:</span></div><div class="line">    <span class="keyword">if</span> len(prices) &lt; <span class="number">2</span> <span class="keyword">or</span> k &lt; <span class="number">1</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span> </div><div class="line">    <span class="keyword">if</span> k &gt; len(prices)/<span class="number">2</span>:</div><div class="line">        <span class="keyword">return</span> self.maxProfit_unlimited(prices)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        buy = [-float(<span class="string">'Inf'</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(k)]</div><div class="line">        sell =[-float(<span class="string">'Inf'</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(k)]</div><div class="line">        buy[<span class="number">0</span>] = -prices[<span class="number">0</span>]</div><div class="line">        </div><div class="line">        <span class="comment"># reverse order when moving to next day (or create a copy of previous dp) to avoid overwrite</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(prices)):</div><div class="line">            <span class="keyword">for</span> kk <span class="keyword">in</span> reversed(range(<span class="number">1</span>, k)):</div><div class="line">                sell[kk] = max(sell[kk], buy[kk] + prices[i])</div><div class="line">                buy[kk] = max(buy[kk], sell[kk<span class="number">-1</span>] - prices[i])</div><div class="line">            sell[<span class="number">0</span>] = max(sell[<span class="number">0</span>], buy[<span class="number">0</span>] + prices[i])</div><div class="line">            <span class="comment"># deal with corner case of buy[0]</span></div><div class="line">            buy[<span class="number">0</span>] = max(buy[<span class="number">0</span>], -prices[i])</div><div class="line">        <span class="keyword">return</span> max([<span class="number">0</span>] + sell)</div><div class="line"></div><div class="line"><span class="comment"># unlimited transactions with 1 day cool down</span></div><div class="line"><span class="comment"># Time O(N) Space O(N)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit_unlimited_cool_down</span><span class="params">(self, prices)</span>:</span></div><div class="line">    <span class="keyword">if</span> len(prices) &lt; <span class="number">2</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    hold = [<span class="keyword">None</span>] * len(prices)</div><div class="line">    empty = [<span class="keyword">None</span>] * len(prices)</div><div class="line">    hold[<span class="number">0</span>] = - prices[<span class="number">0</span>]</div><div class="line">    empty[<span class="number">0</span>] = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(prices)):</div><div class="line">        empty[i] = max(empty[i<span class="number">-1</span>], hold[i<span class="number">-1</span>] + prices[i])</div><div class="line">        hold[i] = max(hold[i<span class="number">-1</span>], empty[i<span class="number">-2</span>] - prices[i] <span class="keyword">if</span> i &gt; <span class="number">1</span> <span class="keyword">else</span> -prices[i])</div><div class="line">    <span class="keyword">return</span> max(empty[<span class="number">-1</span>], hold[<span class="number">-1</span>])</div></pre></td></tr></table></figure>
+<h4 id="word-break"><a href="#word-break" class="headerlink" title="word break"></a>word break</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#DP</span></div><div class="line"><span class="comment"># Time: O(N^2) Space: O(N)</span></div><div class="line"><span class="comment"># https://leetcode.com/problems/word-break/description/</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">wordBreak</span><span class="params">(self, s, wordDict)</span>:</span></div><div class="line"></div><div class="line">    dp = [<span class="keyword">False</span>] * (len(s) + <span class="number">1</span>)</div><div class="line">    dp[<span class="number">0</span>] = <span class="keyword">True</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(s)+<span class="number">1</span>):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</div><div class="line">            <span class="keyword">if</span> dp[j] == <span class="keyword">True</span> <span class="keyword">and</span> s[j:i] <span class="keyword">in</span> wordDict:</div><div class="line">                dp[i] = <span class="keyword">True</span></div><div class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>]</div><div class="line"></div><div class="line"><span class="comment"># DFS + memorization</span></div><div class="line"><span class="comment"># Time complexity  O(N^3): </span></div><div class="line"><span class="comment"># Size of recursion tree can go up to n^2 The creation of list takes n time.</span></div><div class="line"><span class="comment"># Space complexity O(N^3): </span></div><div class="line"><span class="comment"># ​​ The depth of the recursion tree can go up to n and each activation record can contains a string list of size n.</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">wordBreak2</span><span class="params">(self, s, wordDict)</span>:</span></div><div class="line">    dic = defaultdict(list)</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(word)</span>:</span></div><div class="line">        <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> dic:            </div><div class="line">            res = []</div><div class="line">            <span class="keyword">for</span> w <span class="keyword">in</span> wordDict:</div><div class="line">                <span class="keyword">if</span> word[:len(w)] == w:</div><div class="line">                    <span class="keyword">if</span> len(word) == len(w):</div><div class="line">                        res.append(w)</div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        dfs_res = dfs(word[len(w):])</div><div class="line">                        <span class="keyword">for</span> r <span class="keyword">in</span> dfs_res:</div><div class="line">                            <span class="keyword">if</span> r:</div><div class="line">                                res.append(w + <span class="string">' '</span> + r)</div><div class="line">            dic[word] = res</div><div class="line">        <span class="keyword">return</span> dic[word]</div><div class="line">    </div><div class="line">    res = dfs(s)</div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+            <a href="/tags/interview/" rel="tag"># interview</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/15/S1-Multiprocessing-Multithreading/" rel="next" title="Multiprocessing-Multithreading.md">
+                <i class="fa fa-chevron-left"></i> Multiprocessing-Multithreading.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/26/A3-Binary-Search/" rel="prev" title="Binary-Search">
+                Binary-Search <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#general-strategy"><span class="nav-number">1.</span> <span class="nav-text">general strategy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#When-to-use"><span class="nav-number">2.</span> <span class="nav-text">When to use</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Principles"><span class="nav-number">3.</span> <span class="nav-text">Principles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memorization-Search"><span class="nav-number">4.</span> <span class="nav-text">Memorization + Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Minmax"><span class="nav-number">5.</span> <span class="nav-text">Minmax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Classical-Problems"><span class="nav-number">6.</span> <span class="nav-text">Classical Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Regex-Matching"><span class="nav-number">6.1.</span> <span class="nav-text">Regex Matching</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LIS-Linear"><span class="nav-number">6.1.1.</span> <span class="nav-text">LIS (Linear)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Edit-Distance-2D-Array"><span class="nav-number">6.1.2.</span> <span class="nav-text">Edit Distance (2D Array)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Backpack"><span class="nav-number">6.1.3.</span> <span class="nav-text">Backpack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#guess-money"><span class="nav-number">6.1.4.</span> <span class="nav-text">guess money</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#best-time-to-buy-and-sell-stock"><span class="nav-number">6.1.5.</span> <span class="nav-text">best time to buy and sell stock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#word-break"><span class="nav-number">6.1.6.</span> <span class="nav-text">word break</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2018/05/26/A7-Dynamic-Programming/';
+          this.page.identifier = '2018/05/26/A7-Dynamic-Programming/';
+          this.page.title = 'Dynamic-Programming';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

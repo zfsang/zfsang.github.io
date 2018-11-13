@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="interview,product_sense," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Frameworks for feature metricsThere are two frameworks that I have known to be useful to track feature success: Dave McClure’s Pirate MetricsAcquisition How do users become aware of you? SEO, SEM  (Se">
+<meta name="keywords" content="interview,product_sense">
+<meta property="og:type" content="article">
+<meta property="og:title" content="product-metrics">
+<meta property="og:url" content="http://zfsang.github.io/2018/06/19/P1-product-metrics/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="Frameworks for feature metricsThere are two frameworks that I have known to be useful to track feature success: Dave McClure’s Pirate MetricsAcquisition How do users become aware of you? SEO, SEM  (Se">
+<meta property="og:updated_time" content="2018-11-13T08:37:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="product-metrics">
+<meta name="twitter:description" content="Frameworks for feature metricsThere are two frameworks that I have known to be useful to track feature success: Dave McClure’s Pirate MetricsAcquisition How do users become aware of you? SEO, SEM  (Se">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2018/06/19/P1-product-metrics/"/>
+
+
+
+
+
+  <title>product-metrics | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2018/06/19/P1-product-metrics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">product-metrics</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-19T18:55:28-07:00">
+                2018-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview_Prep</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/product-sense/" itemprop="url" rel="index">
+                    <span itemprop="name">product_sense</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/19/P1-product-metrics/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/19/P1-product-metrics/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Frameworks for feature metrics<br>There are two frameworks that I have known to be useful to track feature success:</p>
+<h2 id="Dave-McClure’s-Pirate-Metrics"><a href="#Dave-McClure’s-Pirate-Metrics" class="headerlink" title="Dave McClure’s Pirate Metrics"></a>Dave McClure’s Pirate Metrics</h2><h3 id="Acquisition"><a href="#Acquisition" class="headerlink" title="Acquisition"></a>Acquisition</h3><ul>
+<li>How do users become aware of you?<ul>
+<li>SEO, SEM  (Search Engine Marketing) , widgets, email, PR (Public Relation), campaigns, blogs…</li>
+</ul>
+</li>
+<li>Function<ul>
+<li>Generate attention through a variety of means, both organic and inorganic</li>
+</ul>
+</li>
+<li>Relevant metrics<ul>
+<li>Traffic, mentions, cost per click, search results, cost of acquisition, open rate<h3 id="Activation"><a href="#Activation" class="headerlink" title="Activation"></a>Activation</h3></li>
+</ul>
+</li>
+<li>Do drive-by visitors subscribe, use, stc.?<ul>
+<li>Features, design, tone, compensation, affirmation…</li>
+</ul>
+</li>
+<li><strong>Functions</strong>: Turn the resulting drive-by visitors into users who are somehow enrolled</li>
+<li><strong>Relevant metrics</strong>:  Enrollments, sign ups, completed onboarding process, used the service at least once, subscriptions<h3 id="Retention"><a href="#Retention" class="headerlink" title="Retention"></a>Retention</h3></li>
+<li>Does one-time user become engaged?<ul>
+<li>Notifications, alerts, reminders, emails, updates,…</li>
+</ul>
+</li>
+<li><strong>Functions</strong>: convince users to come back repeatedly, exhibiting sticky behavior</li>
+<li><strong>Relevant metrics</strong>: engagement, time since last visit, daily and monthly active use, churns<h3 id="Revenue"><a href="#Revenue" class="headerlink" title="Revenue"></a>Revenue</h3></li>
+<li>Do you make money from user activity?<ul>
+<li>Transactions, clicks, subscriptions, DLC, analytics…</li>
+</ul>
+</li>
+<li><strong>Functions</strong>: business outcomes (which vary by your business model: purchases, ad clicks, content creation, subscriptions, etc.)</li>
+<li><strong>Relevant metrics</strong>: customer lifetime value, conversion rate, shopping cart size, click-through revenue<h3 id="referral"><a href="#referral" class="headerlink" title="referral"></a>referral</h3></li>
+<li>Do users promote your product?<ul>
+<li>email, widgets, campaigns, likes, RTs, affiliates</li>
+</ul>
+</li>
+<li><strong>Functions</strong>: viral and word-of-mouth invitations to other potential users</li>
+<li><strong>Relevant metrics</strong>: invites sent, viral coefficient, viral cycle time</li>
+</ul>
+<h2 id="Google’s-Heart-Framework"><a href="#Google’s-Heart-Framework" class="headerlink" title="Google’s Heart Framework:"></a>Google’s Heart Framework:</h2><h3 id="Happiness"><a href="#Happiness" class="headerlink" title="Happiness"></a>Happiness</h3><ul>
+<li>satisfaction, likelihood of recommendation via user study  <strong>User Survey</strong><h3 id="Engagement"><a href="#Engagement" class="headerlink" title="Engagement"></a>Engagement</h3></li>
+<li>how much on average user is using your product (by time, sessions…)  <strong>Analytics</strong><h3 id="Adoption"><a href="#Adoption" class="headerlink" title="Adoption"></a>Adoption</h3></li>
+<li>the percentage of users that adopt your product after signing up (user onboarding), and/or the percentage of users that adopt a specific feature of your product <strong>Analytics</strong><h3 id="Retention-1"><a href="#Retention-1" class="headerlink" title="Retention"></a>Retention</h3></li>
+<li>how many users are still present later <strong>Analytics</strong><h3 id="Task-Success"><a href="#Task-Success" class="headerlink" title="Task Success"></a>Task Success</h3></li>
+<li>time to complete a task, error rate   <strong>User tests</strong></li>
+</ul>
+<p>(Choose one or two categories in the HEART framework that are the focus of your product or project.)</p>
+<h2 id="Metrics-by-Products"><a href="#Metrics-by-Products" class="headerlink" title="Metrics by Products"></a>Metrics by Products</h2><h3 id="Shareride-App-Uber"><a href="#Shareride-App-Uber" class="headerlink" title="Shareride App (Uber)"></a>Shareride App (Uber)</h3><p>(<a href="http://www.businessofapps.com/data/uber-statistics/" target="_blank" rel="external">http://www.businessofapps.com/data/uber-statistics/</a>)</p>
+<ul>
+<li>two-sided market place</li>
+<li>real world component (driver take the courage to drive the cart to pick up the first rider)</li>
+<li><p>paid acquisition<br>App:</p>
+</li>
+<li><p>booked rides : <strong>weekly trips</strong> is the <strong>north store metrics</strong> for Uber</p>
+</li>
+<li>engagement</li>
+<li>Trips/hr per driver</li>
+<li>Driver churn (Active since become Uber driver, Uber driver continuation rates half over 12 months)</li>
+<li>Customer churn</li>
+<li>Average cross fare per trip</li>
+<li><p>total number of active users/drivers this week = last week active number + new user this week - churn user this week + re-engaged user this week </p>
+</li>
+<li><p>buyer/seller growth (rider, driver)</p>
+</li>
+<li>search/match effectiveness</li>
+<li>conversion funnels</li>
+<li>rating and signs of fraud</li>
+<li>pricing metrics<br>( - inventory growth (driver growth, region coverage))</li>
+</ul>
+<p>Dimension:</p>
+<ul>
+<li>Different Products</li>
+<li>City</li>
+<li>Time of day (rush hours)</li>
+<li>Compare to taxi, car rental</li>
+<li>gender</li>
+<li>age<br>User:</li>
+<li>Earning per hour</li>
+<li>Driver online time</li>
+</ul>
+<p>Table Design<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> driver (</div><div class="line">    user_id <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    date_of_birth <span class="built_in">DATE</span>,</div><div class="line">    start_at <span class="built_in">DATE</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    last_use <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    verified <span class="built_in">BOOLEAN</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    rating <span class="built_in">FLOAT</span>,</div><div class="line">    city <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    country <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    total_trips <span class="built_in">INT</span>,</div><div class="line">    active_status <span class="built_in">VARCHAR</span>(<span class="number">25</span>),</div><div class="line">    total_earning <span class="built_in">FLOAT</span>,</div><div class="line">    acquisition_cost <span class="built_in">FLOAT</span>,</div><div class="line">    PRIMARY <span class="keyword">KEY</span> (user_id)</div><div class="line">)</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> rider (</div><div class="line">    user_id <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    car_id <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    date_of_birth <span class="built_in">DATE</span>,</div><div class="line">    start_at <span class="built_in">DATE</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    last_use <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    verified <span class="built_in">BOOLEAN</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    rating <span class="built_in">FLOAT</span>,</div><div class="line">    city <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    country <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    total_trips <span class="built_in">INT</span>,</div><div class="line">    active_status <span class="built_in">VARCHAR</span>(<span class="number">25</span>),</div><div class="line">    total_spend <span class="built_in">FLOAT</span>,</div><div class="line">    acquisition_cost <span class="built_in">FLOAT</span>,</div><div class="line">    PRIMARY <span class="keyword">KEY</span> (user_id)</div><div class="line"></div><div class="line">)</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> ride</div><div class="line">    ride_id <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    driver_id <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    rider_id <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    start_at <span class="keyword">TIMESTAMP</span>,</div><div class="line">    end_at <span class="keyword">TIMESTAMP</span>,</div><div class="line">    price <span class="built_in">FLOAT</span>,</div><div class="line">    start_location <span class="built_in">VARCHAR</span>(<span class="number">255</span>),</div><div class="line">    end_location <span class="built_in">VARCHAR</span>(<span class="number">255</span>)</div><div class="line">;</div><div class="line"></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> car</div><div class="line">;</div></pre></td></tr></table></figure></p>
+<h3 id="Music-App-Spoify"><a href="#Music-App-Spoify" class="headerlink" title="Music App (Spoify)"></a>Music App (Spoify)</h3><ul>
+<li>Common query types:<ul>
+<li>KPIs by specified and hoc parameters</li>
+<li>FB audience list for social targeting for AU campaign</li>
+<li>Top tracks by age/ gender by market</li>
+<li>How many free users age 18-30 listen to hip hop in the US?</li>
+<li>What platforms do those hip hop fans like to use?</li>
+<li>How do those platform habits differ from all free 18-30 year olds in the US?</li>
+<li>What cause user not stream after impression?</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>fact<ul>
+<li>MAU / DAU</li>
+<li>Retention</li>
+<li>session length (avg)</li>
+<li>% of total impression (An impression is the number of times one of your visitors had viewed a page where a video or audio was included)</li>
+<li>conversion (after impression, …)</li>
+<li>engagement</li>
+</ul>
+</li>
+<li>dimension<ul>
+<li>services (streaming, downloads, radio, discovery…)</li>
+<li>genre </li>
+<li>platform/device (mobile, web, desktop,…)</li>
+<li>user tiers (free, premium)</li>
+<li>age</li>
+<li>gender</li>
+<li>country/city</li>
+</ul>
+</li>
+</ul>
+<h3 id="Messaging-App-Messenger"><a href="#Messaging-App-Messenger" class="headerlink" title="Messaging App (Messenger)"></a>Messaging App (Messenger)</h3><p>Messaging is the one thing people do more than social networking like posting on a wall, and the content exchanged over chat is richer, more intimate, and prolific.</p>
+<p>Interactions on messenger would be an important source of data, which could then be leveraged to target more relevant content and ads.</p>
+<p>It also has the potential to be a powerful platform for developers, designers to sell games, premium stickers and other things that make communicating more delightful or easier, or for businesses to offer customer support, content, services, etc.</p>
+<p>Messenger was broken out from the main Facebook app, so I imagine that acquisition and adoption — driving app downloads and retention — is a major goal for this product team. After that, it would be engagement levels for existing users like average response time…</p>
+<h3 id="Mobile-Game"><a href="#Mobile-Game" class="headerlink" title="Mobile Game"></a>Mobile Game</h3><ul>
+<li>MAU</li>
+<li>MUP</li>
+<li>Mobile %</li>
+</ul>
+<h3 id="Instagram-Youtube-Snapshot"><a href="#Instagram-Youtube-Snapshot" class="headerlink" title="Instagram /Youtube/ Snapshot"></a>Instagram /Youtube/ Snapshot</h3><ul>
+<li>Facts<ul>
+<li>3s 10s view… (3s mark) -&gt; attention</li>
+<li>reach</li>
+<li>total minute view</li>
+<li>average watch time and engagement </li>
+<li>total audience</li>
+<li>post engagement</li>
+<li>top location</li>
+<li>completion rate</li>
+<li>view through rate</li>
+<li>audience attention</li>
+<li>unique viewers</li>
+</ul>
+</li>
+<li>Dimension<ul>
+<li>traffic</li>
+<li>thumbnail / full video? (outside sources do not have thumbnail like retweets, and other shared links/embeds)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Twitter"><a href="#Twitter" class="headerlink" title="Twitter"></a>Twitter</h3><h3 id="Photo-upload-feature"><a href="#Photo-upload-feature" class="headerlink" title="Photo upload feature"></a>Photo upload feature</h3><ul>
+<li><p>metrics</p>
+<ul>
+<li>DAU, MAU</li>
+<li>number of sessions</li>
+<li>number of photos per session</li>
+<li>activation</li>
+<li>churn/retention</li>
+<li>session length, feature up time</li>
+<li>happiness (complaints, supports, bugs…)</li>
+</ul>
+</li>
+<li><p>dimension</p>
+<ul>
+<li>device</li>
+<li>time</li>
+<li>user groups</li>
+<li>age/gender/location</li>
+<li>service (premium, free)</li>
+</ul>
+</li>
+<li><p>table design</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> (</div><div class="line">    user_id <span class="built_in">SERIAL</span>,</div><div class="line">    age <span class="built_in">INT</span>,</div><div class="line">    gender <span class="built_in">CHAR</span>(<span class="number">1</span>),</div><div class="line">    city <span class="built_in">VARCHAR</span>(<span class="number">25</span>),</div><div class="line">    country <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</div><div class="line">    joined_date <span class="keyword">TIMESTAMP</span>,</div><div class="line">    last_login_date <span class="keyword">TIMESTAMP</span>,</div><div class="line">    PRIMARY <span class="keyword">KEY</span> (user_id)</div><div class="line">)</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> upload(</div><div class="line">    upload_id <span class="built_in">SERIAL</span>,</div><div class="line">    user_id <span class="built_in">INT</span> <span class="keyword">REFERENCES</span> <span class="keyword">user</span> (user_id),</div><div class="line">    total_photos <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    completed_photos <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    start_time <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    end_time <span class="keyword">TIMESTAMP</span></div><div class="line">    PRIMARY <span class="keyword">KEY</span> (upload_id)</div><div class="line">)</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> photo(</div><div class="line">    photo_id <span class="built_in">SERIAL</span>,</div><div class="line">    user_id <span class="built_in">INT</span> <span class="keyword">REFERENCES</span> <span class="keyword">user</span> (user_id),</div><div class="line">    upload_id <span class="built_in">INT</span> <span class="keyword">REFERENCES</span> upload (upload_id),</div><div class="line">    <span class="keyword">link</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    upvote <span class="built_in">INT</span>,</div><div class="line">    <span class="keyword">share</span> <span class="built_in">INT</span>,</div><div class="line">    del <span class="built_in">BOOLEAN</span>,</div><div class="line">    PRIMARY <span class="keyword">KEY</span> (photo_id)</div><div class="line">)</div></pre></td></tr></table></figure>
+</li>
+<li><p>query</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- DAU, MAU</span></div><div class="line">with dau_table as (</div><div class="line">      <span class="keyword">select</span> <span class="built_in">date</span>(start_time) <span class="keyword">AS</span> <span class="built_in">date</span>, <span class="keyword">count</span>(<span class="keyword">distinct</span> user_id) <span class="keyword">as</span> dau</div><div class="line">      <span class="keyword">from</span> upload</div><div class="line">      <span class="keyword">group</span> <span class="keyword">by</span> <span class="built_in">date</span>(start_time)</div><div class="line">     )</div><div class="line"><span class="keyword">select</span> <span class="built_in">date</span>, dau,</div><div class="line">       (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">distinct</span> user_id)</div><div class="line">        <span class="keyword">from</span> upload u</div><div class="line">        <span class="keyword">where</span> u.start_time <span class="keyword">between</span> <span class="built_in">date</span> - <span class="number">29</span> * <span class="built_in">interval</span> <span class="string">'1 day'</span> <span class="keyword">and</span> <span class="built_in">date</span></div><div class="line">       ) <span class="keyword">as</span> mau</div><div class="line"><span class="keyword">from</span> dau_table;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Collections-of-common-metrics"><a href="#Collections-of-common-metrics" class="headerlink" title="Collections of common metrics"></a>Collections of common metrics</h3><h4 id="Click-Through-Rate"><a href="#Click-Through-Rate" class="headerlink" title="Click Through Rate"></a>Click Through Rate</h4><ul>
+<li>clicks / impressions</li>
+<li>CTR &gt; 1:<ul>
+<li>You can have multiple clicks during the same session</li>
+</ul>
+</li>
+<li>Invalid traffic (related):<ul>
+<li>Accidental clicks that provide no value, such as the second click of a double-click</li>
+<li>Manual clicks intended to increase someone’s advertising costs</li>
+<li>Manual clicks intended to increase profits for website owners hosting your ads</li>
+<li>Clicks and impressions by automated tools, robots, or other deceptive software</li>
+<li>Impressions intended to artificially lower an advertiser’s clickthrough rate (CTR)</li>
+</ul>
+</li>
+</ul>
+<h4 id="Bounce-Rate"><a href="#Bounce-Rate" class="headerlink" title="Bounce Rate"></a>Bounce Rate</h4><ul>
+<li>Total number of visitors viewing one page only/ Total entries to page</li>
+<li>It is typically used as a measurement of a website’s overall engagement</li>
+<li>potential reasons of bouncing:<ul>
+<li>Clicking on a link to a page on a different web site</li>
+<li>Closing an open window or tab</li>
+<li>Typing a new URL</li>
+<li>Clicking the “Back” button to leave the site</li>
+<li>Session timeout</li>
+</ul>
+</li>
+</ul>
+<h4 id="Churn-Rate"><a href="#Churn-Rate" class="headerlink" title="Churn Rate"></a>Churn Rate</h4><ul>
+<li>Customer Churn Rate = (Customers beginning of month - Customers end of month) / Customers beginning of month</li>
+<li>Revenue Churn Rate = [(MRR beginning of month - MRR end of month) - MRR in upgrades during month] / MRR beginning of month<ul>
+<li>MRR = Monthly recurring revenue</li>
+</ul>
+</li>
+</ul>
+<h4 id="DAU-MAU-Ratio"><a href="#DAU-MAU-Ratio" class="headerlink" title="DAU/MAU Ratio:"></a>DAU/MAU Ratio:</h4><ul>
+<li>(#) Daily active users / (#) Monthly active users = (%) DAU/MAU Ratio</li>
+<li>measure stickiness of your product</li>
+</ul>
+<h4 id="Customer-Lifetime-Value"><a href="#Customer-Lifetime-Value" class="headerlink" title="Customer Lifetime Value"></a>Customer Lifetime Value</h4><ul>
+<li>Average Revenue Per Account (ARPU) (month) / Customer Churn Rate (month)= Customer Lifetime Value (LTV)  </li>
+<li>It is an estimate of the average gross revenue that a customer will generate before they churn.</li>
+</ul>
+<h4 id="Conversion-Rate"><a href="#Conversion-Rate" class="headerlink" title="Conversion Rate"></a>Conversion Rate</h4><ul>
+<li>number of conversions / number of visitors.</li>
+<li>e.g. Paying Subscribers / Total Signups = Signup to Subscriber Conversion Rate</li>
+</ul>
+<h4 id="Retention-Rate"><a href="#Retention-Rate" class="headerlink" title="Retention Rate"></a>Retention Rate</h4><ul>
+<li>Aggregate Retention Rate = (#) Monthly active users / (#) Installs</li>
+<li>Retention Rate for Cohort = (#) Users retained at the end of time period / (#) installs at start of time period </li>
+<li>leading indicator of growth trends and potential revenue</li>
+<li>stats:  mobile apps on average have a 30-day Retention Rate of 42% and a 90-day Retention Rate of 25%.</li>
+</ul>
+<h4 id="Average-Revenue-Per-User"><a href="#Average-Revenue-Per-User" class="headerlink" title="Average Revenue Per User"></a>Average Revenue Per User</h4><ul>
+<li>($) Total revenue generated during specific time period / (#) Active users during the same period = ($) Average Revenue Per User</li>
+</ul>
+<h4 id="Cost-Per-Install"><a href="#Cost-Per-Install" class="headerlink" title="Cost Per Install"></a>Cost Per Install</h4><ul>
+<li>($) Ad spend / (#) new installs from ad = ($) Cost Per Install</li>
+</ul>
+<h4 id="Cost-Per-Acquisition"><a href="#Cost-Per-Acquisition" class="headerlink" title="Cost Per Acquisition"></a>Cost Per Acquisition</h4><ul>
+<li>($) total media spend / (#) new customers acquired via media = ($) Cost Per Acquisition</li>
+</ul>
+<h4 id="Viral-Coefficient"><a href="#Viral-Coefficient" class="headerlink" title="Viral Coefficient"></a>Viral Coefficient</h4><ul>
+<li>(#) invitations sent per user X (%) conversion rate = (#) Viral Coefficient</li>
+<li>a good indicator of your company’s growth trajectory</li>
+</ul>
+<h4 id="Marketing-ROI"><a href="#Marketing-ROI" class="headerlink" title="Marketing ROI"></a>Marketing ROI</h4><ul>
+<li>[ ($)Gross profit - ($) Marketing Investment ] / ($) Marketing Investment = (%) Marketing ROI</li>
+</ul>
+<h4 id="Session-Length"><a href="#Session-Length" class="headerlink" title="Session Length"></a>Session Length</h4><ul>
+<li>Time user becomes inactive - time app was launched = (#) Session Length</li>
+<li>baseline for user engagement</li>
+<li>For some apps, long session length leads to frustration (Uber)<br>SEO<br>Estimated monthly value = Total value created in the month for this keyword, in dollars</li>
+</ul>
+<p>Total monthly searches = Total search volume for this particular keyword each month (estimated)</p>
+<p>CTR[Position] = Estimated click-through rate for this keyword, based on current or target position</p>
+<p>Value per visit = Estimated value of each visit</p>
+<h3 id="Impression"><a href="#Impression" class="headerlink" title="Impression"></a>Impression</h3><p>Reach is the total number of people who see your content. Impressions are the number of times your content is displayed, no matter if it was clicked or not.<br>(To continue, say tomorrow you publish two Tweets to the same 100 followers. Your reach is still 100 users because your follower count didn’t change. However, now you have 200 impressions. Why? Because every single one of your 100 followers saw both Tweets you published.)</p>
+<h4 id="Facebook-Reach-vs-Impressions"><a href="#Facebook-Reach-vs-Impressions" class="headerlink" title="Facebook Reach vs. Impressions"></a>Facebook Reach vs. Impressions</h4><p>On Facebook, reach falls into three different categories:</p>
+<h5 id="Metrics-to-consider"><a href="#Metrics-to-consider" class="headerlink" title="Metrics to consider"></a>Metrics to consider</h5><ol>
+<li>Numbers of Downloads and Installation</li>
+<li>Number of Users</li>
+<li>Lifetime Value</li>
+<li>Retention Rate</li>
+<li>Active Users</li>
+<li>Session Length</li>
+<li>Average Revenue per User</li>
+<li>Cohort Analysis</li>
+<li>Number of Uses During the Initial Day or Week</li>
+<li>Permissions Users Grant to an App</li>
+<li>Virality</li>
+<li>Crash Analytics</li>
+</ol>
+<ul>
+<li>Organic: This represents the number of unique people who saw your content—for free—in the News Feed.</li>
+<li>Paid: This is the number of unique people who saw your paid content, such as a Facebook Ad.</li>
+<li>Viral: This is the number of unique people who saw your post or Page mentioned in a story published by a friend. These stories include actions such as Liking, sharing or commenting.</li>
+</ul>
+<p>–<br>Just like reach, Facebook impressions are also broken down into three categories, which are viewable in Sprout’s Facebook Pages report:</p>
+<ul>
+<li>Organic: The number of times your content was displayed—for free—in News Feed or on your Page.</li>
+<li>Paid: The number of times your paid content—such as a Facebook Ad—was displayed.</li>
+<li>Viral: The number of times content associated with your Page was displayed in a story published by a friend. These stories include Liking, sharing or commenting.</li>
+</ul>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ul>
+<li><a href="https://www.linkedin.com/pulse/how-measure-success-your-product-features-ravi-kumar-sapata/" target="_blank" rel="external">https://www.linkedin.com/pulse/how-measure-success-your-product-features-ravi-kumar-sapata/</a></li>
+<li><a href="https://www.geckoboard.com/learn/kpi-examples/saas-kpis/customer-lifetime-value-ltv/" target="_blank" rel="external">https://www.geckoboard.com/learn/kpi-examples/saas-kpis/customer-lifetime-value-ltv/</a></li>
+<li><a href="http://observer.com/2017/06/airbnb-uber-growth-hacking/" target="_blank" rel="external">http://observer.com/2017/06/airbnb-uber-growth-hacking/</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/interview/" rel="tag"># interview</a>
+          
+            <a href="/tags/product-sense/" rel="tag"># product_sense</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/21/P2-Earning-Reports/" rel="next" title="Earning-Reports">
+                <i class="fa fa-chevron-left"></i> Earning-Reports
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/19/D1-create-table/" rel="prev" title="star-schema">
+                star-schema <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dave-McClure’s-Pirate-Metrics"><span class="nav-number">1.</span> <span class="nav-text">Dave McClure’s Pirate Metrics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Acquisition"><span class="nav-number">1.1.</span> <span class="nav-text">Acquisition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Activation"><span class="nav-number">1.2.</span> <span class="nav-text">Activation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retention"><span class="nav-number">1.3.</span> <span class="nav-text">Retention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Revenue"><span class="nav-number">1.4.</span> <span class="nav-text">Revenue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#referral"><span class="nav-number">1.5.</span> <span class="nav-text">referral</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google’s-Heart-Framework"><span class="nav-number">2.</span> <span class="nav-text">Google’s Heart Framework:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Happiness"><span class="nav-number">2.1.</span> <span class="nav-text">Happiness</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Engagement"><span class="nav-number">2.2.</span> <span class="nav-text">Engagement</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adoption"><span class="nav-number">2.3.</span> <span class="nav-text">Adoption</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retention-1"><span class="nav-number">2.4.</span> <span class="nav-text">Retention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Success"><span class="nav-number">2.5.</span> <span class="nav-text">Task Success</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Metrics-by-Products"><span class="nav-number">3.</span> <span class="nav-text">Metrics by Products</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shareride-App-Uber"><span class="nav-number">3.1.</span> <span class="nav-text">Shareride App (Uber)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Music-App-Spoify"><span class="nav-number">3.2.</span> <span class="nav-text">Music App (Spoify)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Messaging-App-Messenger"><span class="nav-number">3.3.</span> <span class="nav-text">Messaging App (Messenger)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mobile-Game"><span class="nav-number">3.4.</span> <span class="nav-text">Mobile Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Instagram-Youtube-Snapshot"><span class="nav-number">3.5.</span> <span class="nav-text">Instagram /Youtube/ Snapshot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Twitter"><span class="nav-number">3.6.</span> <span class="nav-text">Twitter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Photo-upload-feature"><span class="nav-number">3.7.</span> <span class="nav-text">Photo upload feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collections-of-common-metrics"><span class="nav-number">3.8.</span> <span class="nav-text">Collections of common metrics</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Click-Through-Rate"><span class="nav-number">3.8.1.</span> <span class="nav-text">Click Through Rate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bounce-Rate"><span class="nav-number">3.8.2.</span> <span class="nav-text">Bounce Rate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Churn-Rate"><span class="nav-number">3.8.3.</span> <span class="nav-text">Churn Rate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DAU-MAU-Ratio"><span class="nav-number">3.8.4.</span> <span class="nav-text">DAU/MAU Ratio:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Customer-Lifetime-Value"><span class="nav-number">3.8.5.</span> <span class="nav-text">Customer Lifetime Value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conversion-Rate"><span class="nav-number">3.8.6.</span> <span class="nav-text">Conversion Rate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Retention-Rate"><span class="nav-number">3.8.7.</span> <span class="nav-text">Retention Rate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Average-Revenue-Per-User"><span class="nav-number">3.8.8.</span> <span class="nav-text">Average Revenue Per User</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cost-Per-Install"><span class="nav-number">3.8.9.</span> <span class="nav-text">Cost Per Install</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cost-Per-Acquisition"><span class="nav-number">3.8.10.</span> <span class="nav-text">Cost Per Acquisition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Viral-Coefficient"><span class="nav-number">3.8.11.</span> <span class="nav-text">Viral Coefficient</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Marketing-ROI"><span class="nav-number">3.8.12.</span> <span class="nav-text">Marketing ROI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Session-Length"><span class="nav-number">3.8.13.</span> <span class="nav-text">Session Length</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Impression"><span class="nav-number">3.9.</span> <span class="nav-text">Impression</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Facebook-Reach-vs-Impressions"><span class="nav-number">3.9.1.</span> <span class="nav-text">Facebook Reach vs. Impressions</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Metrics-to-consider"><span class="nav-number">3.9.1.1.</span> <span class="nav-text">Metrics to consider</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">3.10.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2018/06/19/P1-product-metrics/';
+          this.page.identifier = '2018/06/19/P1-product-metrics/';
+          this.page.title = 'product-metrics';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="algorithm,interview," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Topological orderingDefinitionA topological ordering of a directed graph G is a a labelling f of G’s nodes such that:  the f(v)’s are the set {1, 2, …, n} $(u, v) \in G =&amp;gt; f(u) &amp;lt; f(v) $  Motivat">
+<meta name="keywords" content="algorithm,interview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graph-Algorithms">
+<meta property="og:url" content="http://zfsang.github.io/2018/05/13/A5-Graph-Algorithms/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="Topological orderingDefinitionA topological ordering of a directed graph G is a a labelling f of G’s nodes such that:  the f(v)’s are the set {1, 2, …, n} $(u, v) \in G =&amp;gt; f(u) &amp;lt; f(v) $  Motivat">
+<meta property="og:updated_time" content="2018-11-13T08:37:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Graph-Algorithms">
+<meta name="twitter:description" content="Topological orderingDefinitionA topological ordering of a directed graph G is a a labelling f of G’s nodes such that:  the f(v)’s are the set {1, 2, …, n} $(u, v) \in G =&amp;gt; f(u) &amp;lt; f(v) $  Motivat">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2018/05/13/A5-Graph-Algorithms/"/>
+
+
+
+
+
+  <title>Graph-Algorithms | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2018/05/13/A5-Graph-Algorithms/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Graph-Algorithms</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-13T11:14:11-07:00">
+                2018-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview_Prep</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview-Prep/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/13/A5-Graph-Algorithms/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/13/A5-Graph-Algorithms/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Topological-ordering"><a href="#Topological-ordering" class="headerlink" title="Topological ordering"></a>Topological ordering</h2><h3 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h3><p>A topological ordering of a directed graph G is a a labelling f of G’s nodes such that:</p>
+<ul>
+<li>the f(v)’s are the set {1, 2, …, n}</li>
+<li>$(u, v) \in G =&gt; f(u) &lt; f(v) $</li>
+</ul>
+<p><strong>Motivation</strong>:<br>sequence tasks while respecting all precedence constraints<br><strong>Note</strong>: G has directed cycle =&gt; no topological ordering<br><strong>Theorem</strong>: no directed cycle =&gt; can compute topological ordering in O(m+n) time  (DFS + book kepping)<br><strong>Time</strong>: O(V+E)<br><strong>Reason</strong>: O(1) per node, O(1) per edge<br><strong>Correctness</strong>: need to show that if (u,v) is an edge, then f(u) &lt; f(v)</p>
+<ul>
+<li>case1 u visited by DFS before v =&gt; recursive call corresponding to v finishes before that of u (since DFS) =&gt; f(v) &gt; f(u)</li>
+<li>case2: v visited before u =&gt; v’s recursive call finishes before u’s even starts =&gt; f(v) &gt; f(u)</li>
+</ul>
+<h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h3><p>Course Schedule<br><a href="https://www.hrwhisper.me/leetcode-graph/" target="_blank" rel="external">https://www.hrwhisper.me/leetcode-graph/</a><br><a href="https://leetcode.com/problems/course-schedule-ii/description/" target="_blank" rel="external">https://leetcode.com/problems/course-schedule-ii/description/</a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 1. 每次找入度为0的点，输出该入度为0的点，并删除与之相连接的边</span></div><div class="line"><span class="comment"># 2. 重复1直到没有入度为0的点。之前输出入度为0的点若小于原图的结点数，那么说明图有环，即拓扑排序不存在，否则即为拓扑排序。</span></div><div class="line"></div><div class="line"><span class="comment"># Time O(V+E)  Space O(E)</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">findOrder</span><span class="params">(numCourses, prerequisites)</span>:</span></div><div class="line">    degrees = [<span class="number">0</span>] * numCourses</div><div class="line">    childs = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(numCourses)]</div><div class="line">    <span class="keyword">for</span> t,s <span class="keyword">in</span> prerequisites:</div><div class="line">        degrees[t] += <span class="number">1</span></div><div class="line">        childs[s].append(t)</div><div class="line">    </div><div class="line">    res = []</div><div class="line">    courses = set(range(numCourses))</div><div class="line">    flag = <span class="keyword">True</span></div><div class="line">    </div><div class="line">    <span class="keyword">while</span> flag <span class="keyword">and</span> courses:</div><div class="line">        flag = <span class="keyword">False</span></div><div class="line">        removeList = []</div><div class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> courses:</div><div class="line">            <span class="keyword">if</span> degrees[c] == <span class="number">0</span>:</div><div class="line">                res.append(c)</div><div class="line">                <span class="keyword">for</span> child <span class="keyword">in</span> childs[c]:</div><div class="line">                    degrees[child] -= <span class="number">1</span></div><div class="line">                removeList.append(c)</div><div class="line">                flag = <span class="keyword">True</span></div><div class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> removeList:</div><div class="line">            courses.remove(c)</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> res <span class="keyword">if</span> len(courses) == <span class="number">0</span> <span class="keyword">else</span> []</div></pre></td></tr></table></figure></p>
+<h3 id="Union-Find"><a href="#Union-Find" class="headerlink" title="Union Find"></a>Union Find</h3><ol>
+<li><p>simple version for undirected graph</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">parent = &#123;&#125;</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">init</span><span class="params">(node)</span>:</span></div><div class="line">    <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> parent:</div><div class="line">        parent[node] = node</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(node)</span>:</span></div><div class="line">    <span class="comment"># no path compression</span></div><div class="line">    <span class="keyword">return</span> node <span class="keyword">if</span> parent[node] == node <span class="keyword">else</span> find(parent[node])</div></pre></td></tr></table></figure>
+</li>
+<li><p>for directed graph</p>
+</li>
+<li><p>with path compression</p>
+</li>
+</ol>
+<p>e.g.<br><a href="https://leetcode.com/problems/redundant-connection/description/" target="_blank" rel="external">https://leetcode.com/problems/redundant-connection/description/</a><br><a href="https://leetcode.com/problems/number-of-islands-ii/description/" target="_blank" rel="external">https://leetcode.com/problems/number-of-islands-ii/description/</a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">numIslands2</span><span class="params">(self, m, n, positions)</span>:</span></div><div class="line">    parent = &#123;&#125;</div><div class="line">    rank = &#123;&#125;</div><div class="line">    self.cnt = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(x)</span>:</span></div><div class="line">        <span class="keyword">if</span> parent[x] != x:</div><div class="line">            <span class="comment"># path compression</span></div><div class="line">            parent[x] = find(parent[x])</div><div class="line">        <span class="keyword">return</span> parent[x]</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">union</span><span class="params">(x, y)</span>:</span></div><div class="line">        x, y = find(x), find(y)</div><div class="line">        <span class="keyword">if</span> x != y:</div><div class="line">            <span class="keyword">if</span> rank[x] &lt; rank[y]:</div><div class="line">                x, y = y, x</div><div class="line">            parent[y] = x</div><div class="line">            rank[x] += rank[y]</div><div class="line">            self.cnt -= <span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(<span class="params">(i, j)</span>)</span>:</span></div><div class="line">        x = parent[x] = i, j</div><div class="line">        rank[x] = <span class="number">0</span></div><div class="line">        self.cnt += <span class="number">1</span></div><div class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> (i+<span class="number">1</span>, j), (i<span class="number">-1</span>, j), (i, j+<span class="number">1</span>), (i, j<span class="number">-1</span>):</div><div class="line">            <span class="keyword">if</span> y <span class="keyword">in</span> parent:</div><div class="line">                union(x,y)</div><div class="line">    </div><div class="line">    map(add, positions)</div><div class="line">    <span class="keyword">return</span> self.cnt</div></pre></td></tr></table></figure></p>
+<h2 id="Floyd-Algorithm"><a href="#Floyd-Algorithm" class="headerlink" title="Floyd Algorithm"></a>Floyd Algorithm</h2><p>正如我们所知道的，Floyd算法用于求最短路径。Floyd算法可以说是Warshall算法的扩展，三个for循环就可以解决问题，所以它的时间复杂度为O(n^3)。</p>
+<p>Floyd算法的基本思想如下：从任意节点A到任意节点B的最短路径不外乎2种可能，1是直接从A到B，2是从A经过若干个节点X到B。所以，我们假设Dis(AB)为节点A到节点B的最短路径的距离，对于每一个节点X，我们检查Dis(AX) + Dis(XB) &lt; Dis(AB)是否成立，如果成立，证明从A到X再到B的路径比A直接到B的路径短，我们便设置Dis(AB) = Dis(AX) + Dis(XB)，这样一来，当我们遍历完所有节点X，Dis(AB)中记录的便是A到B的最短路径的距离。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#http://bookshadow.com/weblog/2016/09/11/leetcode-evaluate-division/</span></div><div class="line"><span class="comment"># Floyd算法求解传递闭包</span></div><div class="line"><span class="comment"># 输入等式可以看做一个有向图</span></div><div class="line"><span class="comment"># 例如等式a / b = 2.0，可以转化为两条边：&lt;a, b&gt;，&lt;b, a&gt;，其长度分别为2.0，0.5</span></div><div class="line"><span class="comment"># 遍历equations与values，利用字典g保存有向图中各边的长度，g的keys即为顶点集</span></div><div class="line"><span class="comment"># 最后调用Floyd算法即可</span></div><div class="line"></div><div class="line"><span class="comment"># Time O(N^3) Space O(N^2)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcEquation</span><span class="params">(self, equations, values, queries)</span>:</span></div><div class="line">    g = defaultdict(<span class="keyword">lambda</span>: defaultdict(int))</div><div class="line">    <span class="keyword">for</span> (s,t), v <span class="keyword">in</span> zip(equations, values):</div><div class="line">        g[s][t] = v</div><div class="line">        g[t][s] = <span class="number">1.0</span>/v</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> g:</div><div class="line">        g[k][k] = <span class="number">1.0</span></div><div class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> g:</div><div class="line">            <span class="keyword">for</span> t <span class="keyword">in</span> g:</div><div class="line">                <span class="keyword">if</span> g[s][k] <span class="keyword">and</span> g[k][t]:</div><div class="line">                    g[s][t] = g[s][k] * g[k][t]</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> [ g[s][t] <span class="keyword">if</span> g[s][t] <span class="keyword">else</span> <span class="number">-1.0</span> <span class="keyword">for</span> s,t <span class="keyword">in</span> queries]</div></pre></td></tr></table></figure>
+<h3 id="Bellman-Ford-Algorithm"><a href="#Bellman-Ford-Algorithm" class="headerlink" title="Bellman Ford Algorithm"></a>Bellman Ford Algorithm</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+            <a href="/tags/interview/" rel="tag"># interview</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/13/A9-Advanced-Topics/" rel="next" title="Advanced-Topics">
+                <i class="fa fa-chevron-left"></i> Advanced-Topics
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/13/A0-Tricks-Tips-Time-Complexity/" rel="prev" title="Tricks-and-Tips">
+                Tricks-and-Tips <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Topological-ordering"><span class="nav-number">1.</span> <span class="nav-text">Topological ordering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition"><span class="nav-number">1.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Examples"><span class="nav-number">1.2.</span> <span class="nav-text">Examples</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Union-Find"><span class="nav-number">1.3.</span> <span class="nav-text">Union Find</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Floyd-Algorithm"><span class="nav-number">2.</span> <span class="nav-text">Floyd Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bellman-Ford-Algorithm"><span class="nav-number">2.1.</span> <span class="nav-text">Bellman Ford Algorithm</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2018/05/13/A5-Graph-Algorithms/';
+          this.page.identifier = '2018/05/13/A5-Graph-Algorithms/';
+          this.page.title = 'Graph-Algorithms';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
