@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="blog," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OverviewOne day my girlfriend asked me to recommend some tech companies for her next job.  While I am more familiar with data science/ML jobs in tech companies, she is looking for software engineer op">
+<meta name="keywords" content="blog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="T1 How to Utilize Asyncio to Conduct Company Research">
+<meta property="og:url" content="http://zfsang.github.io/2019/01/08/T1-How-to-Utilize-Asyncio-to-Conduct-Company-Research/index.html">
+<meta property="og:site_name" content="Data Adventurer">
+<meta property="og:description" content="OverviewOne day my girlfriend asked me to recommend some tech companies for her next job.  While I am more familiar with data science/ML jobs in tech companies, she is looking for software engineer op">
+<meta property="og:updated_time" content="2019-01-09T03:19:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="T1 How to Utilize Asyncio to Conduct Company Research">
+<meta name="twitter:description" content="OverviewOne day my girlfriend asked me to recommend some tech companies for her next job.  While I am more familiar with data science/ML jobs in tech companies, she is looking for software engineer op">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zfsang.github.io/2019/01/08/T1-How-to-Utilize-Asyncio-to-Conduct-Company-Research/"/>
+
+
+
+
+
+  <title>T1 How to Utilize Asyncio to Conduct Company Research | Data Adventurer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Data Adventurer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2019/01/08/T1-How-to-Utilize-Asyncio-to-Conduct-Company-Research/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/pro_headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Data Adventurer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">T1 How to Utilize Asyncio to Conduct Company Research</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-08T11:01:21-08:00">
+                2019-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/crawler/" itemprop="url" rel="index">
+                    <span itemprop="name">crawler</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/crawler/asyncio/" itemprop="url" rel="index">
+                    <span itemprop="name">asyncio</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/crawler/asyncio/job-hunting/" itemprop="url" rel="index">
+                    <span itemprop="name">job_hunting</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/08/T1-How-to-Utilize-Asyncio-to-Conduct-Company-Research/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/08/T1-How-to-Utilize-Asyncio-to-Conduct-Company-Research/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>One day my girlfriend asked me to recommend some tech companies for her next job.  While I am more familiar with data science/ML jobs in tech companies, she is looking for software engineer opportunities with strong software/engineering focus.  I tried my best brush my memories on startups and big companies in the Bay Areas, however, I found out what I only got no more than 10 companies either FANNG or ML related companies like H2O.ai in an hour.  Apparently, I am not familiar with this field.  The first drafted list is neither comprehensive nor relevant.</p>
+<p>Once I found this <a href="https://github.com/sumodirjo/engineering-blogs" target="_blank" rel="external">curated list of engineer blogs</a>, I was saying to myself this is a way to go.  Companies, either big or small, will be likely operating with a good engineering practice if they maintain good engineering blogs.  This is actually a better starting point than random career pages and LinkedIn Ads since the eng blogs tell a lot more what are happening under the hood in the engineering department.  Fortunately, I still remember how to build crawlers and learned the Asyncio from my coworker Vincent.  Why not use the tools and the Internet enhance the list and build a good engineering company list?</p>
+<h2 id="Introduction-of-Asyncio"><a href="#Introduction-of-Asyncio" class="headerlink" title="Introduction of Asyncio"></a>Introduction of Asyncio</h2><p>Though it might not be necessary to use asyncio with Python 3.7 for this trivial case, it would be a good exercise and expandable solution to go with.  Before diving into details of the use case, let’s have a look of Asynchronous I/O and its implementation in Python 3.7.</p>
+<p>On high level, asyncio is a library to write concurrent code using the <code>async</code>/<code>await</code> syntax in Python 3.</p>
+<h3 id="High-Level-APIs"><a href="#High-Level-APIs" class="headerlink" title="High Level APIs"></a>High Level APIs</h3><h4 id="Coroutines"><a href="#Coroutines" class="headerlink" title="Coroutines"></a>Coroutines</h4><p>Coroutines is a high-level API/abstract that declared with async/await syntax is the preferred way of writing asyncio applications (Python 3.7+).</p>
+<h4 id="Awaitables"><a href="#Awaitables" class="headerlink" title="Awaitables"></a>Awaitables</h4><p>We say that an object is an awaitable object if it can be used in an await expression. Many asyncio APIs are designed to accept awaitables.</p>
+<p>There are three main types of awaitable objects:</p>
+<ul>
+<li>coroutines</li>
+<li>Tasks: used to schedule coroutines concurrently.</li>
+<li>Futures: a low-level awaitable object that represents an eventual result of an asynchronous operation</li>
+</ul>
+<p>Some examples are listed below.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line"><span class="meta">... </span>    print(<span class="string">'hello'</span>)</div><div class="line"><span class="meta">... </span>    <span class="keyword">await</span> asyncio.sleep(<span class="number">1</span>)</div><div class="line"><span class="meta">... </span>    print(<span class="string">'world'</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>asyncio.run(main())</div></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> asyncio</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">nested</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="number">42</span></div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="comment"># Schedule nested() to run soon concurrently</span></div><div class="line">    <span class="comment"># with "main()".</span></div><div class="line">    task = asyncio.create_task(nested())</div><div class="line"></div><div class="line">    <span class="comment"># "task" can now be used to cancel "nested()", or</span></div><div class="line">    <span class="comment"># can simply be awaited to wait until it is complete:</span></div><div class="line">    <span class="keyword">await</span> task</div><div class="line"></div><div class="line">asyncio.run(main())</div></pre></td></tr></table></figure>
+<p>###<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> random</div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</div><div class="line"><span class="keyword">import</span> asyncio</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(pid)</span>:</span></div><div class="line">    <span class="string">"""Synchronous non-deterministic task."""</span></div><div class="line">    sleep(random.randint(<span class="number">0</span>, <span class="number">2</span>) * <span class="number">0.001</span>)</div><div class="line">    print(<span class="string">'Task %s done'</span> % pid)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">task_coro</span><span class="params">(pid)</span>:</span></div><div class="line">    <span class="string">"""Coroutine non-deterministic task"""</span></div><div class="line">    <span class="keyword">await</span> asyncio.sleep(random.randint(<span class="number">0</span>, <span class="number">2</span>) * <span class="number">0.001</span>)</div><div class="line">    print(<span class="string">'Task %s done'</span> % pid)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">synchronous</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</div><div class="line">        task(i)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">asynchronous</span><span class="params">()</span>:</span></div><div class="line">    tasks = [task_coro(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>)]</div><div class="line">    <span class="keyword">await</span> asyncio.gather(*tasks)</div><div class="line"></div><div class="line"></div><div class="line">print(<span class="string">'Synchronous:'</span>)</div><div class="line">synchronous()</div><div class="line"></div><div class="line">print(<span class="string">'Asynchronous:'</span>)</div><div class="line">asyncio.run(asynchronous())</div></pre></td></tr></table></figure></p>
+<h2 id="Learn-more-about-Company-from-Google-and-Wikipedia"><a href="#Learn-more-about-Company-from-Google-and-Wikipedia" class="headerlink" title="Learn more about Company from Google and Wikipedia"></a>Learn more about Company from Google and Wikipedia</h2><p>You can easily extract a list of company names and eng blog urls from the the github repos( <a href="https://github.com/kilimchoi/engineering-blogs" target="_blank" rel="external">repo1</a>, <a href="https://github.com/sumodirjo/engineering-blogs" target="_blank" rel="external">repo2</a>) after some basic regex parsing.  Check out <a href="https://regexone.com/" target="_blank" rel="external">https://regexone.com/</a> or <a href="https://regex101.com/" target="_blank" rel="external">https://regex101.com/</a> if you need some extra help.</p>
+<h3 id="Get-Locations-from-Google-Place-API"><a href="#Get-Locations-from-Google-Place-API" class="headerlink" title="Get Locations from Google Place API"></a>Get Locations from Google Place API</h3><p>The new Google Place API requires signing up and filling in credit card information.  But it’s free for minimal usages in the first year.  Check out <a href="https://developers.google.com/places/web-service/intro" target="_blank" rel="external">https://developers.google.com/places/web-service/intro</a> more details and be cautious not to expose your tokens and control your cost.  </p>
+<p>For our use case, it’s important to find out the location, latitude and longitude of the tech companys’ offices.  The <a href="https://developers.google.com/places/web-service/search" target="_blank" rel="external">search end point</a> is the one to go with.  It is a bit tricky that if you search the company name by itself in google place API, you will get no result.  In order to increase the match rate, more location information like <code>USA</code> or <code>Bay Area</code> or <code>Seattle</code> are needed to gather with the company name.  Also, the inclusion of key words like <code>office</code> or <code>headquater</code> will </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> aiohttp</div><div class="line"><span class="keyword">import</span> asyncio</div><div class="line"><span class="keyword">import</span> json</div><div class="line"></div><div class="line">GOOGLE_PLACE_API = <span class="string">'https://maps.googleapis.com/maps/api/place/findplacefromtext/json'</span></div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">fetch</span><span class="params">(session, url, params)</span>:</span></div><div class="line">    <span class="keyword">async</span> <span class="keyword">with</span> session.get(url, params=params) <span class="keyword">as</span> response:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">await</span> response.text()</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">fetch_company</span><span class="params">(session, url=GOOGLE_PLACE_API, company=None)</span>:</span></div><div class="line">    params = &#123;<span class="string">'input'</span>:<span class="string">'&#123;&#125;%20office%20Bay%20Area%20usa'</span>.format(company[<span class="string">'name'</span>]),</div><div class="line">              <span class="string">'inputtype'</span>: <span class="string">'textquery'</span>,</div><div class="line">              <span class="string">'fields'</span>: <span class="string">'formatted_address,name,geometry'</span>,</div><div class="line">              <span class="string">'key'</span>: <span class="string">'YOUR_API_KEY'</span></div><div class="line">          &#125;</div><div class="line">    resp = <span class="keyword">await</span> fetch(session, url, params)</div><div class="line">    company.update(&#123;<span class="string">'place_response'</span>: json.loads(resp)&#125;)</div><div class="line">    <span class="keyword">return</span> company</div><div class="line">    </div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(companies)</span>:</span></div><div class="line">    tasks = []</div><div class="line">    <span class="keyword">async</span> <span class="keyword">with</span> aiohttp.ClientSession() <span class="keyword">as</span> session:</div><div class="line">        <span class="keyword">for</span> comp <span class="keyword">in</span> companies:</div><div class="line">            tasks.append(fetch_company(session, GOOGLE_PLACE_API, comp))</div><div class="line">        res = <span class="keyword">await</span> asyncio.gather(*tasks)</div><div class="line"></div><div class="line">        <span class="comment"># write output to json lines once everything is done</span></div><div class="line">        <span class="keyword">with</span> open(<span class="string">'company_google_place_search.jsonl'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:    </div><div class="line">            <span class="keyword">for</span> r <span class="keyword">in</span> res:</div><div class="line">                f.write(json.dumps(r) + <span class="string">'\n'</span>)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    company_sample = [&#123;<span class="string">'name'</span>: <span class="string">'facebook'</span>, <span class="string">'url'</span>: <span class="string">'https://code.fb.com/'</span>&#125;, &#123;<span class="string">'name'</span>:<span class="string">'databricks'</span>, <span class="string">'url'</span>: <span class="string">'https://databricks.com/blog/category/engineering'</span>&#125;]</div><div class="line">    asyncio.run(main(company_sample))</div></pre></td></tr></table></figure>
+<p>After running the script above, we can get the detailed place information about the company we are searching for.  Here is an expanded json line output.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"databricks"</span>,</div><div class="line">  <span class="attr">"url"</span>: <span class="string">"https://databricks.com/blog/category/engineering"</span>,</div><div class="line">  <span class="attr">"place_response"</span>: &#123;</div><div class="line">    <span class="attr">"candidates"</span>: [</div><div class="line">      &#123;</div><div class="line">        <span class="attr">"formatted_address"</span>: <span class="string">"160 Spear St 13th floor, San Francisco, CA 94105, USA"</span>,</div><div class="line">        <span class="attr">"geometry"</span>: &#123;</div><div class="line">          <span class="attr">"location"</span>: &#123;</div><div class="line">            <span class="attr">"lat"</span>: <span class="number">37.791365</span>,</div><div class="line">            <span class="attr">"lng"</span>: <span class="number">-122.393741</span></div><div class="line">          &#125;,</div><div class="line">          <span class="attr">"viewport"</span>: &#123;</div><div class="line">            <span class="attr">"northeast"</span>: &#123;</div><div class="line">              <span class="attr">"lat"</span>: <span class="number">37.79293997989272</span>,</div><div class="line">              <span class="attr">"lng"</span>: <span class="number">-122.3921091701073</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">"southwest"</span>: &#123;</div><div class="line">              <span class="attr">"lat"</span>: <span class="number">37.79024032010727</span>,</div><div class="line">              <span class="attr">"lng"</span>: <span class="number">-122.3948088298927</span></div><div class="line">            &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">"name"</span>: <span class="string">"Databricks Inc."</span></div><div class="line">      &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"status"</span>: <span class="string">"OK"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Get-Filmographic-data-from-Wikipedia"><a href="#Get-Filmographic-data-from-Wikipedia" class="headerlink" title="Get Filmographic data from Wikipedia"></a>Get Filmographic data from Wikipedia</h3><p>After getting the location, we need more detailed information about the companies.  Wikipedia is a good source of information for some well-known public/private companies with useful headcount, revenue, industry and founder information.  </p>
+<p>For comparison purpose, two methods will be presented below, where one is <code>synchronous()</code> and the other is <code>asynchronous()</code><br>.</p>
+<h3 id="Synchronous-Method-amp-Asynchronous-Method"><a href="#Synchronous-Method-amp-Asynchronous-Method" class="headerlink" title="Synchronous Method &amp; Asynchronous Method"></a>Synchronous Method &amp; Asynchronous Method</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> aiohttp</div><div class="line"><span class="keyword">import</span> asyncio</div><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">from</span> scrapy.http <span class="keyword">import</span> HtmlResponse</div><div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> perf_counter <span class="keyword">as</span> pc</div><div class="line"></div><div class="line">WIKIPEDIA_API = <span class="string">'https://en.wikipedia.org/w/api.php'</span></div><div class="line">WIKIPEDIA_PAGE_FORMAT = <span class="string">'https://en.wikipedia.org/api/rest_v1/page/html/&#123;&#125;'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_title</span><span class="params">(name)</span>:</span></div><div class="line">    params = &#123;<span class="string">'action'</span>:<span class="string">'query'</span>,</div><div class="line">              <span class="string">'origin'</span>:<span class="string">'*'</span>,</div><div class="line">              <span class="string">'format'</span>:<span class="string">'json'</span>,</div><div class="line">              <span class="string">'generator'</span>:<span class="string">'search'</span>,</div><div class="line">              <span class="string">'gsrnamespace'</span>:<span class="number">0</span>,</div><div class="line">              <span class="string">'gsrlimit'</span>:<span class="number">1</span>,</div><div class="line">              <span class="string">'gsrsearch'</span>: name</div><div class="line">          &#125;    </div><div class="line">    response = requests.get(WIKIPEDIA_API, params=params)</div><div class="line">    res = response.json()</div><div class="line">    <span class="keyword">if</span> res.get(<span class="string">'query'</span>, &#123;&#125;).get(<span class="string">'pages'</span>, &#123;&#125;):</div><div class="line">        <span class="keyword">return</span> list(res[<span class="string">'query'</span>][<span class="string">'pages'</span>].values())[<span class="number">0</span>][<span class="string">'title'</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_infobox</span><span class="params">(response)</span>:</span></div><div class="line">    <span class="keyword">for</span> node <span class="keyword">in</span> response.xpath(<span class="string">'//table[contains(@class, "infobox")]'</span>):</div><div class="line">        raw_data = node.xpath(<span class="string">'@data-mw'</span>).extract()</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> raw_data:</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> raw_data:</div><div class="line">            item = json.loads(item)</div><div class="line">            <span class="keyword">try</span>:</div><div class="line">                <span class="keyword">return</span> item[<span class="string">'parts'</span>][<span class="number">0</span>][<span class="string">'template'</span>][<span class="string">'params'</span>]</div><div class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">                print(e)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_wiki_info_box</span><span class="params">(name)</span>:</span></div><div class="line">    title = get_title(name)</div><div class="line">    print(title, end=<span class="string">', '</span>)</div><div class="line">    <span class="keyword">if</span> title:</div><div class="line">        url = WIKIPEDIA_PAGE_FORMAT.format(title)</div><div class="line">        body = requests.get(url).content</div><div class="line">        response = HtmlResponse(url=url, body=body)</div><div class="line">        <span class="keyword">return</span> get_infobox(response)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">synchronous</span><span class="params">(names)</span>:</span></div><div class="line">    res = [get_wiki_info_box(name) <span class="keyword">for</span> name <span class="keyword">in</span> names]</div><div class="line">    <span class="keyword">return</span> res</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">fetch</span><span class="params">(session, url, params)</span>:</span></div><div class="line">    <span class="keyword">async</span> <span class="keyword">with</span> session.get(url, params=params) <span class="keyword">as</span> response:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">await</span> response.text()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_infobox</span><span class="params">(response)</span>:</span></div><div class="line">    <span class="keyword">for</span> node <span class="keyword">in</span> response.xpath(<span class="string">'//table[contains(@class, "infobox")]'</span>):</div><div class="line">        raw_data = node.xpath(<span class="string">'@data-mw'</span>).extract()</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> raw_data:</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> raw_data:</div><div class="line">            item = json.loads(item)</div><div class="line">            <span class="keyword">try</span>:</div><div class="line">                <span class="keyword">return</span> item[<span class="string">'parts'</span>][<span class="number">0</span>][<span class="string">'template'</span>][<span class="string">'params'</span>]</div><div class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">                print(e)</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">fetch_wiki_title_res</span><span class="params">(session, url=WIKIPEDIA_API, name=None)</span>:</span></div><div class="line">    params = &#123;<span class="string">'action'</span>:<span class="string">'query'</span>,</div><div class="line">              <span class="string">'origin'</span>:<span class="string">'*'</span>,</div><div class="line">              <span class="string">'format'</span>:<span class="string">'json'</span>,</div><div class="line">              <span class="string">'generator'</span>:<span class="string">'search'</span>,</div><div class="line">              <span class="string">'gsrnamespace'</span>:<span class="number">0</span>,</div><div class="line">              <span class="string">'gsrlimit'</span>:<span class="number">1</span>,</div><div class="line">              <span class="string">'gsrsearch'</span>: name</div><div class="line">          &#125;    </div><div class="line">    res = json.loads(<span class="keyword">await</span> fetch(session, url, params))</div><div class="line">    <span class="keyword">if</span> res.get(<span class="string">'query'</span>, &#123;&#125;).get(<span class="string">'pages'</span>, &#123;&#125;):</div><div class="line">        <span class="keyword">return</span> list(res[<span class="string">'query'</span>][<span class="string">'pages'</span>].values())[<span class="number">0</span>][<span class="string">'title'</span>]   </div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">fetch_wiki_info_box</span><span class="params">(session, format_url=WIKIPEDIA_PAGE_FORMAT, name=None)</span>:</span></div><div class="line">    title = <span class="keyword">await</span>(fetch_wiki_title_res(session, url=WIKIPEDIA_API, name=name))</div><div class="line">    print(title, end=<span class="string">', '</span>)</div><div class="line">    <span class="keyword">if</span> title:</div><div class="line">        url = format_url.format(title)</div><div class="line">        resp =  <span class="keyword">await</span> fetch(session, url=url, params=<span class="keyword">None</span>)</div><div class="line">        response = HtmlResponse(url=url, body=resp, encoding=<span class="string">'utf-8'</span>)</div><div class="line">        <span class="keyword">return</span> get_infobox(response)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">asynchronous</span><span class="params">(names)</span>:</span></div><div class="line">    tasks = []</div><div class="line">    <span class="keyword">async</span> <span class="keyword">with</span> aiohttp.ClientSession() <span class="keyword">as</span> session:</div><div class="line">        <span class="keyword">for</span> name <span class="keyword">in</span> names:</div><div class="line">            tasks.append(fetch_wiki_info_box(session, WIKIPEDIA_PAGE_FORMAT, name))</div><div class="line">        res = <span class="keyword">await</span> asyncio.gather(*tasks)</div><div class="line">        <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h3 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h3><p>In order to evaluate sync vs. async methods, 100 company names are used for a benchmarking. More Specifically, the same data are passed into  <code>synchronous()</code> and <code>asynchronous()</code> methods defined above in the same environment (Mac OS, CPU: 2.2 GHz Intel Core i7, Memory: 16 GB 1600 MHz DDR3).  The <code>asynchronous()</code> method is 7.7X faster than <code>synchronous()</code> method in a small sample where a total of 200 HTTP requests are involved in each case.  Though there are some non-trivial synchronous operations in both method such as HTML parsing, it is clear that <code>asyncio</code> + <code>aiohttp</code> non-blocking workflow make the whole wikipedia extraction process much faster. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="comment"># 100 sample names</span></div><div class="line">    sample_names = [<span class="string">'Netflix'</span>, <span class="string">'Google'</span>, <span class="string">'Yahoo'</span>, <span class="string">'Uber'</span>, <span class="string">'Adobe'</span>, <span class="string">'Lyft'</span>, <span class="string">'Facebook'</span>, <span class="string">'DiDi'</span>, <span class="string">'Stripe'</span>, <span class="string">'Salesforce'</span>] * <span class="number">10</span></div><div class="line">    total = len(sample_names)</div><div class="line">    print(<span class="string">'Synchronous:'</span>)</div><div class="line">    print(<span class="string">'Wiki titles of the first ten results:'</span>)</div><div class="line">    t0 = pc()</div><div class="line">    synchronous(sample_names)</div><div class="line">    print(<span class="string">'finished extracting &#123;&#125; wiki records in &#123;:.2f&#125; seconds'</span>.format(total, pc()-t0))</div><div class="line">    print(<span class="string">'Asynchronous:'</span>)</div><div class="line">    print(<span class="string">'Wiki titles of the first ten results:'</span>)</div><div class="line">    print()</div><div class="line">    t1 = pc()</div><div class="line">    asyncio.run(asynchronous(sample_names))</div><div class="line">    print()</div><div class="line">    print(<span class="string">'finished extracting &#123;&#125; wiki records in &#123;:.2f&#125; seconds'</span>.format(total, pc()-t1))</div></pre></td></tr></table></figure>
+<p>Here are the results for the references.  Another interesting part is that it is clear that the sequence of Asynchronous results is not guaranteed whereas the synchronous method returns the results in the exact order as input.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Synchronous:</div><div class="line">- finished extracting 100 wiki records in 54.54 seconds</div><div class="line">- Wiki titles of the results:</div><div class="line">Netflix, Google, Yahoo!, Uber, Adobe, Lyft, Facebook, DiDi, Stripe, Salesforce.com, Netflix, Google, Yahoo!, Uber, Adobe, Lyft, Facebook, DiDi, Stripe, Salesforce.com, Netflix, Google, Yahoo!, Uber, Adobe, Lyft, Facebook, DiDi, Stripe, Salesforce.com, Netflix, Google, Yahoo!, Uber, Adobe, Lyft, Facebook, DiDi, Stripe, Salesforce.com, Netflix, Google, Yahoo!, Uber, Adobe, Lyft, Facebook, DiDi, Stripe, Salesforce.com, Netflix, Google, Yahoo!, Uber, Adobe, Lyft, Facebook, DiDi, Stripe, Salesforce.com, Netflix, Google, Yahoo!, Uber, Adobe, Lyft, Facebook, DiDi, Stripe, Salesforce.com, Netflix, Google, Yahoo!, Uber, Adobe, Lyft, Facebook, DiDi, Stripe, Salesforce.com, Netflix, Google, Yahoo!, Uber, Adobe, Lyft, Facebook, DiDi, Stripe, Salesforce.com, Netflix, Google, Yahoo!, Uber, Adobe, Lyft, Facebook, DiDi, Stripe, Salesforce.com,</div><div class="line">===</div><div class="line">Asynchronous:</div><div class="line">- finished extracting 100 wiki records in 7.06 seconds</div><div class="line">- Wiki titles of the results:</div><div class="line">Lyft, Uber, Yahoo!, Salesforce.com, Lyft, Lyft, Lyft, Lyft, Lyft, Salesforce.com, Yahoo!, Stripe, Lyft, Uber, Salesforce.com, Adobe, Uber, Salesforce.com, Stripe, Netflix, Salesforce.com, Netflix, Salesforce.com, Uber, Netflix, Adobe, Google, Salesforce.com, Salesforce.com, Netflix, Lyft, Uber, Netflix, Adobe, Adobe, Uber, Stripe, Stripe, Salesforce.com, Netflix, Uber, Netflix, Stripe, Stripe, Stripe, Stripe, Adobe, DiDi, Stripe, Adobe, Google, Netflix, DiDi, Adobe, Google, Netflix, Google, Uber, Google, Yahoo!, Uber, Uber, Netflix, DiDi, Adobe, Yahoo!, Yahoo!, Facebook, Salesforce.com, DiDi, Adobe, DiDi, Facebook, Google, Stripe, Google, Google, Facebook, Yahoo!, DiDi, Yahoo!, Yahoo!, Facebook, Yahoo!, Facebook, Facebook, DiDi, DiDi, Google, DiDi, Facebook, Google, Lyft, Lyft, Adobe, Facebook, Facebook, Facebook, DiDi, Yahoo!,</div></pre></td></tr></table></figure></p>
+<h2 id="Next-Steps"><a href="#Next-Steps" class="headerlink" title="Next Steps"></a>Next Steps</h2><h3 id="How-far-is-it-from-my-location"><a href="#How-far-is-it-from-my-location" class="headerlink" title="How far is it from my location?"></a>How far is it from my location?</h3><p>There are lots of things to play around with once you have the data from Google place and Wikipedia.  One thing you could try is to calculate the distance between the target company and your current location via <code>geopy</code> library.  This information is super useful to filter out the offices that are too far from your location or rank companies based on adjacency.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> geopy.distnace</div><div class="line">company_distance = geopy.distance.vincenty((lat1, lng1), (lat2, lng2)).miles</div></pre></td></tr></table></figure></p>
+<h3 id="What-are-those-companies-talking-about-in-the-engineering-groups"><a href="#What-are-those-companies-talking-about-in-the-engineering-groups" class="headerlink" title="What are those companies talking about in the engineering groups?"></a>What are those companies talking about in the engineering groups?</h3><p>In this trivial case, crawlers are not necessary.  However, if we want to extend the work to cover all the pages of eng blog from each company, some form of crawler system is a must.  A simple/Python way to go with this is to use Scrapy to crawl the related eng blog pages, and use text analytics to generate work clouds or grouping companies by technology together.  That would be a fun exercise and interesting facts to discover.</p>
+<h3 id="More-information-please"><a href="#More-information-please" class="headerlink" title="More information please!"></a>More information please!</h3><p>There are always more data sources out there that provide detailed information about public/private companies.  Here are some websites and services to start with:</p>
+<ul>
+<li><a href="https://www.crunchbase.com/" target="_blank" rel="external">Crunchbase</a></li>
+<li><a href="https://www.bloomberg.com/research//common/symbollookup/symbollookup.asp" target="_blank" rel="external">Bloomberg</a></li>
+<li><a href="https://builtwith.com/" target="_blank" rel="external">Builtwith</a></li>
+</ul>
+<h2 id="Final-Words"><a href="#Final-Words" class="headerlink" title="Final Words"></a>Final Words</h2><p>Here are the curated list I got from this exercise. Hope you enjoy the post.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a href="https://docs.python.org/3/library/asyncio.html" target="_blank" rel="external">https://docs.python.org/3/library/asyncio.html</a></li>
+<li><a href="https://github.com/kilimchoi/engineering-blogs" target="_blank" rel="external">https://github.com/kilimchoi/engineering-blogs</a></li>
+<li><a href="https://github.com/sumodirjo/engineering-blogs" target="_blank" rel="external">https://github.com/sumodirjo/engineering-blogs</a></li>
+<li><a href="https://magic.io/blog/uvloop-blazing-fast-python-networking/" target="_blank" rel="external">https://magic.io/blog/uvloop-blazing-fast-python-networking/</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/blog/" rel="tag"># blog</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/21/S5-asynchronous-I-O/" rel="prev" title="S5-asynchronous-I/O">
+                S5-asynchronous-I/O <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/pro_headshot.jpg"
+                alt="Jeff Sang" />
+            
+              <p class="site-author-name" itemprop="name">Jeff Sang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zfsang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-of-Asyncio"><span class="nav-number">2.</span> <span class="nav-text">Introduction of Asyncio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#High-Level-APIs"><span class="nav-number">2.1.</span> <span class="nav-text">High Level APIs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Coroutines"><span class="nav-number">2.1.1.</span> <span class="nav-text">Coroutines</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Awaitables"><span class="nav-number">2.1.2.</span> <span class="nav-text">Awaitables</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Learn-more-about-Company-from-Google-and-Wikipedia"><span class="nav-number">3.</span> <span class="nav-text">Learn more about Company from Google and Wikipedia</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-Locations-from-Google-Place-API"><span class="nav-number">3.1.</span> <span class="nav-text">Get Locations from Google Place API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-Filmographic-data-from-Wikipedia"><span class="nav-number">3.2.</span> <span class="nav-text">Get Filmographic data from Wikipedia</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Synchronous-Method-amp-Asynchronous-Method"><span class="nav-number">3.3.</span> <span class="nav-text">Synchronous Method & Asynchronous Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparison"><span class="nav-number">3.4.</span> <span class="nav-text">Comparison</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next-Steps"><span class="nav-number">4.</span> <span class="nav-text">Next Steps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-far-is-it-from-my-location"><span class="nav-number">4.1.</span> <span class="nav-text">How far is it from my location?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What-are-those-companies-talking-about-in-the-engineering-groups"><span class="nav-number">4.2.</span> <span class="nav-text">What are those companies talking about in the engineering groups?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#More-information-please"><span class="nav-number">4.3.</span> <span class="nav-text">More information please!</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Final-Words"><span class="nav-number">5.</span> <span class="nav-text">Final Words</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://zfsang.github.io/2019/01/08/T1-How-to-Utilize-Asyncio-to-Conduct-Company-Research/';
+          this.page.identifier = '2019/01/08/T1-How-to-Utilize-Asyncio-to-Conduct-Company-Research/';
+          this.page.title = 'T1 How to Utilize Asyncio to Conduct Company Research';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
