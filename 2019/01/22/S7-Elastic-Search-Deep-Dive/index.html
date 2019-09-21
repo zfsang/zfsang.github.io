@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="network," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="What is TCP/IP &amp;amp; UDP?IP, TCP, and UDP are all network communications protocols. A protocol is nothing more than a system of procedures or regulations to perform a task.  In this case it is all the">
-<meta name="keywords" content="network">
+<meta name="description" content="2.XElasticsearch is an open-source search engine built on top of Apache Lucene™, a full-text search-engine library. Elasticsearch is document oriented, meaning that it stores entire objects or documen">
+<meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="When We Talk about Network Protocols">
-<meta property="og:url" content="http://zfsang.github.io/2017/07/14/Z-When-We-Talk-about-Network-Protocols/index.html">
+<meta property="og:title" content="S7-Elastic Search Deep Dive">
+<meta property="og:url" content="http://zfsang.github.io/2019/01/22/S7-Elastic-Search-Deep-Dive/index.html">
 <meta property="og:site_name" content="Data Adventurer">
-<meta property="og:description" content="What is TCP/IP &amp;amp; UDP?IP, TCP, and UDP are all network communications protocols. A protocol is nothing more than a system of procedures or regulations to perform a task.  In this case it is all the">
-<meta property="og:updated_time" content="2018-11-13T08:38:15.000Z">
+<meta property="og:description" content="2.XElasticsearch is an open-source search engine built on top of Apache Lucene™, a full-text search-engine library. Elasticsearch is document oriented, meaning that it stores entire objects or documen">
+<meta property="og:updated_time" content="2019-03-28T00:26:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="When We Talk about Network Protocols">
-<meta name="twitter:description" content="What is TCP/IP &amp;amp; UDP?IP, TCP, and UDP are all network communications protocols. A protocol is nothing more than a system of procedures or regulations to perform a task.  In this case it is all the">
+<meta name="twitter:title" content="S7-Elastic Search Deep Dive">
+<meta name="twitter:description" content="2.XElasticsearch is an open-source search engine built on top of Apache Lucene™, a full-text search-engine library. Elasticsearch is document oriented, meaning that it stores entire objects or documen">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://zfsang.github.io/2017/07/14/Z-When-We-Talk-about-Network-Protocols/"/>
+  <link rel="canonical" href="http://zfsang.github.io/2019/01/22/S7-Elastic-Search-Deep-Dive/"/>
 
 
 
 
 
-  <title>When We Talk about Network Protocols | Data Adventurer</title>
+  <title>S7-Elastic Search Deep Dive | Data Adventurer</title>
   
 
 
@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2017/07/14/Z-When-We-Talk-about-Network-Protocols/">
+    <link itemprop="mainEntityOfPage" href="http://zfsang.github.io/2019/01/22/S7-Elastic-Search-Deep-Dive/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sang">
@@ -269,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">When We Talk about Network Protocols</h1>
+          <h1 class="post-title" itemprop="name headline">S7-Elastic Search Deep Dive</h1>
         
 
         <div class="post-meta">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-14T11:27:27-07:00">
-                2017-07-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-22T13:57:47-08:00">
+                2019-01-22
               </time>
             
 
@@ -292,39 +292,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/learning-notes/" itemprop="url" rel="index">
-                    <span itemprop="name">learning_notes</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/learning-notes/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -333,9 +300,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/14/Z-When-We-Talk-about-Network-Protocols/#comments" itemprop="discussionUrl">
+                <a href="/2019/01/22/S7-Elastic-Search-Deep-Dive/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/14/Z-When-We-Talk-about-Network-Protocols/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/01/22/S7-Elastic-Search-Deep-Dive/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,84 +330,35 @@
       
 
       
-        <h2 id="What-is-TCP-IP-amp-UDP"><a href="#What-is-TCP-IP-amp-UDP" class="headerlink" title="What is TCP/IP &amp; UDP?"></a>What is TCP/IP &amp; UDP?</h2><p>IP, TCP, and UDP are all network communications protocols.</p>
-<p>A protocol is nothing more than a system of procedures or regulations to perform a task.  In this case it is all the applications that tell the computer system how to perform a specific function or task.  In this particular case, it deals with a means of communication on a network.</p>
-<p><strong>IP (Internet Protocol)</strong> - is the networking protocol that uses logical addresses to uniquely define hosts and direct data from one host to another. IP is commonly paired with TCP to make up what is known as the TCP/IP Suite or internet protocol suite.</p>
-<p><strong>TCP (Transmission Control Protocol)</strong> - This protocol tells the system how to establish and maintain a connection between systems and their application for data transfer.  TCP uses sockets and ports ranging from 0 - 65,534. It has well known ports 1-1023 and ephemeral ports 1024 - 65,534.</p>
-<p><strong>UDP (User Datagram Protocol)</strong> - This protocol tells the system how to communicate between two computers using short messages. UDP uses sockets and ports ranging from 0 to 65,534.</p>
-<p><strong>Port</strong>  </p>
-<table>
-<thead>
-<tr>
-<th>TCP</th>
-<th></th>
-<th>UDP</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FTP</td>
-<td>20,21</td>
-<td>DNS</td>
-<td>53</td>
-</tr>
-<tr>
-<td>SSH</td>
-<td>22</td>
-<td>BooTPS/DHCP</td>
-<td>67</td>
-</tr>
-<tr>
-<td>Telnet</td>
-<td>23</td>
-<td>TFTP</td>
-<td>69</td>
-</tr>
-<tr>
-<td>SMTP</td>
-<td>25</td>
-<td>SNMP</td>
-<td>161</td>
-</tr>
-<tr>
-<td>DNS</td>
-<td>53</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>HTTP</td>
-<td>80</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>POP3</td>
-<td>110</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>NTP</td>
-<td>123</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>IMAP4</td>
-<td>143</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>HTTPS</td>
-<td>443</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Socket</strong><br>A Socket is one half of the protocol for UDP and TCP. It is the Operating systems abstraction of the TCP connection or UDP message.</p>
+        <h1 id="2-X"><a href="#2-X" class="headerlink" title="2.X"></a>2.X</h1><p>Elasticsearch is an open-source search engine built on top of Apache Lucene™, a full-text search-engine library.</p>
+<p>Elasticsearch is document oriented, meaning that it stores entire objects or documents. It not only stores them, but also indexes the contents of each document in order to make them searchable.</p>
+<p>As users, we can talk to any node in the cluster, including the master node. Every node knows where each document lives and can forward our request directly to the nodes that hold the data we are interested in. Whichever node we talk to manages the process of gathering the response from the node or nodes holding the data and returning the final response to the client. It is all managed transparently by Elasticsearch.</p>
+<h3 id="Shard"><a href="#Shard" class="headerlink" title="Shard"></a>Shard</h3><p>A shard is a low-level worker unit that holds just a slice of all the data in the index</p>
+<h3 id="Document"><a href="#Document" class="headerlink" title="Document"></a>Document</h3><p>Documents in Elasticsearch are immutable; we cannot change them. Instead, if we need to update an existing document, we reindex or replace it.</p>
+<p>update API, which can be used to make partial updates to a document. This API appears to change documents in place, but actually Elasticsearch is following exactly the same process as described previously:</p>
+<ol>
+<li>Retrieve the JSON from the old document</li>
+<li>Change it</li>
+<li>Delete the old document</li>
+<li>Index a new document</li>
+</ol>
+<h3 id="Write-Conflicts"><a href="#Write-Conflicts" class="headerlink" title="Write Conflicts"></a>Write Conflicts</h3><ul>
+<li>Pessimistic concurrency control<br>Widely used by relational databases, this approach assumes that conflicting changes are likely to happen and so blocks access to a resource in order to prevent conflicts. A typical example is locking a row before reading its data, ensuring that only the thread that placed the lock is able to make changes to the data in that row.</li>
+<li>Optimistic concurrency control<br>Used by Elasticsearch, this approach assumes that conflicts are unlikely to happen and doesn’t block operations from being attempted. However, if the underlying data has been modified between reading and writing, the update will fail. It is then up to the application to decide how it should resolve the conflict. For instance, it could reattempt the update, using the fresh data, or it could report the situation to the user.</li>
+</ul>
+<h3 id="Distributed-Document-Store"><a href="#Distributed-Document-Store" class="headerlink" title="Distributed Document Store"></a>Distributed Document Store</h3><ul>
+<li>shard = hash(routing) % number_of_primary_shards</li>
+</ul>
+<h1 id="Links"><a href="#Links" class="headerlink" title="Links:"></a>Links:</h1><ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/analysis-ngram-tokenfilter.html" target="_blank" rel="external">https://www.elastic.co/guide/en/elasticsearch/reference/2.3/analysis-ngram-tokenfilter.html</a></li>
+</ul>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ul>
+<li><a href="https://www.youtube.com/watch?v=PpX7J-G2PEo" target="_blank" rel="external">https://www.youtube.com/watch?v=PpX7J-G2PEo</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/_document_oriented.html" target="_blank" rel="external">https://www.elastic.co/guide/en/elasticsearch/guide/current/_document_oriented.html</a></li>
+</ul>
+<h1 id="Videos"><a href="#Videos" class="headerlink" title="Videos"></a>Videos</h1><ul>
+<li><a href="https://www.youtube.com/watch?v=Y-nYEOgq3YE" target="_blank" rel="external">Mike Mull: The Art and Science of Data Matching</a></li>
+</ul>
 
       
     </div>
@@ -456,12 +374,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/network/" rel="tag"># network</a>
-          
-        </div>
-      
 
       
       
@@ -471,18 +383,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/07/Z-Quick-tour-in-Redis/" rel="next" title="Quick tour in Redis">
-                <i class="fa fa-chevron-left"></i> Quick tour in Redis
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/04/Z-Scala-Notes-Functional-Programming-Principles-in-Scala/" rel="prev" title="Scala Notes - Functional Programming Principles in Scala">
-                Scala Notes - Functional Programming Principles in Scala <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/15/S6-Hashing/" rel="prev" title="S6-Hashing">
+                S6-Hashing <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -639,7 +547,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-TCP-IP-amp-UDP"><span class="nav-number">1.</span> <span class="nav-text">What is TCP/IP & UDP?</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-X"><span class="nav-number">1.</span> <span class="nav-text">2.X</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shard"><span class="nav-number">1.0.1.</span> <span class="nav-text">Shard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Document"><span class="nav-number">1.0.2.</span> <span class="nav-text">Document</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Write-Conflicts"><span class="nav-number">1.0.3.</span> <span class="nav-text">Write Conflicts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Distributed-Document-Store"><span class="nav-number">1.0.4.</span> <span class="nav-text">Distributed Document Store</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Links"><span class="nav-number">2.</span> <span class="nav-text">Links:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Videos"><span class="nav-number">4.</span> <span class="nav-text">Videos</span></a></li></ol></div>
             
 
           </div>
@@ -809,9 +717,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://zfsang.github.io/2017/07/14/Z-When-We-Talk-about-Network-Protocols/';
-          this.page.identifier = '2017/07/14/Z-When-We-Talk-about-Network-Protocols/';
-          this.page.title = 'When We Talk about Network Protocols';
+          this.page.url = 'http://zfsang.github.io/2019/01/22/S7-Elastic-Search-Deep-Dive/';
+          this.page.identifier = '2019/01/22/S7-Elastic-Search-Deep-Dive/';
+          this.page.title = 'S7-Elastic Search Deep Dive';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
